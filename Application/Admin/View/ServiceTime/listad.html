@@ -1,0 +1,102 @@
+<include file="Public/header" />
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <form id="form1" name="form1" method="post"
+        action="{:U('ServiceTime/sortad','projectid='.$map['projectid'].'&bid='.$map['bid'])}">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100">周期</th>
+                                        <th width="100" class="TC">标题</th>
+                                        <th width="100" class="TC">开始时间</th>
+                                        <th width="100" class="TC">结束时间</th>
+                                        <!-- <th width="100" class="TC">是否紧张</th> -->
+                                        <!-- <th width="100" class="TC">价格</th> -->
+                                        <th width="100" class="TC">审核</th>
+                                        <th width="100" class="TC">创建日期</th>
+                                        <th width="200" class="TC">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td width="100" colspan="6">
+                                                <if condition="$vo.count gt 0">
+                                                    <i class="fa fa-plus-square-o J-node" data-id="{$vo.id}"></i>
+                                                </if>
+                                                {$vo.title}
+                                            </td>
+                                            <td width="200" align="center">
+                                                <a
+                                                    href="{:U('ServiceTime/modifyad','days='.$vo['id'].'&projectid='.$map['projectid'])}">更新服务时间</a>
+                                            </td>
+                                        </tr>
+                                        <tr class="J-child-{$vo.id}" style="display: none;">
+                                            <td colspan="7" style="padding: 0;">
+                                                <table class="table table-striped table-hover"
+                                                    style="margin-bottom: 0;">
+                                                    <volist name="vo.list" id="ivo" key="in">
+                                                        <tr>
+                                                            <td width="100" style="padding-left: 25px;"> -- </td>
+                                                            <td width="100" align="center">{$ivo.title}</td>
+                                                            <td width="100" align="center">{$ivo.begintime}</td>
+                                                            <td width="100" align="center">{$ivo.endtime}</td>
+                                                            <!-- <td width="100" align="center">
+                                                                <if condition="$ivo.nervous eq 1">
+                                                                    是
+                                                                    <else />
+                                                                    否
+                                                                </if>
+                                                            </td> -->
+                                                            <!-- <td width="100" align="center">{$ivo.price}</td> -->
+                                                            <td width="100" align="center">
+                                                                <if condition="$ivo.status eq 1">
+                                                                    <i class="fa fa-check"></i>
+                                                                    <else />
+                                                                    <i class="fa fa-close"></i>
+                                                                </if>
+                                                            </td>
+                                                            <td width="100" align="center">
+                                                                {$ivo.createdate|strtotime|date="Y-m-d",###}</td>
+                                                            <td width="200" class="text-navy" align="center">
+
+                                                            </td>
+                                                        </tr>
+                                                    </volist>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <include file="Public/footer" />
+    <script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({ openEffect: "none", closeEffect: "none" });
+
+            $("i.J-node").on("click", function () {
+                var id = $(this).data("id");
+
+                if ($(".J-child-" + id).is(":visible")) {
+                    $(this).removeClass("fa-minus-square-o").addClass("fa-plus-square-o");
+                    $(".J-child-" + id).hide();
+                } else {
+                    $(this).removeClass("fa-plus-square-o").addClass("fa-minus-square-o");
+                    $(".J-child-" + id).show();
+                }
+            });
+        });
+    </script>

@@ -1,0 +1,676 @@
+<include file="Public/detail_header" />
+
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data"
+    action="{:U('ServiceOrder/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'].'&admin_status='.$map['admin_status'].'&status='.$map['status'])}">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#panel1" aria-controls="panel1" role="tab"
+                data-toggle="tab">基础信息</a></li>
+        <li role="presentation"><a href="#panel2" aria-controls="panel2" role="tab" data-toggle="tab">照护人信息</a></li>
+        <li role="presentation"><a href="#panel3" aria-controls="panel3" role="tab" data-toggle="tab">服务评价</a></li>
+        <li role="presentation"><a href="#panel4" aria-controls="panel4" role="tab" data-toggle="tab">服务交互记录</a></li>
+        <li role="presentation"><a href="#panel5" aria-controls="panel4" role="tab" data-toggle="tab">服务人员坐标</a></li>
+    </ul>
+    <div class="hr-line-dashed"></div>
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="panel1">
+            <if condition="$map.status neq 'sh'">
+                <div class="form-group myform">
+                    <label class="col-sm-2 control-label">审核：</label>
+                    <div class="col-sm-10 radio">
+                        <if
+                            condition="$info['status'] eq 1 and $info['pay_status'] eq 3 and $info['admin_status'] eq 0">
+                            <div class="i-checks">
+                                <label><input type="radio" name="admin_status" value="0"
+                                        {$info["admin_status"]|getSelect=radio,###,0}><i></i>待审核</label>
+                                <label><input type="radio" name="admin_status" value="1"
+                                        {$info["admin_status"]|getSelect=radio,###,1}><i></i>已通过</label>
+                                <label><input type="radio" name="admin_status" value="2"
+                                        {$info["admin_status"]|getSelect=radio,###,2}><i></i>不通过</label>
+                                <!-- <textarea class="form-control" name="admin_status_reason" placeholder="请输入审核不通过原因"
+                                style="resize:none;height:50px;display:block;display: none;"></textarea> -->
+                            </div>
+                            <elseif condition="$info['admin_status'] eq 1" />
+                            <p>已通过</p>
+                            <elseif condition="$info['admin_status'] eq 2" />
+                            <p>不通过</p>
+                        </if>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+            </if>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.title}</p>
+                </div>
+            </div>
+            <if condition="$info.type eq 2">
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务栏目：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$info.category}</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务人员姓名：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$info.service_realname}</p>
+                    </div>
+                </div>
+                <if condition="$info.service_level gt 0">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">服务星级：</label>
+                        <div class="col-sm-10 radio">
+                            <p>{$info.service_level}星</p>
+                        </div>
+                    </div>
+                </if>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务时长：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$info.time}{$info.time_type|getTimeType=###}</p>
+                    </div>
+                </div>
+            </if>
+            <if condition="$info.type eq 1">
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">餐次：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$info.res_type|getMealLevel=###}</p>
+                    </div>
+                </div>
+            </if>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务开始/结束时间：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.begintime} / {$info.endtime}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">封面图：</label>
+                <div class="col-sm-10 radio">
+                    <div>
+                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                            <if condition="$info.thumb neq ''">
+                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                            </if>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">地区：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.province} / {$info.city} / {$info.region}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">详细地址：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.region_detail}{$info.detail}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系人：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.contact}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系电话：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.mobile}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">订单金额：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.amount}</p>
+                </div>
+            </div>
+            <if condition="$info.again_count gt 0">
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">
+                        <if condition="$info.assess eq 1">
+                            评估尾款：
+                            <else />
+                            续费金额：
+                        </if>
+                    </label>
+                    <div class="col-sm-10 radio">
+                        <p>{$info.again_price}</p>
+                    </div>
+                </div>
+            </if>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠券金额：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.coupon_money}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">平台补贴：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.platform_money}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">其它要求：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.other_remark}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">订单状态：</label>
+                <div class="col-sm-10">
+                    <p>
+                        <if
+                            condition="$info.status eq 1 and $info.pay_status neq 3 and $info['createdate'] lt $map['outtime']">
+                            已超时
+                            <elseif condition="$info.status eq 1 and $info.pay_status neq 3" />
+                            待付款
+                            <elseif condition="$info.status eq 2" />
+                            已取消
+                            <elseif condition="$info.status eq 4" />
+                            已完成
+                            <elseif condition="$info.status eq 5" />
+                            申请退款
+                            <elseif condition="$info.status eq 6" />
+                            已退款
+                            <elseif condition="$info.status eq 1 and $info.admin_status eq 2" />
+                            审核不通过
+                            <elseif condition="$info.status eq 1 and $info.admin_status eq 0" />
+                            待审核
+                            <elseif condition="$info.status eq 1 and $info.admin_status eq 1 and $info.service_userid eq 0" />
+                            待接单
+                            <elseif condition="$info.assess eq 1 and $info.status eq 1 and $info.assess_status eq 1" />
+                            线下评估中
+                            <elseif condition="$info.assess eq 1 and $info.status eq 1 and $info.assess_status eq 2 and $info.again_status eq 1" />
+                            待缴付尾款
+                            <elseif condition="$info.status eq 1 and $info.admin_status eq 1 and $info.service_userid gt 0 and $info.execute_status eq 0" />
+                            <if condition="$info.type eq 1">
+                                等待配送
+                                <else />
+                                等待服务
+                            </if>
+                            <elseif
+                                condition="$info.status eq 1 and $info.admin_status eq 1 and $info.service_userid gt 0 and $info.execute_status eq 1" />
+                            <if condition="$info.type eq 1">
+                                配送中
+                                <else />
+                                待确认开始服务
+                            </if>
+                            <elseif
+                                condition="$info.status eq 1 and $info.admin_status eq 1 and $info.service_userid gt 0 and $info.execute_status eq 2" />
+                            <if condition="$info.type eq 1">
+                                配送中
+                                <else />
+                                服务中
+                            </if>
+                            <elseif
+                                condition="$info.status eq 1 and $info.admin_status eq 1 and $info.service_userid gt 0 and $info.execute_status eq 3" />
+                            待确认完成
+                            <elseif
+                                condition="$info.status eq 1 and $info.admin_status eq 1 and $info.service_userid gt 0 and $info.execute_status eq 7" />
+                            已爽约
+                        </if>
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">支付状态：</label>
+                <div class="col-sm-10 radio">
+                    <p>
+                        <if condition="$info.pay_status eq 0">
+                            待支付
+                            <elseif condition="$info.pay_status eq 3" />
+                            已支付
+                            <else />
+                            未知状态
+                        </if>
+                    </p>
+                </div>
+            </div> -->
+            <notempty name="info['pay_date']">
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">支付时间：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$info.pay_date|strtotime|date="Y-m-d H:i",###}</p>
+                    </div>
+                </div>
+            </notempty>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">下单时间：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$info.createdate|strtotime|date="Y-m-d H:i",###}</p>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel2">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">姓名：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.name}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">性别：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.gender}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">出生日期：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.birth}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">身高(cm)：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.height}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">体重(kg)：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.weight}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">证件类型：</label>
+                <div class="col-sm-10 radio">
+                    <p>
+                        <if condition="$care.identification_type eq 1">
+                            大陆身份证
+                            <elseif condition="$care.identification_type eq 2" />
+                            港澳身份证
+                            <elseif condition="$care.identification_type eq 3" />
+                            回乡证
+                            <else />
+                            未知
+                        </if>
+                    </p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">证件号：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.identification}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">饮食偏好：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.diet}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">护理等级：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.level}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">与被照护人的关系：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.relationship}</p>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">病例图集合：</label>
+                <div class="col-sm-10 radio">
+                    <div class="MulitiImageSelectDiv">
+                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                        </ul>
+                    </div>
+                    <div class="MulitiImageSelecttextarea">
+                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true"
+                            style="width: 100%; height: 100px">{$care.images}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注：</label>
+                <div class="col-sm-10 radio">
+                    <p>{$care.remark}</p>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel3">
+            <if condition="$comment eq ''">
+                <p style="margin-left: 15%">暂未评价</p>
+                <else />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务态度：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$comment.comment1}星</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">专业能力：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$comment.comment2}星</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">整体满意度：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$comment.comment3}星</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">评价详情：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$comment.content}</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">评价图集：</label>
+                    <div class="col-sm-10 radio">
+                        <div class="MulitiImageSelecttextarea">
+                            <textarea type="text" name="commentimages" id="commentimages" class="MulitiImageSelect"
+                                multiline="true" style="width: 100%; height: 100px">{$comment.images}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">评价时间：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$comment.createdate|strtotime|date="Y-m-d H:i",###}</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">平台回复：</label>
+                    <div class="col-sm-10 radio">
+                        <p>{$comment.platform_reply}</p>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">回复时间：</label>
+                    <div class="col-sm-10 radio">
+                        <if condition="$comment.platform_time neq ''">
+                            <p>{$comment.platform_time|strtotime|date="Y-m-d H:i",###}</p>
+                        </if>
+                    </div>
+                </div>
+            </if>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel4">
+            <table class="table table-striped table-hover" style="border:1px solid #ccc;">
+                <thead>
+                    <tr>
+                        <th width="100" class="TC">ID</th>
+                        <th width="100" class="TC">交互用户</th>
+                        <th width="100" class="TC">交互方式</th>
+                        <th width="100" class="TC">交互时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="record" id="vo" key="n">
+                        <tr>
+                            <td align="center">{$vo.id}</td>
+                            <td align="center">
+                                <if condition="$vo['userid'] eq $info['userid']">
+                                    用户 - {$info.contact}
+                                    <elseif condition="$vo['userid'] eq $info['service_userid']" />
+                                    服务人员 - {$info.service_realname}
+                                    <else />
+                                    系统
+                                </if>
+                            </td>
+                            <td align="center">{$vo.title}</td>
+                            <td align="center">{$vo.updatetime|strtotime|date="Y-m-d H:i",###}</td>
+                        </tr>
+                    </volist>
+                </tbody>
+            </table>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel5">
+            <notempty name="coordinate">
+                <div style="line-height: 20px;margin-bottom:10px;">
+                    <p>
+                        <span style="display: inline-block;width:20px;height:20px;background-color: #0000FF"></span>
+                        <span style="display: inline-block; vertical-align:super;">选择日期坐标</span>
+                    </p>
+                    <p>
+                        <span style="display: inline-block;width:20px;height:20px;background-color: #FF0000"></span>
+                        <span style="display: inline-block; vertical-align:super;">1.服务人员开始 ~ 用户确认开始 - 坐标</span>
+                    </p>
+                    <p>
+                        <span style="display: inline-block;width:20px;height:20px;background-color: #00AA00"></span>
+                        <span style="display: inline-block; vertical-align:super;">2.用户确认开始 ~ 服务人员完成服务 - 坐标</span>
+                    </p>
+                    <p>
+                        <span style="display: inline-block;width:20px;height:20px;background-color: #FFFF00"></span>
+                        <span style="display: inline-block; vertical-align:super;">3.服务完成后一小时坐标</span>
+                    </p>
+                </div>
+                <select id="coordinate-date" class="form-control"
+                    style="z-index: 999;margin-bottom:20px;width:200px;max-height: 300px;">
+                    <option value="">全部</option>
+                    <foreach name="coordinate['all_coordinate']" item="vo" key="date">
+                        <option value="{$date}">{$date}</option>
+                    </foreach>
+                </select>
+            </notempty>
+            <div id="map" style="height: 500px;font-size: 20px;text-align: center;"></div>
+        </div>
+
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <if condition="$map.status neq 'sh'">
+                <button class="btn btn-primary" type="submit">保存内容</button>
+            </if>
+            <button class="btn btn-white" type="button" onclick="javascript:history.go(-1)">返回</button>
+        </div>
+    </div>
+</form>
+<include file="Public/detail_footer" />
+<!-- 省市区 -->
+<script type="text/javascript" src="__PLUGINS__/city-select/jquery.cityselect.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+        //初始化图集
+        InitMulitiImages("images");
+        InitMulitiImages("commentimages");
+
+        //审核不通过处理
+        // $("div.J-adminstatus>label").on("click", function () {
+        //     var status = $(this).find("input[name='admin_status']").val();
+        //     if (status == 2) {
+        //         $("div.J-adminstatus textarea[name='admin_status_reason']").show();
+        //     } else {
+        //         $("div.J-adminstatus textarea[name='admin_status_reason']").hide();
+        //     }
+        // });
+    });
+</script>
+<script type="text/javascript"
+    src="https://webapi.amap.com/maps?v=1.4.15&key=92d67ef38d6b7a62ff72070d44b780f7"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        <notempty name="coordinate">
+
+            var config = {
+                resizeEnable: true, zoom: 16
+            };
+
+            <notempty name="coordinate['service_coordinate']['longitude']">
+                config.center = ["{$info['longitude']}", "{$info['latitude']}"];
+            </notempty>
+
+            //初始化地图对象，加载地图
+            var map = new AMap.Map("map", config);
+
+            <notempty name="coordinate['service_coordinate']['longitude']">
+                //服务地址坐标点标记
+                var s_marker = new AMap.Marker({
+                    position: new AMap.LngLat("{$coordinate['service_coordinate']['longitude']}", "{$coordinate['service_coordinate']['latitude']}"),
+                    title: "服务地址",
+                    icon: "/upload/default/water-green.png"
+                });
+                map.add(s_marker);
+            </notempty>
+
+            <notempty name="coordinate['begin_coordinate']['longitude']">
+                //开始服务坐标点标记
+                var b_marker = new AMap.Marker({
+                    position: new AMap.LngLat("{$coordinate['begin_coordinate']['longitude']}", "{$coordinate['begin_coordinate']['latitude']}"),
+                    title: "开始服务：{$coordinate['begin_coordinate']['time']}",
+                    icon: "/upload/default/water-blue.png"
+                });
+                map.add(b_marker);
+            </notempty>
+
+            <notempty name="coordinate['end_coordinate']['longitude']">
+                //结束服务坐标点标记
+                var e_marker = new AMap.Marker({
+                    position: new AMap.LngLat("{$coordinate['end_coordinate']['longitude']}", "{$coordinate['end_coordinate']['latitude']}"),
+                    title: "结束服务：{$coordinate['end_coordinate']['time']}",
+                    icon: "/upload/default/water-red.png"
+                });
+                map.add(e_marker);
+            </notempty>
+
+            //全部坐标
+            var path = [];
+            var coordinate = {};
+            <foreach name="coordinate['all_coordinate']" item="vo" key="date">
+
+                coordinate['{$date}'] = [];
+
+                <foreach name="vo" item="ivo" key="n">
+
+                    path.push(["{$ivo.longitude}", "{$ivo.latitude}"]);
+
+                    coordinate['{$date}'].push(["{$ivo.longitude}", "{$ivo.latitude}"]);
+
+                </foreach>
+
+            </foreach>
+
+            var polyline = new AMap.Polyline({map: map, path: path, strokeColor: '#0000FF'});
+
+            //3.用户确认开始 ~ 服务人员完成服务 - 坐标
+            var service_completed_coordinate = []
+            <foreach name="coordinate['service_completed_coordinate']" item="vo">
+
+                service_completed_coordinate.push(["{$vo.longitude}", "{$vo.latitude}"]);
+
+            </foreach>
+
+            var polyline_completed = new AMap.Polyline({map: map, path: service_completed_coordinate, strokeColor: '#FFFF00'});
+
+            //2.用户确认开始 ~ 服务人员完成服务 - 坐标
+            var service_execute_coordinate = []
+            <foreach name="coordinate['service_execute_coordinate']" item="vo">
+
+                service_execute_coordinate.push(["{$vo.longitude}", "{$vo.latitude}"]);
+
+            </foreach>
+
+            var polyline_execute = new AMap.Polyline({map: map, path: service_execute_coordinate, strokeColor: '#00AA00'});
+
+            //1.服务人员开始 ~ 用户确认开始 - 坐标
+            var service_begin_coordinate = []
+            <foreach name="coordinate['service_begin_coordinate']" item="vo">
+
+                service_begin_coordinate.push(["{$vo.longitude}", "{$vo.latitude}"]);
+
+            </foreach>
+
+            var polyline_begin = new AMap.Polyline({map: map, path: service_begin_coordinate, strokeColor: '#FF0000'});
+
+            <else />
+            $("div#map").html("暂无服务人员坐标信息");
+        </notempty>
+
+        $("#coordinate-date").on("change", function () {
+
+            map = new AMap.Map("map", config);
+
+            if (typeof s_marker != "undefined") {
+                map.add(s_marker);
+            }
+            if (typeof b_marker != "undefined") {
+                map.add(b_marker);
+            }
+            if (typeof e_marker != "undefined") {
+                map.add(e_marker);
+            }
+
+            var date = $("#coordinate-date option:selected").val();
+            if (date) {
+                if (date == "one") {
+                    polyline = new AMap.Polyline({ map: map, path: polyline_completed, strokeColor: '#FF0033' });
+                } else {
+                    polyline = new AMap.Polyline({ map: map, path: coordinate[date], strokeColor: '#0000FF' });
+                }
+            } else {
+                polyline = new AMap.Polyline({ map: map, path: path, strokeColor: '#0000FF' });
+
+                polyline_completed = new AMap.Polyline({ map: map, path: service_completed_coordinate, strokeColor: '#FFFF00' });
+
+                polyline_execute = new AMap.Polyline({ map: map, path: service_execute_coordinate, strokeColor: '#00AA00' });
+
+                polyline_begin = new AMap.Polyline({ map: map, path: service_begin_coordinate, strokeColor: '#AA4400' });
+            }
+
+        });
+    });
+
+</script>

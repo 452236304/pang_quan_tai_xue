@@ -1,0 +1,628 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()"
+                            enctype="multipart/form-data"
+                            action="{:U('Product/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'].'&categoryid='.$map['categoryid'])}">
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">审核<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0"
+                                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+							<div class="form-group myform">
+							    <label class="col-sm-2 control-label">状态<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="shelf" value="0"
+							                {$info["shelf"]|getSelect=radio,###,0}><i></i>下架</label>
+							        <label><input type="radio" name="shelf" value="1"
+							                {$info["shelf"]|getSelect=radio,###,1}><i></i>上架</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">猜你喜欢<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="guess_like" value="0"
+                                            {$info["guess_like"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="guess_like" value="1"
+                                            {$info["guess_like"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+                            <if condition="$map.categoryid eq 5">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">类型<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择类型" name="types" class="form-control chosen-select"
+                                            required>
+                                            <option value="0" {$info["types"]|getSelect=select,0,###}>套餐</option>
+                                            <option value="1" {$info["types"]|getSelect=select,1,###}>方案</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </if>
+                            <if condition="($map.categoryid neq 1) and ($map.categoryid neq 5)"> 
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">一级分类<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择商品栏目" name="typeid1"
+                                            class="form-control chosen-select" required>
+                                            <option value="0">请选择商品栏目</option>
+                                            <foreach name="category" item="v" key="k">
+                                                <option value="{$v.id}" {$info["categoryid"]|getSelect=select,$v["id"],###}>
+                                                    {$v.name}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">二级分类<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择商品栏目" name="typeid2"
+                                            class="form-control chosen-select">
+                                                <option value="">请选择二级分类</option>
+                                                <if condition="$select_pid_category.depth eq 2">
+                                                    <foreach name="typeid2_data" item="v" key="k">
+                                                        <option value="{$v.id}" {$select_pid_category["category_pid"]|getSelect=select,$v["id"],###}>
+                                                            {$v.name}</option>
+                                                    </foreach>
+                                                <else />
+                                                    <foreach name="typeid2_data" item="v" key="k">
+                                                        <option value="{$v.id}" {$select_pid_category["id"]|getSelect=select,$v["id"],###}>
+                                                            {$v.name}</option>
+                                                    </foreach>
+                                                </if>
+                                                <!-- <option value="" {$info["typeid"]|getSelect=select,$v["id"],###}>
+                                                   </option> -->
+                                                <option value="" >
+                                                </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">三级分类<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择商品栏目" name="typeid3"
+                                            class="form-control chosen-select">
+                                            <option value="">请选择三级分类</option>
+                                            <foreach name="typeid3_data" item="v" key="k">
+                                                <option value="{$v.id}" {$info["typeid"]|getSelect=select,$v["id"],###}>
+                                                    {$v.name}</option>
+                                            </foreach>
+                                            <!-- <option value="" {$info["typeid"]|getSelect=select,$v["id"],###}>
+                                                    </option> -->
+                                            <option value="" >
+                                                </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">产品分类<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择产品分类" name="attribute_cpid"
+                                            class="form-control chosen-select" required>
+                                            <option value="0">请选择产品分类</option>
+                                            <foreach name="attribute_cp" item="v" key="k">
+                                                <option value="{$v.id}"
+                                                    {$info["attribute_cpid"]|getSelect=select,$v["id"],###}>{$v.name}
+                                                </option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">材质分类<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择材质分类" name="attribute_czid"
+                                            class="form-control chosen-select" required>
+                                            <option value="0">请选择材质分类</option>
+                                            <foreach name="attribute_cz" item="v" key="k">
+                                                <option value="{$v.id}"
+                                                    {$info["attribute_czid"]|getSelect=select,$v["id"],###}>{$v.name}
+                                                </option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </if>
+                            <if condition="$map.categoryid eq 2">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">商品类型<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择商品类型" name="type" class="form-control chosen-select"
+                                            required>
+                                            <option value="0" {$info["type"]|getSelect=select,0,###}>商品</option>
+                                            <option value="1" {$info["type"]|getSelect=select,1,###}>定制</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <elseif condition="$map.categoryid eq 5" />
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">商品类型<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择商品类型" name="type" class="form-control chosen-select"
+                                            required>
+                                            <option value="2" {$info["type"]|getSelect=select,2,###}>改造</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </if>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">副标题：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">海报副标题：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="poster_title" value="{$info.poster_title}">
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">封面图<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input name="thumb" id="thumb" type="text" class="form-control"
+                                        value="{$info.thumb}" required="" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                                            <if condition="$info.thumb neq ''">
+                                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                        <div class="red" style="margin-top:5px;">尺寸大小为：344*344</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">图集<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <div class="MulitiImageSelectDiv">
+                                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                                        </ul>
+                                    </div>
+                                    <div class="MulitiImageSelecttextarea">
+                                        <textarea type="text" name="images" id="images" class="MulitiImageSelect"
+                                            multiline="true" style="width: 100%; height: 100px"
+                                            required="">{$info.images}</textarea>
+                                    </div>
+                                    <div>
+                                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');"
+                                            href="javascript:void(0);" class="btn btn-white"
+                                            data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">平台价格<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="price" value="{$info.price}"
+                                    required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">市场价格<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="market_price"
+                                        value="{$info.market_price}" step="0.01" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">分佣金额<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="brokerage"
+                                           value="{$info.brokerage}" required="">
+                                </div>
+                            </div>
+                            <!-- <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">商品库存<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="stock" value="{$info.stock}" required="">
+                                </div>
+                            </div> -->
+                            <if condition="($map.categoryid neq 1) and ($map.categoryid neq 5)">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">运费模版<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择材质分类" name="freightid"
+                                            class="form-control chosen-select" required>
+                                            <option value="0">请选择运费模版</option>
+                                            <foreach name="freight" item="v" key="k">
+                                                <option value="{$v.id}"
+                                                    {$info["freightid"]|getSelect=select,$v["id"],###}>
+                                                    运费{$v.money}元，满{$v.full_amount}元免邮
+                                                </option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+								
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">商品标签：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="attr" value="{$info.label.attr}">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">标签背景色：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="color"
+                                            value="{$info.label.color}">
+                                    </div>
+                                </div>
+                            </if><!-- 
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">首页标签(前)：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="home_label" value="{$info.home_label}">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">首页标签(后)：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="home_label_after" value="{$home_label_after}">
+							    </div>
+							</div> -->
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">平台认证：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="attribute1"
+                                        value="{$info.attribute1}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">配置保障：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="attribute2"
+                                        value="{$info.attribute2}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">安全保障：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="attribute3"
+                                        value="{$info.attribute3}">
+                                </div>
+                            </div>
+                            <!--<if condition="$map['categoryid'] eq 1">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group myform">
+                                    <label class="col-sm-2 control-label">配餐餐次：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择配餐餐次" name="res_type" class="form-control chosen-select"
+                                                required>
+                                            <option value="0">请选择配餐餐次</option>
+                                            <option value="1" {$info["res_type"]|getSelect=select,1,###}>中</option>
+                                            <option value="2" {$info["res_type"]|getSelect=select,2,###}>晚</option>
+                                            <option value="3" {$info["res_type"]|getSelect=select,3,###}>中晚</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </if>-->
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">置顶<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="top" value="0"
+                                            {$info["top"]|getSelect=radio,###,0}><i></i>否</label>
+                                    <label><input type="radio" name="top" value="1"
+                                            {$info["top"]|getSelect=radio,###,1}><i></i>是</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">精选推荐<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="recommend" value="0"
+                                            {$info["recommend"]|getSelect=radio,###,0}><i></i>否</label>
+                                    <label><input type="radio" name="recommend" value="1"
+                                            {$info["recommend"]|getSelect=radio,###,1}><i></i>是</label>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">精选推荐排序号<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="recommend_orderby"
+							            value="{$info.recommend_orderby|default=getMax('product','recommend_orderby', $map)}" required="">
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">优惠选购<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="discounts" value="0"
+                                                  {$info["discounts"]|getSelect=radio,###,0}><i></i>否</label>
+                                    <label><input type="radio" name="discounts" value="1"
+                                                  {$info["discounts"]|getSelect=radio,###,1}><i></i>是</label>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group myform">
+							    <label class="col-sm-2 control-label">热门抢购<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="seckill" value="0"
+							                {$info["seckill"]|getSelect=radio,###,0}><i></i>否</label>
+							        <label><input type="radio" name="seckill" value="1"
+							                {$info["seckill"]|getSelect=radio,###,1}><i></i>是</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">热门抢购排序号<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="seckill_orderby"
+							            value="{$info.seckill_orderby|default=getMax('product','seckill_orderby', $map)}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group myform">
+							    <label class="col-sm-2 control-label">生活优品-为你推荐<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="recommend_for_you" value="0"
+							                {$info["recommend_for_you"]|getSelect=radio,###,0}><i></i>否</label>
+							        <label><input type="radio" name="recommend_for_you" value="1"
+							                {$info["recommend_for_you"]|getSelect=radio,###,1}><i></i>是</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">生活优品-为你推荐排序号<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="recommend_for_you_ordernum"
+							            value="{$info.recommend_for_you_ordernum|default=getMax('product','recommend_for_you_ordernum', $map)}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group myform">
+							    <label class="col-sm-2 control-label">生活优品-每日抢购<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="everyday_seckill" value="0"
+							                {$info["everyday_seckill"]|getSelect=radio,###,0}><i></i>否</label>
+							        <label><input type="radio" name="everyday_seckill" value="1"
+							                {$info["everyday_seckill"]|getSelect=radio,###,1}><i></i>是</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">生活优品-每日抢购排序号<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="everyday_seckill_orderby"
+							            value="{$info.everyday_seckill_orderby|default=getMax('product','everyday_seckill_orderby', $map)}" required="">
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序号<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="ordernum"
+                                        value="{$info.ordernum|default=getMax('product','ordernum', $map)}" required="">
+                                </div>
+                            </div>
+                            <if condition="(($info.categoryid neq 1) and ($info.type eq 0)) or (($info.categoryid eq 5) and ($info.types eq 0))">
+                                <!-- <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">规格参数<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <textarea cols="80" id="spec_content" name="spec_content" style="height: 400px;"
+                                            rows="10">{$info.spec_content}</textarea>
+                                    </div>
+                                </div> -->
+                            </if>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">规格参数<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <textarea cols="80" id="spec_content" name="spec_content" style="height: 400px;" rows="10"
+							          >{$info.spec_content}</textarea>
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">商品详情<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <textarea cols="80" id="content" name="content" style="height: 400px;" rows="10"
+                                      >{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <if condition="(($info.categoryid neq 1) AND ($info.categoryid neq 5))">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">分佣设置<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10" >
+                                    <table class="table table-bordered">
+                                        <thder>
+                                            <tr class="success" >
+                                                <td class="text-center col-sm-3" ></td>
+                                                <td class="text-center col-sm-3" >A</td>
+                                                <td class="text-center col-sm-3" >B</td>
+                                                <td class="text-center col-sm-3" >C</td>
+                                            </tr>
+                                        </thder>
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center warning" >B购买</td>
+                                            <td class="text-center" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="请输入分红比例" name="part1[]" value="{$info.team.part1.0}"  >
+                                                    <div class="input-group-addon">%</div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="请输入分红比例" name="part1[]" value="{$info.team.part1.1}" >
+                                                    <div class="input-group-addon">%</div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center warning" >C购买</td>
+                                            <td class="text-center" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="请输入分红比例" name="part2[]" value="{$info.team.part2.0}" >
+                                                    <div class="input-group-addon">%</div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="请输入分红比例" name="part2[]" value="{$info.team.part2.1}" >
+                                                    <div class="input-group-addon">%</div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" >
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="请输入分红比例" name="part2[]" value="{$info.team.part2.2}" >
+                                                    <div class="input-group-addon">%</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10" >
+                                        <span style="color:red;margin:5px;">*</span>分佣系统优先使用此处设置，如未设置则使用系统设置参数
+                                    </div>
+                                </div>
+                            </if>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            var ue = UE.getEditor('content');
+			var ue = UE.getEditor('spec_content');
+			//初始化图集
+			InitMulitiImages("images");
+        });
+
+        $('select[name=typeid1]').change(function(){
+                var typeid1 = $('select[name=typeid1] option:checked').val();
+                // var typeid2 = $('select[name=typeid2] option:checked').val();
+                $.ajax({
+                    url:'{:U("get_attribute")}',
+                    data:{typeid1:typeid1},
+                    datatype:'html',
+                    type:'get',
+                    success:function(res){
+                        $('select[name=typeid2]').html("<option value=''>请选择</option>"+res);
+                        $('select[name=typeid3]').html('');
+                        $('.chosen-select').trigger("chosen:updated");
+                    }
+                })
+            })
+
+        $('select[name=typeid2]').change(function(){
+                var typeid2 = $('select[name=typeid2] option:checked').val();
+                // var typeid2 = $('select[name=typeid2] option:checked').val();
+                $.ajax({
+                    url:'{:U("get_attribute")}',
+                    data:{typeid2:typeid2},
+                    datatype:'html',
+                    type:'get',
+                    success:function(res){
+                        $('select[name=typeid3]').html("<option value=''>请选择</option>"+res);
+                        $('.chosen-select').trigger("chosen:updated");
+                    }
+                })
+            })
+            
+    </script>

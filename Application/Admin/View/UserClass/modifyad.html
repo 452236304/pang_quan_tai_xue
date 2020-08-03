@@ -1,0 +1,77 @@
+<include file="Public/header" />
+<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css" media="all">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form method="post" class="form-horizontal" action="{:U('user_class/modifyad','doinfo=modify&id='.$info['id'])}">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">用户组名称：</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="title" value="{$info.title}" required="">
+								</div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">用户组成员：</label>
+								<div class="col-sm-10 checkbox">
+									<input type='hidden' name="user_list" value="{$info.user_list}">
+									<div id="test4" class="demo-transfer"></div>
+								</div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-2">
+									<button class="btn btn-primary" type="submit">保存内容</button>
+									<button class="btn btn-white" type="button" onclick="location.href='{:U('user_class/listad')}'">返回</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<include file="Public/footer" />
+	<script src="__PUBLIC__/layui/layui.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function() {
+			$(".i-checks").iCheck({
+				checkboxClass: "icheckbox_square-green",
+				radioClass: "iradio_square-green",
+			});
+		});
+		layui.use(['transfer', 'layer', 'util'], function() {
+			var $ = layui.$,
+				transfer = layui.transfer,
+				layer = layui.layer,
+				util = layui.util;
+
+			//模拟数据
+			var user = {$user}
+
+			//显示搜索框
+			transfer.render({
+				elem: '#test4',
+				data: user,
+				title: ['可选用户', '已选用户'],
+				showSearch: true,
+				value: [{$info.user_list}],
+				id: 'user_list',
+				onchange: function(data, index) {
+						var getData = transfer.getData('user_list');
+						console.log(getData);
+						var user_array = new Array();
+						getData.forEach((item,index,array)=>{
+						    //执行代码
+							user_array[index] = item.value;
+						})
+						user_list = user_array.join(',');
+						$('input[name=user_list]').val(user_list);
+				}
+			})
+			
+		});
+	</script>

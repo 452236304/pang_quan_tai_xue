@@ -1,0 +1,77 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" action="{:U('Sysuser/modifysysitem','doinfo=modifysysitem&id='.$sysitem['id'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">上一级：</label>
+
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择上一级..." class="chosen-select form-control" style="width:350px;"
+                                        tabindex="2" name="bid">
+                                        <option value="0">作为一级项目</option>
+                                    <foreach name="parents" item="v">
+                                        <option value="{$v['id']}" {$sysitem["bid"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+                                    </foreach>
+                                        {$parentOption}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">项目名称：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$sysitem.title}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">连接名称：</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="url" value="{$sysitem.url}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">菜单项：</label>
+                                <div class="col-sm-10">
+                                    <label><input type="radio" name="ismenu" value="0" {$sysitem["ismenu"]|getSelect=radio,###,0}><i></i>否</label>
+                                    <label><input type="radio" name="ismenu" value="1" {$sysitem["ismenu"]|getSelect=radio,###,1}><i></i>是</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序号：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="orderby" value="{$sysitem['orderby']|default=getMax('sysitem','orderby')}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="location.href='{:U('Sysuser/listsysitem')}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script>
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            })
+        });
+    </script>

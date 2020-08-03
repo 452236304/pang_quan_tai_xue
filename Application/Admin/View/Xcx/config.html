@@ -1,0 +1,96 @@
+<include file="Public/header" />
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        	<div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" action="{:U('Xcx/config','doinfo=config')}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">热门抢购-标题<span style="color:red;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="seckill_title" value="{$info.seckill_title}" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">热门抢购-副标题<span style="color:red;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="seckill_subtitle" value="{$info.seckill_subtitle}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">精选推荐-标题<span style="color:red;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="recommend_title" value="{$info.recommend_title}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">精选推荐-副标题<span style="color:red;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="recommend_subtitle" value="{$info.recommend_subtitle}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">是否隐藏电话咨询和在线评估：</label>
+								<div class="col-sm-10 radio i-checks">
+									<label><input type="radio" name="service_off" value="0" {$info["service_off"]|getSelect=radio,###,0}><i></i>隐藏</label>
+									<label><input type="radio" name="service_off" value="1" {$info["service_off"]|getSelect=radio,###,1}><i></i>显示</label>
+								</div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">在线咨询<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input name="online_consulting" id="online_consulting" type="text" class="form-control"
+							            value="{$info.online_consulting}" required="" /><br>
+							        <div>
+							            <a onclick="BrowseServer('Images:/', 'online_consulting');" href="javascript:void(0);"
+							                class="btn btn-white" data-options="iconCls:'icon-redo'"
+							                style="width: 60px">选择</a>
+							            <a id="online_consulting_Img" title="点击预览大图,点击大图关闭预览" href="{$info.online_consulting}" target="_blank">
+							                <if condition="$info.online_consulting neq ''">
+							                    <img src="{$info.online_consulting}" style="max-height:100px;max-width: 100%" />
+							                </if>
+							            </a>
+							            <div class="red" style="margin-top:5px;">尺寸大小为：344*108</div>
+							        </div>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">电话咨询<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input name="mobile_consulting" id="mobile_consulting" type="text" class="form-control"
+							            value="{$info.mobile_consulting}" required="" /><br>
+							        <div>
+							            <a onclick="BrowseServer('Images:/', 'mobile_consulting');" href="javascript:void(0);"
+							                class="btn btn-white" data-options="iconCls:'icon-redo'"
+							                style="width: 60px">选择</a>
+							            <a id="mobile_consulting_Img" title="点击预览大图,点击大图关闭预览" href="{$info.mobile_consulting}" target="_blank">
+							                <if condition="$info.mobile_consulting neq ''">
+							                    <img src="{$info.mobile_consulting}" style="max-height:100px;max-width: 100%" />
+							                </if>
+							            </a>
+							            <div class="red" style="margin-top:5px;">尺寸大小为：344*108</div>
+							        </div>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file="Public/footer" />

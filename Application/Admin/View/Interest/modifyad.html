@@ -1,0 +1,100 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form id="form-data" method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('Interest/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&role='.$map['role'])}">
+                            <div class="hr-line-dashed"></div>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="panel1">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">标签名称<span style="color:red;margin:5px;">*</span></span>
+                                                <input type="text" class="form-control" name="title"
+                                                    value="{$info.title}" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">状态</span>
+                                                <select data-placeholder="选择类别" name="status"
+                                                    class="form-control chosen-select">
+                                                    <option value="0" {$info["status"]|getSelect=select,'0',###}>禁用
+                                                    </option>
+                                                    <option value="1" {$info["status"]|getSelect=select,'1',###}>启用
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon">分类</span>
+                                                <select data-placeholder="选择类别" name="cate_id"
+                                                    class="form-control chosen-select">
+                                                    <option value="1" {$info["cate_id"]|getSelect=select,'1',###}>热门
+                                                    </option>
+                                                    <option value="2" {$info["cate_id"]|getSelect=select,'2',###}>社区
+                                                    </option>
+													<option value="3" {$info["cate_id"]|getSelect=select,'3',###}>健康
+													</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<div class="col-sm-4 col-sm-offset-2">
+										<input type='hidden' name="id" value="{$info['id']}">
+										<a class="btn btn-primary" id="btn-submit">保存内容</a>
+										<button class="btn btn-white" type="button" onclick="location.href='{:U('Interest/listad','p='.$map['p'])}'">返回</button>
+									</div>
+								</div>
+							</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <!-- 省市区 -->
+    <script type="text/javascript" src="__PLUGINS__/jQueryProvinces/area.js"></script>
+    <script type="text/javascript" src="__PLUGINS__/jQueryProvinces/select.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $('input[type="file"]').prettyFile();
+
+            $("#btn-submit").on('click', function () {
+                
+
+                $("#form-data").submit();
+
+            });
+
+            var start = {
+                elem: "#p_birth", format: "YYYY-MM-DD",
+                min: laydate.now(), max: "2099-12-31",
+                istime: true, istoday: false,
+                choose: function (datas) {
+                    end.min = datas;
+                    end.start = datas;
+                }
+            };
+            laydate(start);
+			
+        });
+    </script>

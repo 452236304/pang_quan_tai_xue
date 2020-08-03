@@ -1,0 +1,105 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('ServiceTime/modifyad','doinfo=modify&days='.$map['days'].'&projectid='.$map['projectid'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">周期：</label>
+                                <div class="col-sm-10">
+                                    <p style="padding-top: 7px;">第{$map.days}天</p>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">时间：</label>
+                                <div class="col-sm-10">
+                                    <label class="W1 J-all-selected" style="margin-left: 15px;">
+                                        <input type="checkbox" class="i-checks" />
+                                        <i></i>全选
+                                    </label>
+                                    <div class="J-container">
+                                        <volist name="times" id="vo" key="n">
+                                            <div
+                                                style="display: inline-block;padding:10px; border:1px solid #2d8f7b;border-radius:5px;margin:5px;width:200px;">
+                                                <label class="W1">
+                                                    <if condition="$vo.selected eq 1">
+                                                        <input type="checkbox" class="i-checks" name="times[]"
+                                                            value="{$vo.begin_stamp}|{$vo.end_stamp}"
+                                                            checked="checked" />
+                                                        <else />
+                                                        <input type="checkbox" class="i-checks" name="times[]"
+                                                            value="{$vo.begin_stamp}|{$vo.end_stamp}" />
+                                                    </if>
+                                                    <i></i>{$vo.begintime} - {$vo.endtime}
+                                                </label>
+                                                <select name="titles[]" class="form-control chosen-select">
+                                                    <option>不选择</option>
+                                                    <option value="{$vo.begin_stamp}|紧张"
+                                                        {$vo["title"]|getSelect=select,'紧张',###}>紧张</option>
+                                                    <option value="{$vo.begin_stamp}|约满"
+                                                        {$vo["title"]|getSelect=select,'约满',###}>约满</option>
+                                                </select>
+                                            </div>
+                                        </volist>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="location.href='{:U('ServiceTime/listad','projectid='.$map['projectid'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script>
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+
+            $("label.J-all-selected").on("click", function () {
+                if ($(this).find("input[type='checkbox']").is(":checked")) {
+                    $("div.J-container label").each(function () {
+                        if (!($(this).find("div.icheckbox_square-green").hasClass("checked"))) {
+                            $(this).trigger("click");
+                        }
+                    });
+                } else {
+                    $("div.J-container label").each(function () {
+                        if ($(this).find("div.icheckbox_square-green").hasClass("checked")) {
+                            $(this).trigger("click");
+                        }
+                    });
+                }
+            });
+            $("label.J-all-selected ins.iCheck-helper").on("click", function () {
+                if ($(this).parent().find("input[type='checkbox']").is(":checked")) {
+                    $("div.J-container label").each(function () {
+                        if (!($(this).find("div.icheckbox_square-green").hasClass("checked"))) {
+                            $(this).trigger("click");
+                        }
+                    });
+                } else {
+                    $("div.J-container label").each(function () {
+                        if ($(this).find("div.icheckbox_square-green").hasClass("checked")) {
+                            $(this).trigger("click");
+                        }
+                    });
+                }
+            });
+        });
+    </script>

@@ -1,0 +1,82 @@
+<include file="Public/header"/>
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th width="100" class="TC">ID</th>
+                            <th width="150" class="TC">用户id</th>
+                            <th width="150" class="TC">推荐类型</th>
+                            <th width="100" class="TC">订单id</th>
+                            <th width="100" class="TC">订单编号</th>
+                            <th width="200" class="TC">商品id</th>
+                            <th width="200" class="TC">收货地址</th>
+                            <th width="100" class="TC">总分佣金额</th>
+                            <th width="100" class="TC">分佣比例</th>
+                            <th width="100" class="TC">分佣金额</th>
+                            <th width="100" class="TC">售后订单id</th>
+                            <th width="100" class="TC">添加时间</th>
+                            <th width="150" class="TC">预计结算时间</th>
+                            <th width="150" class="TC">实际结算时间</th>
+                            <th width="100" class="TC">状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="data" id="vo" key="n">
+                            <tr>
+                                <td align="center">{$vo.id}</td>
+                                <td align="center">{$vo.user_id}</td>
+                                <td align="center">{$vo.grade}</td>
+                                <td align="center">{$vo.order_id}</td>
+                                <td align="center">{$vo.sn}</td>
+                                <td align="center">{$vo.product_id}</td>
+                                <td align="center">
+                                    {$vo.consignee}{$vo.mobile}<br/>
+                                    {$vo.province}{$vo.city}{$vo.region}
+                                </td>
+                                <td align="center">{$vo.total_amount}</td>
+                                <td align="center">{$vo.percent}</td>
+                                <td align="center">{$vo.amount}</td>
+                                <td align="center">{$vo.refund_order_id}</td>
+                                <td align="center">{$vo.add_time}</td>
+                                <td align="center">{$vo.settle_time}</td>
+                                <td align="center">{$vo.effective_time}</td>
+                                <td class="center" align="center">{$vo.status_text}</td>
+                            </tr>
+                        </volist>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <td align="center">{$pageshow}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer"/>
+<script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".fancybox").fancybox({openEffect: "none", closeEffect: "none"});
+
+        $("#btn-sort").on("click", function () {
+            $("#form1").submit();
+        });
+
+        $("a.J-top").on("click", function () {
+            var url = $(this).data("url");
+            layer.confirm("是否确认更新商品置顶状态？", {btn: ["确认", "取消"]}, function () {
+                window.location.href = url;
+            });
+        });
+    });
+</script>

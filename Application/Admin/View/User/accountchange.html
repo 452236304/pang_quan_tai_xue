@@ -1,0 +1,88 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form id="form-data" method="post" class="form-horizontal" enctype="multipart/form-data" action="{:U('User/accountchange','doinfo=change&id='.$info['id'].'&p='.$map['p'])}">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <div class="input-group m-b">
+                                        <span class="input-group-addon">当前用户</span>
+                                        <input type="text" class="form-control" name="nickname" value="{$info.nickname}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group m-b">
+                                        <span class="input-group-addon">账户余额</span>
+                                        <input type="text" class="form-control" name="user_money" value="{$info.user_money}"
+                                            readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6 myform">
+                                    <div class="input-group m-b">
+                                        <span class="input-group-addon">调节方式</span>
+                                        <div class="radio i-checks">
+                                            <label><input type="radio" name="type" value="1"><i></i>增加</label>
+                                            <label><input type="radio" name="type" value="-1"><i></i>减少</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group m-b">
+                                        <span class="input-group-addon">调节金额</span>
+                                        <input type="number" class="form-control" name="amount" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="input-group m-b">
+                                        <span class="input-group-addon">账户变动原因</span>
+                                        <textarea class="form-control" name="remark" style="height:100px;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="btn-submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="location.href='{:U('User/listad','p='.$map['p'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script>
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+
+            $("#btn-submit").on('click', function () {
+                var $data = $("#form-data").serializeObject();
+
+                if ($data['password']) {
+                    if ($data['password'] != $data['confirm-password']) {
+                        alert('密码与确认密码不一致');
+                        return false;
+                    }
+                }
+
+                $("#form-data").submit();
+
+            });
+        });
+    </script>

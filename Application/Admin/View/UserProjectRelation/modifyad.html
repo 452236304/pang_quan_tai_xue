@@ -1,0 +1,117 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('UserProjectRelation/modifyad','doinfo=modify&id='.$info['id'].'&userid='.$map['userid'].'&role='.$map['role'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">关联服务项目：</label>
+                                <div class="col-sm-10 checkbox">
+                                    <volist name="category" id="vo" key="n">
+                                        <div class="J-container">
+                                            <label class="W1 J-menu J-menu-{$vo.id}" id="{$vo.id}">
+                                                <if condition="$vo.selected eq 1">
+                                                    <input type="checkbox" class="i-checks" name="projectid[]"
+                                                        value="{$vo.id}|1|{$vo.title}" checked="checked" />
+                                                    <else />
+                                                    <input type="checkbox" class="i-checks" name="projectid[]"
+                                                        value="{$vo.id}|1|{$vo.title}" />
+                                                </if>
+
+                                                <i></i>{$vo.title}
+                                            </label>
+                                            <div class="J-child-{$vo.id}" style="margin-bottom:20px;margin-left:25px;">
+                                                <volist name="vo.project" id="ivo" key="in">
+                                                    <label class="W1 J-child" id="{$vo.id}">
+                                                        <if condition="$ivo.selected eq 1">
+                                                            <input type="checkbox" class="i-checks" name="projectid[]"
+                                                                value="{$ivo.id}|2|{$ivo.title}" checked="checked" />
+                                                            <else />
+                                                            <input type="checkbox" class="i-checks" name="projectid[]"
+                                                                value="{$ivo.id}|2|{$ivo.title}" />
+                                                        </if>
+                                                        <i></i>{$ivo.title}
+                                                    </label>
+                                                </volist>
+                                            </div>
+                                        </div>
+                                    </volist>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="location.href='{:U('UserProjectRelation/listad','userid='.$map['userid'].'&role='.$map['role'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({ checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green", });
+
+            $("div.J-container label.J-menu").on("click", function () {
+                var id = $(this).attr("id");
+
+                if ($(this).find("input[type='checkbox']").is(":checked")) {
+                    $("div.J-container div.J-child-" + id + " label").each(function () {
+                        if (!($(this).find("div.icheckbox_square-green").hasClass("checked"))) {
+                            $(this).trigger("click");
+                        }
+                    });
+                } else {
+                    $("div.J-container div.J-child-" + id + " label").each(function () {
+                        if ($(this).find("div.icheckbox_square-green").hasClass("checked")) {
+                            $(this).trigger("click");
+                        }
+                    });
+                }
+            });
+            $("div.J-container label.J-menu ins.iCheck-helper").on("click", function () {
+                var id = $(this).parents("label.J-menu").attr("id");
+
+                if ($(this).parent().find("input[type='checkbox']").is(":checked")) {
+                    $("div.J-container div.J-child-" + id + " label").each(function () {
+                        if (!($(this).find("div.icheckbox_square-green").hasClass("checked"))) {
+                            $(this).trigger("click");
+                        }
+                    });
+                } else {
+                    $("div.J-container div.J-child-" + id + " label").each(function () {
+                        if ($(this).find("div.icheckbox_square-green").hasClass("checked")) {
+                            $(this).trigger("click");
+                        }
+                    });
+                }
+            });
+
+            $("div.J-container label.J-child").on("click", function () {
+                var id = $(this).attr("id");
+
+                if ($(this).find("input[type='checkbox']").is(":checked")) {
+                    $("div.J-container label.J-menu-" + id).find("div.icheckbox_square-green").addClass("checked");
+                    $("div.J-container label.J-menu-" + id).find("input[type=checkbox]").attr("checked", "checked");
+                }
+            });
+
+            $("div.J-container label.J-child ins.iCheck-helper").on("click", function () {
+                var id = $(this).parents("label.J-child").attr("id");
+
+                if ($(this).parent().find("input[type='checkbox']").is(":checked")) {
+                    $("div.J-container label.J-menu-" + id).find("div.icheckbox_square-green").addClass("checked");
+                    $("div.J-container label.J-menu-" + id).find("input[type=checkbox]").attr("checked", "checked");
+                }
+            });
+        });
+    </script>

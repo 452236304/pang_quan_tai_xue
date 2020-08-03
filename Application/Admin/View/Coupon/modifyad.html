@@ -1,0 +1,165 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('Coupon/modifyad','doinfo=modify&id='.$info['id'].'&type='.$map['type'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">审核：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0"
+                                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">类型<span
+										style="color:red;margin:5px;">*</span>：</label>
+								<div class="col-sm-10">
+									<select data-placeholder="选择类型" name="coupon_type" class="form-control chosen-select" required >
+										<option value="0" {$info["coupon_type"]|getSelect=select,0,###}>满减</option>
+										<option value="1" {$info["coupon_type"]|getSelect=select,1,###}>指定商品免费</option>
+										<option value="2" {$info["coupon_type"]|getSelect=select,2,###}>指定服务免费</option>
+										<option value="3" {$info["coupon_type"]|getSelect=select,3,###}>指定机构免费</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="coupon_type coupon_type0" style="{$info['coupon_type']==0?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">金额：</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" name="money" value="{$info.money}"
+											step="0.01">
+									</div>
+								</div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">最低使用金额：</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" name="min_amount"
+											value="{$info.min_amount}"  step="0.01">
+									</div>
+								</div>
+							</div>
+							<div class="coupon_type coupon_type1" style="{$info['coupon_type']==1?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">商品：</label>
+									<div class="col-sm-10">
+										<select data-placeholder="选择商品" name="product_id" class="form-control chosen-select">
+											<volist name="product" id="v" key="k">
+											<option value="{$v.id}" {$info["product_id"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="coupon_type coupon_type2" style="{$info['coupon_type']==2?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">服务：</label>
+									<div class="col-sm-10">
+										<select data-placeholder="选择服务" name="service_id" class="form-control chosen-select">
+											<volist name="service" id="v" key="k">
+											<option value="{$v.id}" {$info["service_id"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="coupon_type coupon_type3" style="{$info['coupon_type']==3?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">机构：</label>
+									<div class="col-sm-10">
+										<select data-placeholder="选择机构" name="org_id" class="form-control chosen-select">
+											<volist name="org" id="v" key="k">
+											<option value="{$v.id}" {$info["org_id"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+							</div>
+							<if condition="$map['type'] eq 3">
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">会员级别：</label>
+								<div class="col-sm-10">
+									<select data-placeholder="选择级别" name="level" class="form-control chosen-select">
+										<option value="1" {$info["level"]|getSelect=select,1,###}>银卡会员</option>
+										<option value="2" {$info["level"]|getSelect=select,2,###}>金卡会员</option>
+										<option value="3" {$info["level"]|getSelect=select,3,###}>钻石卡会员</option>
+									</select>
+								</div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">赠送数量：</label>
+							    <div class="col-sm-10">
+							        <input type="number" class="form-control" name="num" value="{$info.num}"
+							            required="">
+							    </div>
+							</div>
+							</if>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">总数量：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="count" value="{$info.count}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">有效天数：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="use_date" value="{$info.use_date}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="location.href='{:U('Coupon/listad','type='.$map['type'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <!-- 时间 -->
+    <script src="__JS__/plugins/layer/laydate/laydate.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+			$('select[name=coupon_type]').change(function(){
+				var coupon_type = $('select[name=coupon_type] option:selected').val();
+				//console.log(coupon_type);
+				$('.coupon_type').css('display','none');
+				$('.coupon_type'+coupon_type).css('display','block');
+			})
+        });
+    </script>

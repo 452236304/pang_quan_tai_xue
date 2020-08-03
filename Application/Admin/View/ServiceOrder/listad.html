@@ -1,0 +1,300 @@
+<include file="Public/header" />
+<style>
+    .header_title {
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .header_active {
+        font-weight: bold;
+    }
+</style>
+
+<body class="gray-bg">
+    <form id="form1" name="form1" method="post"
+        action="{:U('ServiceOrder/listad', 'type='.$map['type'].'&admin_status='.$map['admin_status'])}">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <?php if($_GET['status']!='sh'){ ?>
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins row">
+                        <div class="col-sm-2 header_title <?php echo $_GET['type']=='2'?'header_active':''; ?>"
+                            onclick="javascript:location.href='{:U('ServiceOrder/listad').'?type=2'}'">
+                            服务订单</div>
+                        <div class="col-sm-2 header_title <?php echo $_GET['type']=='1'?'header_active':''; ?>"
+                            onclick="javascript:location.href='{:U('ServiceOrder/listad').'?type=1'}'">
+                            送餐订单</div>
+                        <div class="col-sm-2 header_title <?php echo $_GET['status']=='sy'?'header_active':''; ?>"
+                            onclick="javascript:location.href='{:U('ServiceOrder/listad').'?status=sy'}'">爽约订单</div>
+                        <div class="col-sm-2 header_title <?php echo $_GET['status']=='dq'?'header_active':''; ?>"
+                            onclick="javascript:location.href='{:U('ServiceOrder/listad').'?status=dq'}'">待抢订单</div>
+                        <div class="col-sm-2 header_title <?php echo $_GET['admin_status']=='2'?'header_active':''; ?>"
+                            onclick="javascript:location.href='{:U('ServiceOrder/listad').'?admin_status=2'}'">审核不通过订单
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins row">
+                        <div class="col-sm-3">
+                            <!-- <select class="form-control" name="pay_status">
+                                <option value="-1">所有支付状态</option>
+                                <option value='3' {$where["pay_status"]|getSelect=select,3,###}>已支付</option>
+                                <option value="0" {$where["pay_status"]|getSelect=select,'0',###}>未支付</option>
+                            </select> -->
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control" name='orderstatus'>
+                                <option value="-1">所有订单状态</option>
+                                <option value="1" {$where["orderstatus"]|getSelect=select,1,###}>已超时</option>
+                                <option value="2" {$where["orderstatus"]|getSelect=select,2,###}>待付款</option>
+                                <option value="3" {$where["orderstatus"]|getSelect=select,3,###}>已取消</option>
+                                <option value="4" {$where["orderstatus"]|getSelect=select,4,###}>已完成</option>
+                                <option value="5" {$where["orderstatus"]|getSelect=select,5,###}>申请退款</option>
+                                <option value="6" {$where["orderstatus"]|getSelect=select,6,###}>已退款</option>
+                                <option value="7" {$where["orderstatus"]|getSelect=select,7,###}>待审核</option>
+                                <option value="8" {$where["orderstatus"]|getSelect=select,8,###}>待接单</option>
+                                <option value="9" {$where["orderstatus"]|getSelect=select,9,###}>待确认开始</option>
+                                <option value="10" {$where["orderstatus"]|getSelect=select,10,###}>服务中</option>
+                                <option value="11" {$where["orderstatus"]|getSelect=select,11,###}>待确认完成</option>
+                                <option value="12" {$where["orderstatus"]|getSelect=select,12,###}>线下评估中</option>
+                                <option value="13" {$where["orderstatus"]|getSelect=select,13,###}>待缴付尾款</option>
+                            </select>
+                        </div>
+                        <div class="input-group col-sm-6">
+                            <input type="text" placeholder="流水号 / 用户昵称 / 标题  / 联系人 / 联系电话" name="keyword"
+                                class="form-control" value="{$map.keyword}">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100" class="TC">ID</th>
+                                        <th width="100" class="TC">流水号</th>
+                                        <th width="200">标题</th>
+                                        <if condition="$map.type eq 2">
+                                            <th width="150" class="TC">服务栏目</th>
+                                            <th width="150" class="TC">服务人员姓名</th>
+                                            <th width="100" class="TC">服务等级</th>
+                                            <th width="100" class="TC">服务时长</th>
+                                        </if>
+                                        <if condition="$map.type eq 1">
+                                            <th width="100" class="TC">餐次</th>
+                                        </if>
+                                        <th width="100" class="TC">用户昵称</th>
+                                        <th width="100" class="TC">联系人</th>
+                                        <th width="100" class="TC">联系电话</th>
+                                        <th width="100" class="TC">地区</th>
+                                        <th width="150" class="TC">订单状态</th>
+                                        <th width="100" class="TC">订单金额</th>
+                                        <!-- <th width="150" class="TC">审核</th> -->
+                                        <th width="150" class="TC">下单时间</th>
+                                        <if condition="$map.status eq 'sy'">
+                                            <th width="150" class="TC">爽约时间</th>
+                                        </if>
+                                        <th width="150" class="TC">订单来源</th>
+                                        <th width="300" class="TC">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td align="center">{$vo.id}<input type="hidden" name="id[]"
+                                                    value="{$vo.id}" />
+                                            </td>
+                                            <td align="center">{$vo.sn}</td>
+                                            <td>{$vo.title}</td>
+                                            <if condition="$map.type eq 2">
+                                                <td align="center">{$vo.category}</td>
+                                                <td align="center">{$vo.service_realname}</td>
+                                                <td align="center">
+                                                    <if condition="$vo.service_level gt 0">
+                                                        {$vo.service_level}星
+                                                        <else />
+                                                        -
+                                                    </if>
+                                                </td>
+                                                <td align="center">{$vo.time}{$vo.time_type|getTimeType=###}</td>
+                                            </if>
+                                            <if condition="$map.type eq 1">
+                                                <td align="center">{$vo.res_type|getMealLevel=###}</td>
+                                            </if>
+                                            <td align="center">{$vo.nickname}</td>
+                                            <td align="center">{$vo.contact}</td>
+                                            <td align="center">{$vo.mobile}</td>
+                                            <td align="center">{$vo.province} / {$vo.city} / {$vo.region}</td>
+                                            <td align="center">
+                                                <if
+                                                    condition="$vo.status eq 1 and $vo.pay_status neq 3 and $vo['createdate'] lt $where['outtime']">
+                                                    已超时
+                                                    <elseif condition="$vo.status eq 1 and $vo.pay_status neq 3" />
+                                                    待付款
+                                                    <elseif condition="$vo.status eq 2" />
+                                                    已取消
+                                                    <elseif condition="$vo.status eq 4" />
+                                                    已完成
+                                                    <elseif condition="$vo.status eq 5" />
+                                                    申请退款
+                                                    <elseif condition="$vo.status eq 6" />
+                                                    已退款
+                                                    <elseif condition="$vo.status eq 1 and $vo.admin_status eq 2" />
+                                                    审核不通过
+                                                    <elseif condition="$vo.status eq 1 and $vo.admin_status eq 0" />
+                                                    待审核
+                                                    <elseif condition="$vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid eq 0" />
+                                                    待接单
+                                                    <elseif condition="$vo.assess eq 1 and $vo.status eq 1 and $vo.assess_status eq 1" />
+                                                    线下评估中
+                                                    <elseif condition="$vo.assess eq 1 and $vo.status eq 1 and $vo.assess_status eq 2 and $vo.again_status eq 1" />
+                                                    待缴付尾款
+                                                    <elseif condition="$vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid gt 0 and $vo.execute_status eq 0" />
+                                                    <if condition="$vo.type eq 1">
+                                                        等待配送
+                                                        <else />
+                                                        等待服务
+                                                    </if>
+                                                    <elseif
+                                                        condition="$vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid gt 0 and $vo.execute_status eq 1" />
+                                                    <if condition="$vo.type eq 1">
+                                                        配送中
+                                                        <else />
+                                                        待确认开始服务
+                                                    </if>
+                                                    <elseif
+                                                        condition="$vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid gt 0 and $vo.execute_status eq 2" />
+                                                    <if condition="$vo.type eq 1">
+                                                        配送中
+                                                        <else />
+                                                        服务中
+                                                    </if>
+                                                    <elseif
+                                                        condition="$vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid gt 0 and $vo.execute_status eq 3" />
+                                                    待确认完成
+                                                    <elseif
+                                                        condition="$vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid gt 0 and $vo.execute_status eq 7" />
+                                                    已爽约
+                                                </if>
+                                            </td>
+                                            <td align="center">
+                                                <if condition="$vo.again_count gt 0">
+                                                    <p>{$vo.amount|calc=$vo['again_price'],'+'}</p>
+                                                    <else />
+                                                    <p>{$vo.amount}</p>
+                                                </if>
+                                            </td>
+                                            <!-- <td align="center">
+                                                <if condition="$vo.admin_status eq 1">
+                                                    已通过
+                                                    <elseif condition="$vo.admin_status eq 2" />
+                                                    不通过
+                                                    <else />
+                                                    待审核
+                                                </if>
+                                            </td> -->
+                                            <td align="center">{$vo.createdate|strtotime|date="Y-m-d H:i",###}</td>
+                                            <if condition="$map.status eq 'sy'">
+                                                <td align="center">{$vo.execute_time|strtotime|date="Y-m-d H:i",###}
+                                                </td>
+                                            </if>
+                                            <td align="center">
+                                                <switch name="vo.hybrid">
+                                                    <case value="app">app</case>
+                                                    <case value="xcx">小程序</case>
+                                                    <default />未知
+                                                </switch>
+                                            </td>
+                                            <td class="text-navy" align="center">
+                                                <p>
+                                                    <a href="{:U('ServiceOrder/modifyad','id='.$vo['id'].'&type='.$map['type'].'&admin_status='.$map['admin_status'].'&p='.$map['p'].'&status='.$map['status'])}">查看{$map["status"]
+                                                        != 'sh' ? '修改' : '' }</a>
+                                                    <if condition="$vo.commentid gt 0">
+                                                        <a href="{:U('ServiceOrder/comment','id='.$vo['commentid'])}"
+                                                            class="J-OpenTab" data-index="service_comment_{$vo.id}"
+                                                            data-title="订单{$vo.sn}-查看评论">查看评论</a>
+                                                    </if>
+                                                </p>
+                                                <if condition="$vo.type eq 2 and (($vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid gt 0 and $vo.execute_status eq 3) or ($vo.status eq 4 and $vo.execute_status eq 4))">
+                                                    <p>
+                                                        <a href="{:U('ServiceOrder/carerecord','orderid='.$vo['id'])}"
+                                                            class="J-OpenTab" data-index="care_record_{$vo.id}"
+                                                            data-title="订单{$vo.sn}-服务总结">查看服务总结</a>
+                                                    </p>
+                                                </if>
+                                                <p>
+                                                    <if condition="$map.status eq 'sh'">
+                                                        <a href="{:U('ServiceOrderRefund/modifyad','orderid='.$vo['id'])}"
+                                                            class="J-OpenTab" data-index="service_refund_{$vo.id}"
+                                                            data-title="{$map['type'] == 1?'送餐':'服务'}订单{$vo.sn}-售后原因">售后原因</a>
+                                                    </if>
+                                                    <if condition="($vo.service_userid eq 0 and $vo.admin_status eq 0) or ($vo.service_userid gt 0 and $vo.admin_status eq 0) or ($map.status eq 'sy') or ($map.status eq 'dq') or ($vo.status eq 1 and $vo.admin_status eq 1 and $vo.service_userid eq 0) ">
+                                                        <a href="{:U('ServiceOrder/appoint','id='.$vo['id'])}"
+                                                            class="J-OpenTab" data-index="service_appoint_{$vo.id}"
+                                                            data-title="订单{$vo.sn}-指派服务人员">指派服务人员</a>
+                                                    </if>
+                                                </p>
+
+                                                <if condition="$map.status eq 'sy'">
+                                                    <p>
+                                                        <a href="javascript:;" data-url="{:U('ServiceOrder/removead','id='.$vo['id'].'&type='.$map['type'].'&admin_status='.$map['admin_status'].'&p='.$map['p'].'&status='.$map['status'])}"
+                                                            class="J-removead">解除爽约</a>
+                                                    </p>
+                                                </if>
+                                                <if condition="($vo.assess eq 1 or $vo.doctor eq 1 or $vo.time_type eq 4) and $vo.admin_status eq 0">
+                                                    <p>
+                                                        <a href="{:U('ServiceOrder/orderform','id='.$vo['id'])}"
+                                                            class="J-OpenTab" data-index="service_orderform_{$vo.id}"
+                                                            data-title="订单{$vo.sn}-设置服务表单">设置服务表单</a>
+                                                    </p>
+                                                    <elseif condition="($vo.assess eq 1 or $vo.doctor eq 1 or $vo.time_type eq 4) and $vo.admin_status eq 1" />
+                                                    <p>
+                                                        <a href="{:U('ServiceOrder/orderform','id='.$vo['id'])}"
+                                                            class="J-OpenTab" data-index="service_orderform_{$vo.id}"
+                                                            data-title="订单{$vo.sn}-查看服务表单">查看服务表单</a>
+                                                    </p>
+                                                    <p>
+                                                        <a href="{:U('ServiceOrder/orderformrecord','orderid='.$vo['id'])}"
+                                                            class="J-OpenTab"
+                                                            data-index="service_orderformrecord_{$vo.id}"
+                                                            data-title="订单{$vo.sn}-查看服务表单">查看服务表单日志</a>
+                                                    </p>
+                                                </if>
+												<if condition="$vo.status eq 1 and $vo.pay_status neq 3">
+													<a href="{:U('ServiceOrder/change_price','id='.$vo['id'].'&p='.$map['p'])}">修改订单价格</a>
+												</if>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover">
+                                <tr>
+                                    <td align="center">{$pageshow}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+
+        $(function () {
+            $("a.J-removead").on("click", function () {
+                var url = $(this).data("url");
+                layer.confirm("是否确认解除服务订单爽约？", { btn: ["确认", "取消"] }, function () {
+                    window.location.href = url;
+                });
+            });
+        });
+
+    </script>

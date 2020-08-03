@@ -1,0 +1,68 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+<form id="form1" name="form1" method="post" action="{:U('UserPapers/listad','userid='.$map['userid'].'&p='.$map['p'])}">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="col-sm-7">
+                            <button class="btn btn-primary" type="button" onclick="location.href='{:U('UserPapers/modifyad','p='.$map['p'].'&userid='.$map['userid'])}'">＋增加</button>
+                        </div>
+                        <div class="input-group col-sm-5">
+                            <input type="text" placeholder="名称" name="keyword" class="form-control"
+                                   value="{$map.keyword}">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="100" class="TC">编号</th>
+                                    <th width="100" class="TC">名称</th>
+                                    <th width="100" class="TC">类型</th>
+                                    <th width="100" class="TC">审核</th>
+                                    <th width="150" class="TC">创建时间</th>
+                                    <th width="150" class="TC">更新时间</th>
+                                    <th width="100" class="TC">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="data" id="vo" key="n">
+                                    <tr>
+                                        <td align="center">{$n}<input type="hidden" name="id[]" value="{$vo.id}" /></td>
+                                        <td align="center">{$vo.name}</td>
+                                        <td align="center">{$vo.type|getPapersType=###}</td>
+                                        <td align="center">
+                                            <if condition="$vo.status eq 1">
+                                                <i class="fa fa-check"></i>
+                                                <else />
+                                                <i class="fa fa-close"></i>
+                                            </if>
+                                        </td>
+                                        <td align="center">{$vo.createdate|strtotime|date="Y-m-d H:i:s",###}</td>
+                                        <td align="center">{$vo.updatetime|strtotime|date="Y-m-d H:i:s",###}</td>
+                                        <td class="text-navy" align="center">
+                                            <a href="{:U('UserPapers/modifyad','id='.$vo['id'].'&p='.$map['p'].'&userid='.$map['userid'])}">修改</a>
+                                            <a href="javascript:;" data-url="{:U('UserPapers/delad','id='.$vo['id'].'&p='.$map['p'].'&userid='.$map['userid'])}"
+                                                class="checkDel">删除</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <include file="Public/footer" />

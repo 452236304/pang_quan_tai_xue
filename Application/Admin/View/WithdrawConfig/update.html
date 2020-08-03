@@ -1,0 +1,103 @@
+<include file="Public/header" />
+<style>
+	.time_lable{
+		float:left;
+		padding:0 10px;
+	}
+</style>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" id="formData" >
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">每周可提现次数<span style="color:red">*</span>：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="num" value="{$data.num}">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">周几可提现<span style="color:red">*</span>：</label>
+                            <div class="col-sm-10" style="padding-top:7px;">
+                        		<div class="time_lable">
+                        			<input id="weekday1" type="checkbox" {$one|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="1" />
+                        			<label for="weekday1" style="font-weight:bold;cursor:pointer;">周一</label>
+                        		</div>
+								<div class="time_lable">
+									<input id="weekday2" type="checkbox" {$two|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="2" />
+									<label for="weekday2" style="font-weight:bold;cursor:pointer;">周二</label>
+								</div>
+								<div class="time_lable">
+									<input id="weekday3" type="checkbox" {$three|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="3" />
+									<label for="weekday3" style="font-weight:bold;cursor:pointer;">周三</label>
+								</div>
+								<div class="time_lable">
+									<input id="weekday4" type="checkbox" {$four|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="4" />
+									<label for="weekday4" style="font-weight:bold;cursor:pointer;">周四</label>
+								</div>
+								<div class="time_lable">
+									<input id="weekday5" type="checkbox" {$five|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="5" />
+									<label for="weekday5" style="font-weight:bold;cursor:pointer;">周五</label>
+								</div>
+								<div class="time_lable">
+									<input id="weekday6" type="checkbox" {$six|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="6" />
+									<label for="weekday6" style="font-weight:bold;cursor:pointer;">周六</label>
+								</div>
+								<div class="time_lable">
+									<input id="weekday7" type="checkbox" {$seven|getSelect=check,###,$data['weekday']} class="i-checks" name="weekday[]" value="7" />
+									<label for="weekday7" style="font-weight:bold;cursor:pointer;">周日</label>
+								</div>
+                        	<!-- <div class="time_lable allcheck" style="margin-top:30px;width:200px;">
+                        		<input id="allcheck" type="checkbox" class="i-checks"/>
+                        		<label for="allcheck" style="font-weight:bold;cursor:pointer;">全选/清空</label>
+                        	</div> -->
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注<span style="color:red">*</span>：</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" name="remark" >{$data.remark}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="hidden" name="id" value="{$data.id}" >
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+<script>
+    $(document).ready(function () {
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+
+        $("#formData").submit(function(){
+            $.ajax({
+                url: "{:U('update')}",
+                type: 'POST',
+                dataType: 'json',
+                data: $("#formData").serialize(),
+                success: function(data){
+                    if( data.status ){
+                        parent.$("#table").bootstrapTable('refresh');
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }else{
+                        layer.alert(data.info, {skin: 'layui-layer-lan'});
+                    }
+                },
+            });
+            return false;
+        });
+    });
+</script>

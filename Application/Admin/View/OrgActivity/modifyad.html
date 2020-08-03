@@ -1,0 +1,109 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('OrgActivity/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">副标题：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input name="thumb" id="thumb" type="text" class="form-control"
+                                        value="{$info.thumb}" required="" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                                            <if condition="$info.thumb neq ''">
+                                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                        <div class="red" style="margin-top:5px;">尺寸大小为：545*240</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">购买价格<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="price" value="{$info.price}"
+                                        step="0.01" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">分佣金额<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="brokerage" value="{$info.brokerage}"
+                                           step="0.01" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">审核<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0"
+                                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="ordernum"
+                                        value="{$info.ordernum|default=getMax('org_activity','ordernum', $map)}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">活动详情<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <textarea cols="80" id="content" name="content" style="height: 400px;"
+                                        rows="10" required="请填写内容" required="" >{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+
+            var editor = UE.getEditor('content');
+        });
+    </script>

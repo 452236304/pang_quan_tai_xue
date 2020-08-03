@@ -1,0 +1,300 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data" action="{:U('UserCare/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&userid='.$map['userid'].'&status='.$map['status'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">审核：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0" {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1" {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">姓名：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="name" value="{$info.name}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">性别：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="gender" value="{$info.gender}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">出生年月：</label>
+                                <div class="col-sm-10">
+                                    <input id="birth" name="birth" class="form-control layer-date"
+                                           placeholder="YYYY-MM-DD" value="{$info.birth}"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" />
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">身高(cm)：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="height" value="{$info.height}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">体重(kg)：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="weight" value="{$info.weight}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">证件类型：</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择证件类型" name="identification_type" class="form-control chosen-select">
+                                        <option value="" {$info["identification_type"]|getSelect=select,"",###}>请选择证件类型</option>
+                                        <option value="1" {$info["identification_type"]|getSelect=select,"1",###}>大陆身份证</option>
+                                        <option value="2" {$info["identification_type"]|getSelect=select,"2",###}>港澳身份证</option>
+                                        <option value="3" {$info["identification_type"]|getSelect=select,"3",###}>回乡证</option>
+                                    </select>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">证件照<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input name="identification_image" id="identification_image" type="text" class="form-control"
+							            value="{$info.identification_image}" required="" /><br>
+							        <div>
+							            <a onclick="BrowseServer('Images:/', 'identification_image');" href="javascript:void(0);"
+							                class="btn btn-white" data-options="iconCls:'icon-redo'"
+							                style="width: 60px">选择</a>
+							            <a id="identification_image_Img" title="点击预览大图,点击大图关闭预览" href="{$info.identification_image}" target="_blank">
+							                <if condition="$info.identification_image neq ''">
+							                    <img src="{$info.identification_image}" style="max-height:100px;max-width: 100%" />
+							                </if>
+							            </a>
+							            <div class="red" style="margin-top:5px;">尺寸大小为：180*140</div>
+							        </div>
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">证件号：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="identification" value="{$info.identification}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">饮食偏好：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="diet" value="{$info.diet}">
+                                    <div class="desc" style="margin-top: 10px;">以英文逗号 ，分隔</div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">行动方式：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="action" value="0" {$info["action"]|getSelect=radio,###,0}><i></i>独立行走</label>
+                                    <label><input type="radio" name="action" value="1" {$info["action"]|getSelect=radio,###,1}><i></i>辅助行走</label>
+									<label><input type="radio" name="action" value="2" {$info["action"]|getSelect=radio,###,2}><i></i>轮椅</label>
+									<label><input type="radio" name="action" value="3" {$info["action"]|getSelect=radio,###,3}><i></i>卧床</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">进食：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="eat" value="0" {$info["eat"]|getSelect=radio,###,0}><i></i>独立完成</label>
+							        <label><input type="radio" name="eat" value="1" {$info["eat"]|getSelect=radio,###,1}><i></i>协助</label>
+									<label><input type="radio" name="eat" value="2" {$info["eat"]|getSelect=radio,###,2}><i></i>管饲</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">穿衣：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="clothes" value="0" {$info["clothes"]|getSelect=radio,###,0}><i></i>独立完成</label>
+							        <label><input type="radio" name="clothes" value="1" {$info["clothes"]|getSelect=radio,###,1}><i></i>协助</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">洗澡：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="wash" value="0" {$info["wash"]|getSelect=radio,###,0}><i></i>独立完成</label>
+							        <label><input type="radio" name="wash" value="1" {$info["wash"]|getSelect=radio,###,1}><i></i>协助</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">大便控制：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="shit" value="0" {$info["shit"]|getSelect=radio,###,0}><i></i>可控制</label>
+							        <label><input type="radio" name="shit" value="1" {$info["shit"]|getSelect=radio,###,1}><i></i>失控</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">小便控制：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="urine" value="0" {$info["urine"]|getSelect=radio,###,0}><i></i>可控制</label>
+							        <label><input type="radio" name="urine" value="1" {$info["urine"]|getSelect=radio,###,1}><i></i>失控</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">尿管：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="urine_piping" value="0" {$info["urine_piping"]|getSelect=radio,###,0}><i></i>无</label>
+							        <label><input type="radio" name="urine_piping" value="1" {$info["urine_piping"]|getSelect=radio,###,1}><i></i>有</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">胃管：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="stomach_piping" value="0" {$info["stomach_piping"]|getSelect=radio,###,0}><i></i>无</label>
+							        <label><input type="radio" name="stomach_piping" value="1" {$info["stomach_piping"]|getSelect=radio,###,1}><i></i>有</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">造瘘管：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="fistula_tube" value="0" {$info["fistula_tube"]|getSelect=radio,###,0}><i></i>无</label>
+							        <label><input type="radio" name="fistula_tube" value="1" {$info["fistula_tube"]|getSelect=radio,###,1}><i></i>有</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">压疮：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="pressure" value="0" {$info["pressure"]|getSelect=radio,###,0}><i></i>无</label>
+							        <label><input type="radio" name="pressure" value="1" {$info["pressure"]|getSelect=radio,###,1}><i></i>有</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">气管切开：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="tracheotomy" value="0" {$info["tracheotomy"]|getSelect=radio,###,0}><i></i>无</label>
+							        <label><input type="radio" name="tracheotomy" value="1" {$info["tracheotomy"]|getSelect=radio,###,1}><i></i>有</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">意识：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="realize" value="0" {$info["realize"]|getSelect=radio,###,0}><i></i>清醒</label>
+							        <label><input type="radio" name="realize" value="1" {$info["realize"]|getSelect=radio,###,1}><i></i>昏睡</label>
+									<label><input type="radio" name="realize" value="2" {$info["realize"]|getSelect=radio,###,2}><i></i>昏迷</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">老年痴呆：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="dementia" value="0" {$info["dementia"]|getSelect=radio,###,0}><i></i>无</label>
+							        <label><input type="radio" name="dementia" value="1" {$info["dementia"]|getSelect=radio,###,1}><i></i>有</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">临终老人：</label>
+							    <div class="col-sm-10 radio i-checks">
+							        <label><input type="radio" name="deathbed" value="0" {$info["deathbed"]|getSelect=radio,###,0}><i></i>否</label>
+							        <label><input type="radio" name="deathbed" value="1" {$info["deathbed"]|getSelect=radio,###,1}><i></i>是</label>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">护理级别：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="level" value="{$info.level}">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">与被照护人的关系：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="relationship" value="{$info.relationship}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">病例图集合：</label>
+                                <div class="col-sm-10">
+                                    <div class="MulitiImageSelectDiv">
+                                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                                        </ul>
+                                    </div>
+                                    <div class="MulitiImageSelecttextarea">
+                                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true" style="width: 100%; height: 100px">{$info.images}</textarea>
+                                    </div>
+                                    <div>
+                                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');" href="javascript:void(0);" class="btn btn-white"
+                                            data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+                                    </div>
+                                    <div class="desc">尺寸大小为：800*800，最多5张图片</div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注：</label>
+                                <div class="col-sm-10">
+                                    <textarea name="remark" class="form-control" style="height: 100px;resize: none;">{$info.remark}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">默认：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="is_default" value="0" {$info["is_default"]|getSelect=radio,###,0}><i></i>否</label>
+                                    <label><input type="radio" name="is_default" value="1" {$info["is_default"]|getSelect=radio,###,1}><i></i>是</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var start = {
+                elem:"#birth",format:"YYYY-MM-DD",
+                min:laydate.now(),max:"2099-12-31",
+                istime:true,istoday:false,
+                choose:function(datas){
+                    end.min = datas;
+                    end.start = datas;
+                }
+            };
+            laydate(start);
+
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            
+            //初始化图集
+            InitMulitiImages("images");
+        });
+    </script>

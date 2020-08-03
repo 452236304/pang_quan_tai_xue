@@ -1,0 +1,51 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()"
+                            enctype="multipart/form-data"
+                            action="{:U('ServiceOrder/change_price','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'].'&categoryid='.$map['categoryid'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">订单总金额<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="total_amount" value="{$info.total_amount}"
+                                        step="0.01" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">支付金额<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="amount"
+                                        value="{$info.amount}" step="0.01" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+        });
+    </script>

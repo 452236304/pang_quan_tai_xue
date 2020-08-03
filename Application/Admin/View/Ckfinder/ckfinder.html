@@ -1,0 +1,28 @@
+<include file="Public/header" />
+
+<body>
+    <div style="margin-bottom:100px;">
+        <input name="Thumb" id="Thumb" type="text" class="form-control" /><br>
+        <div>
+            <a onclick="BrowseServer('Images:/', 'Thumb');" href="javascript:void(0);" class="btn btn-white"
+                data-options="iconCls:'icon-redo'" style="width: 60px">选择</a>
+            <a id="Thumb_Img" title="点击预览大图,点击大图关闭预览" class="fancybox" href="javascript:void(0);" target="_blank"></a>
+        </div>
+    </div>
+    <div>
+        <div class="MulitiImageSelectDiv">
+            <ul id="Images_MulitiImageSelect" class="MulitiImageSelectUl"></ul>
+        </div>
+        <div class="MulitiImageSelecttextarea">
+            <textarea type="text" name="Images" id="Images" class="MulitiImageSelect" multiline="true" style="width: 100%; height: 100px"></textarea>
+        </div>
+        <div>
+            <a id="Images_select" onclick="MulitiBrowseServer('Images:/', 'Images');" href="javascript:void(0);" class="btn btn-white"
+                data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+        </div>
+        <div class="desc">尺寸大小为：800*800，最多5张图片</div>
+    </div>
+</body>
+<include file="Public/footer" />
+<script src="/Public/ckfinder/ckfinder.js"></script>
+<script src="/Public/ckfinder/handle.js"></script>

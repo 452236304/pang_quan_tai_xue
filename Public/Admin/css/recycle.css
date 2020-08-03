@@ -1,0 +1,46 @@
+.img_box{
+	width:1400px;
+	margin:0 auto;
+}
+.img{
+	float:left;
+	background:#fff;
+	width:140px;
+	height:180px;
+	margin:10px 20px;
+	text-align:center;
+	cursor:pointer;
+	
+}
+.img>a{
+	width:140px;
+	height:100px;
+	display:block;
+}
+.img img{
+	max-width:140px;
+	max-height:100px;
+	
+}
+.bottom{
+	width:140px;
+	height:80px;
+}
+.bottom>div{
+	float:left;
+	width:50%;
+	text-align:center;
+	height:80px;
+	line-height:80px;
+}
+.delete{
+	color:red;
+}
+.header_title{
+	text-align:center;
+	font-size:20px;
+	cursor:pointer;
+}
+.header_active{
+	font-weight:bold;
+}

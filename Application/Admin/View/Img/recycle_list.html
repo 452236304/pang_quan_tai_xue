@@ -1,0 +1,82 @@
+<include file="Public/header" />
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="__CSS__/recycle.css" rel="stylesheet">
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins row">
+					<div class="col-sm-4 header_title <?php echo $_GET['type']=='images'?'header_active':''; ?>" onclick="javascript:location.href='{:U('Img/recycle_list').'?type=images'}'">Images</div>
+					<div class="col-sm-4 header_title <?php echo $_GET['type']=='files'?'header_active':''; ?>" onclick="javascript:location.href='{:U('Img/recycle_list').'?type=files'}'">Files</div>
+				</div>
+			</div>
+            <div class='img_box'>
+				<volist name="list" id='vo'>
+				<div class="img">
+					<a href="{$vo}" target="view_window"><img src="{$vo}"/></a>
+					<div class="bottom">
+						<div class="restore" data_url="{$vo}">还原图片</div>
+						<div class="delete" data_url="{$vo}">彻底删除</div>
+					</div>
+				</div>
+				</volist>
+				<div style="clear:both"></div>
+			</div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({ openEffect: "none", closeEffect: "none" });
+
+            $("#btn-sort").on("click", function () {
+                $("#form1").submit();
+            });
+
+            $("a.J-top").on("click", function () {
+                var url = $(this).data("url");
+                layer.confirm("是否确认更新商品置顶状态？", { btn: ["确认", "取消"] }, function () {
+                    window.location.href = url;
+                });
+            });
+        });
+		//还原图片
+		$('.restore').click(function(){
+			var url=$(this).attr('data_url');
+			layer.confirm("是否确认还原该图片？", { btn: ["确认", "取消"] }, function () {
+				
+				$.ajax({
+					url:'{:U("Img/restore")}',
+					data:{
+						type:'<?php echo $_GET['type']?>',
+						url:url
+					},
+					type:'post',
+					datatype:'json',
+					success:function(res){
+						location.reload();
+					}
+				})
+			});
+		});
+		//删除
+		$('.delete').click(function(){
+			var url=$(this).attr('data_url');
+			layer.confirm("是否确认彻底删除该图片？", { btn: ["确认", "取消"] }, function () {
+				
+				console.log(url)
+				$.ajax({
+					url:'{:U("Img/del")}',
+					type:'post',
+					data:{
+						url:url
+					},
+					datatype:'json',
+					success:function(res){
+						location.reload();
+					}
+				})
+			});
+		});
+    </script>

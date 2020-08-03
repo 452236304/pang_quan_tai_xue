@@ -1,0 +1,115 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('OrgOrderRefund/modifyad','doinfo=modify&orderid='.$info['orderid'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">售后类型：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="type" value="2" checked="checked"><i></i>退款</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">状态：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>售后</label>
+                                    <label><input type="radio" name="status" value="4"
+                                            {$info["status"]|getSelect=radio,###,4}><i></i>完成</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">发布时间：</label>
+                                <div class="col-sm-10 radio">
+                                    <p>{$info.createdate}</p>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">退款金额：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="refund_money"
+                                        value="{$order.amount}" required="" step="0.01">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">图集：</label>
+                                <div class="col-sm-10">
+                                    <div class="MulitiImageSelectDiv">
+                                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                                        </ul>
+                                    </div>
+                                    <div class="MulitiImageSelecttextarea">
+                                        <textarea type="text" name="images" id="images" class="MulitiImageSelect"
+                                            multiline="true"
+                                            style="width: 100%; height: 100px">{$info.images}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">售后原因：</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="reason" style="resize:none;height:100px;"
+                                        type="text/plain" readonly>{$info.reason}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">售后反馈：</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="feedback" style="resize:none;height:100px;"
+                                        type="text/plain">{$info.feedback}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">反馈时间：</label>
+                                <div class="col-sm-10 radio">
+                                    <p>{$info.feedback_date}</p>
+                                </div>
+                            </div>
+                            <if condition="$info.status eq 1">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-primary" type="submit">保存内容</button>
+                                        <!-- <button class="btn btn-white" type="button" onclick="location.href='{:U('About/listad')}'">返回</button> -->
+                                    </div>
+                                </div>
+                            </if>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            var start = {
+                elem: "#shipping_date", format: "YYYY-MM-DD hh:mm",
+                min: laydate.now(), max: "2099-12-31",
+                istime: true, istoday: false,
+                choose: function (datas) {
+                    end.min = datas;
+                    end.start = datas;
+                }
+            };
+            laydate(start);
+            //初始化图集
+            InitMulitiImages("images");
+        });
+    </script>

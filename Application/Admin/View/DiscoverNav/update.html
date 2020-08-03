@@ -1,0 +1,126 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" id="formData" >
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="title" value="{$data.title}" required="">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序号：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="sort" placeholder="99" value="{$data.sort}" >
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">推荐：</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline i-checks"><input type="radio" value="1" name="recommend_type" <eq name="data.recommend_type" value="1" >checked</eq> >服务</label>
+                                <label class="radio-inline i-checks"><input type="radio" value="2" name="recommend_type" <eq name="data.recommend_type" value="2" >checked</eq> >商品</label>
+                                <label class="radio-inline i-checks"><input type="radio" value="3" name="recommend_type" <eq name="data.recommend_type" value="2" >checked</eq> >家护师</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10" id="service" >
+                                <select data-placeholder="选择服务项目" class="chosen-select col-sm-12" multiple name="service[]" >
+                                    <option value="">请选择服务项目</option>
+                                    <volist name="service" id="vo" >
+                                        <option value="{$vo.id}" <in name="vo.id" value="$data.recommend">selected</in> >{$vo.title}</option>
+                                    </volist>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-10" id="product" >
+                                <select data-placeholder="选择商品" class="chosen-select col-sm-12" multiple name="product[]" >
+                                    <option value="">请选择商品</option>
+                                    <volist name="product" id="vo" >
+                                        <option value="{$vo.id}" <in name="vo.id" value="$data.recommend">selected</in> >{$vo.title}</option>
+                                    </volist>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-10" id="user" >
+                                <select data-placeholder="选择家护师" class="chosen-select col-sm-12" multiple name="user[]" >
+                                    <option value="">请选择家护师</option>
+                                    <volist name="user" id="vo" >
+                                        <option value="{$vo.id}" <in name="vo.id" value="$data.recommend">selected</in> >{$vo.realname}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="hidden" name="id" value="{$data.id}" >
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+<script>
+
+    $(function () {
+
+        $("#service").hide();
+        $("#product").hide();
+        $("#user").hide();
+        recommend_type = Number("{$data.recommend_type}");
+        chosenSelect(recommend_type);
+        
+        $("input:radio[name='recommend_type']").on('ifChanged', function(event){
+            var recommend_type = $(this).val();
+            chosenSelect(recommend_type);
+        });
+
+        $("#formData").submit(function(){
+            $.ajax({
+                url: "{:U('update')}",
+                type: 'POST',
+                dataType: 'json',
+                data: $("#formData").serialize(),
+                success: function(data){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    window.parent.location.reload();
+                },
+                error: function(data){
+                    layer.alert(data.info, {skin: 'layui-layer-lan'});
+                }
+            });
+            return false;
+        });
+    });
+    
+    function chosenSelect(recommend_type) {
+        if( recommend_type == 1 ){
+            $("#service").show();
+            $("#product").hide();
+            $("#user").hide();
+        }else if( recommend_type == 2 ){
+            $("#service").hide();
+            $("#product").show();
+            $("#user").hide();
+        }else if( recommend_type == 3 ){
+            $("#service").hide();
+            $("#product").hide();
+            $("#user").show();
+        }
+    }
+
+
+</script>

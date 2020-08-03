@@ -1,0 +1,558 @@
+<include file="Public/header" />
+<style>
+    #fujian .preview {
+        text-align: left;
+    }
+
+    #fujian .webuploader-pick {
+        color: #000 !important;
+    }
+
+    #fujian .btn-white {
+        color: #333
+    }
+
+    .noscroll {
+        overflow: hidden;
+    }
+
+    input.input-large {
+        color: #000;
+    }
+
+    .yllist {
+        clear: both;
+        overflow: hidden;
+        padding-left: 15px;
+        padding-bottom: 20px;
+    }
+
+    .yllist span {
+        width: 100px;
+        height: 35px;
+        background: #fff;
+        color: #138CDD;
+        line-height: 35px;
+        border-radius: 5px;
+        text-align: center;
+        display: inline-block;
+        margin-right: 100px;
+        cursor: pointer;
+        border: 1px solid #138CDD;
+    }
+
+    .yllist span.active {
+        background: #138CDD;
+        color: #fff;
+    }
+
+    .cke_bottom,
+    #edui1_bottombar {
+        display: none !important;
+    }
+</style>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('MouldArticle/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&status='.$map['status'])}"
+                            data-id="{$info['id']}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}"
+                                        required="">
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">状态<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择状态" id="status" name="status"
+                                        class="form-control chosen-select">
+                                        <option value="1" {$info["status"]|getSelect=select,1,###}>显示</option>
+                                        <option value="0" {$info["status"]|getSelect=select,0,###}>隐藏</option>
+                                    </select>
+                                </div>
+                            </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分类<span style="color:red;margin:5px;">*</span>：</label>
+                        <div class="col-sm-10">
+                            <select data-placeholder="选择分类" name="type" class="form-control chosen-select">
+                                <foreach name="types" item="v" key="k">
+                                    <option value="{$v.id}" {$info["type"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                    </div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">栏目<span style="color:red;margin:5px;">*</span>：</label>
+					    <div class="col-sm-10">
+					        <select data-placeholder="选择栏目" name="column" class="form-control chosen-select">
+					            <foreach name="column" item="v" key="k">
+					                <option value="{$v.id}" {$info["column"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+					            </foreach>
+					        </select>
+					    </div>
+					</div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
+                        <div class="col-sm-10">
+                            <div class="MulitiImageSelectDiv">
+                                <ul id="thumb_MulitiImageSelect" class="MulitiImageSelectUl">
+                                </ul>
+                            </div>
+                            <div class="MulitiImageSelecttextarea">
+                                <textarea type="text" name="thumb" id="thumb" class="MulitiImageSelect"
+                                    multiline="true"
+                                    style="width: 100%; height: 100px" required="">{$info.thumb}</textarea>
+                            </div>
+                            <div>
+                                <a id="thumb_select" onclick="MulitiBrowseServer('Images:/', 'thumb');"
+                                    href="javascript:void(0);" class="btn btn-white"
+                                    data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+                            </div>
+                            <div class="red">建议最多3张图片</div>
+							<p class="col-sm-3 control-label" style="color: red;">建议尺寸：124*82</p>
+                        </div>
+                    </div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">作者<span style="color:red;margin:5px;">*</span>：</label>
+					    <div class="col-sm-10">
+					        <input type="text" class="form-control" name="name" value="{$info.name}"
+					            required="">
+					    </div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">作者头像：</label>
+					    <div class="col-sm-10">
+					        <input type="file" class="form-control" name="avatar" onchange="preview(this,'.a-preview')">
+					        <div class="preview a-preview">
+					            <if condition="$info.avatar neq ''">
+					                <img src="{$info.avatar}" style="max-height:100px;max-width: 100%" />
+					            </if>
+					        </div>
+					    </div>
+					    <p class="col-sm-3 control-label" style="color: red;">建议尺寸：200*140</p>
+					</div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">附件：</label>
+                        <!--<div class="col-sm-10" id="fujian">-->
+                        <div class="col-sm-10">
+                            <input name="file_link" id="file_link" type="text" class="form-control"
+                                value="{$info.file_link}" /><br>
+                            <input type="hidden" name="file_name" id="file_name" value="{$info.file_name}">
+                            <div>
+                                <p style="display: {$info['file_name'] ? 'block' : 'none'};" id="file-name-p">原文件名:
+                                    <span id="file-name-span">{$info.file_name}</span></p>
+                                <a id="fujian"
+                                    style="width: 100px;display: block;height: 30px;line-height: 30px;text-align: center;border:1px solid #E6E6E6;margin: 20px;margin-top: 0;margin-left: 0;">选择附件</a>
+
+                                <!--                             <a onclick="BrowseServer_online('Images:/', 'file_link');" href="javascript:void(0);" class="btn btn-white"
+                                data-options="iconCls:'icon-redo'" style="width: 60px">选择</a> -->
+                            </div>
+                            <!--<input type="file" class="form-control " id="file_link" name="file_link" onchange="preview(this,'.f-preview', 1)">
+                            <input type="hidden" name="file_link_o" value="{$info.file_link}">
+                            <input type="hidden" name="file_links" value="{$info.file_link}">
+                            <input type="hidden" name="online_url_page" value="{$info.online_url_page}">-->
+
+                        </div>
+                        <div class="preview f-preview col-sm-4 text-right" id="fujian_zksc"
+                            style="padding-right:100px;<?php echo $info['file_link'] ? '' :'display: none'; ?>">
+                            <a href="{$info.file_link}" style="" class="checkfj" target="_blank">查看附件</a>
+                            <a style="color: red;margin-left: 50px;" class="delfile">取消附件</a>
+
+                        </div>
+                        <div class="col-sm-12 col-sm-offset-2" id="progress_bar"
+                            style="display: none; margin-left: 17.666667%;padding-left: 0;">
+                            <div
+                                style=" margin-top: 5px;margin-right: 10px; float: left; height: 6px;width: 300px;background: #F1F1F1;border-radius: 3px;position: relative;">
+                                <span id="probar"
+                                    style="width: 0%;background: #1366B6;position: absolute;top: 0;height: 6px;border-radius: 3px;left: 0;"></span>
+                            </div><span id="protext" style="position: relative;float: left;">0%</span>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">概述：</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="intro"
+                                style="resize:none;height:100px;">{$info.intro}</textarea>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">详细内容：</label>
+                        <div class="col-sm-10" style="position: relative;">
+                            <textarea cols="80" id="content" name="content" style="height:400px;"
+                                rows="10">{$info.content}</textarea>
+
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">排序号：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ordernum"
+                                value="{$info.ordernum|default=getMax('mould_article','ordernum')}" required="">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收藏数：</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="collection_count"
+                                value="{$info.collection_count|default=0}" />
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">点赞数：</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="good_count"
+                                value="{$info.good_count|default=0}" />
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">浏览量：</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="browse_count"
+                                value="{$info.browse_count|default=0}" />
+                        </div>
+                    </div>
+                    <!-- <div class="hr-line-dashed"></div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">相关推荐关键词：</label>
+					    <div class="col-sm-10">
+					        <input type="text" class="form-control" name="relevant"
+					            value="{$info.relevant}" />
+					    </div>
+					</div> -->
+					<div class="hr-line-dashed"></div>
+                    <div class="form-group myform">
+                        <label class="col-sm-2 control-label">热门推荐：</label>
+                        <div class="col-sm-10 radio i-checks">
+                            <label><input type="radio" name="hot" value="0"
+                                    {$info["status"]|getSelect=radio,###,0}><i></i>否</label>
+                            <label><input type="radio" name="hot" value="1"
+                                    {$info["status"]|getSelect=radio,###,1}><i></i>是</label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary" type="submit">保存内容</button>
+                            <button class="btn btn-white" type="button"
+                                onclick="javascript:history.go(-1)">返回</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <include file="Public/footer" />
+    <link rel="stylesheet" type="text/css" href="__WEBJS__/webuploader.css" />
+    <script src="__WEBJS__/webuploader.min.js" type="text/javascript"></script>
+    <script src="/Public/Home/plugin/layer/layer.js" type="text/javascript"></script>
+
+    <script src="/Public/ckfinder/ckfinder.js" type="text/javascript"></script>
+    <script src="/Public/Home/controller/common/jsframe.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        function BrowseServer_online(startupPath, clientId) {
+            var inputValue = $("#" + clientId).val();
+            if (inputValue) {
+                var arr = inputValue.split("/");
+                delete arr[arr.length - 1];
+                var dir = arr.join("/");
+                startupPath = decodeURI(dir); //decodeURIComponent(dir);
+            }
+            startupPath = startupPath.replace("/upload/userfiles/files/", "Files:/");
+            startupPath = startupPath.replace("/upload/userfiles/images/", "Images:/");
+
+            CKFinder.popup({
+                chooseFiles: true,
+                rememberLastFolder: true,
+                startupPath: startupPath,
+                onInit: function (finder) {
+                    finder.on("files:choose", function (evt) {
+                        var file = evt.data.files.first();
+                        var fileUrl = file.getUrl();
+                        SetFileField_online(fileUrl, clientId);
+                        filesize(fileUrl);
+                    });
+                }
+            });
+        }
+
+        // This is a sample function which is called when a file is selected in CKFinder.
+        /* function SetFileField_online(fileUrl, clientId) {
+             $('#' + clientId).val(fileUrl);
+             var online_url = 'http://ow365.cn/?i=17473&n=2&furl=http://'+window.location.host+fileUrl;
+             $('#online_url').val(online_url);
+             $("#isFullScreen").attr("src", online_url);
+             $(".checkfj").attr("href", online_url)
+             $("#fujian_zksc").show();
+             var online_url_info = '"http://ow365.cn/?i=17473&info=0&furl=http://'+window.location.host+fileUrl;
+             $.ajax({
+                 url: online_url_info,
+                 type: 'get',
+                 dataType: 'json',
+                 success: function (data) {
+                     $("#online_url_page").val(data.PageCount)
+                 }
+             })
+         }*/
+
+
+    </script>
+
+
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="__TMPL__/xedit/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__TMPL__/xedit/ueditor.all.js"></script>
+    <!--<script type="text/javascript" src="/Public/ckeditor/ckeditor.js"></script>-->
+    <script type="text/javascript">
+        var editor = UE.getEditor('content');
+		editor.ready(function() {
+			editor.setHeight(400);
+		})
+        //初始化图集
+        InitMulitiImages("thumb");
+        /* CKEDITOR.replace('content',
+        {
+           toolbar : [
+                [ 'Source',  'Preview', '-', ],
+                //加粗     斜体，     下划线      穿过线      下标字        上标字
+                ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+                // 数字列表          实体列表            减小缩进    增大缩进
+                ['NumberedList','BulletedList','-','Outdent','Indent'],
+                //左对 齐             居中对齐          右对齐          两端对齐
+                ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                //超链接  取消超链接 锚点
+                ['Link','Unlink','Anchor'],
+                //图片    flash    表格       水平线            表情       特殊字符        分页符
+                ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+                // 样式       格式      字体    字体大小
+                ['Styles','Format','Font','FontSize'],
+                //文本颜色     背景颜色
+                ['TextColor','BGColor'],
+                //全屏           显示区块
+                ['Maximize']
+],
+              width :"100%",
+              height : 400,
+              resize_enabled:false,
+        }
+    );
+    CKEDITOR.on('instanceReady', function(ev) {
+    ev.editor.on('maximize', function(evt) {
+        if(evt.data==1){
+            $("body").addClass("noscroll")
+            $("#isFullScreen").css({ "height": "100%", "width": "100%", "left": 0 });
+        }else{
+             $("body").removeClass("noscroll")
+             $("#isFullScreen").css({ "height": "400px", "width": "98%", "left": "16px" });
+        }
+    });
+    
+});*/
+
+        function uploader(ids) {
+            var webuploader = WebUploader.create({
+                fileVal: "file_link",
+                // 选完文件后，是否自动上传。
+                auto: true,
+                // swf文件路径
+                swf: '/Public/Home/plugin/webuploader/js/Uploader.swf',
+                // 文件接收服务端。
+                server: "http://" + window.location.host + "/admin.php/MouldArticle/upFuJian",
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: "#fujian",
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false,
+            });
+            webuploader.on('fileQueued', function (file) {
+                $("#progress_bar").show();
+                layer.load();
+            });
+            // 文件上传过程中创建进度条实时显示。
+            webuploader.on('uploadProgress', function (file, percentage) {
+                $("#probar").css('width', percentage * 100 + '%');
+                $("#protext").text(percentage * 100 + '%')
+            });
+            webuploader.on('uploadSuccess', function (file, response) {
+                layer.msg("上传成功！", { time: 1500 })
+                $("#progress_bar").hide();
+                $("#fujian_zksc").show();
+                $("#fujian .input-append input.input-large").val(response.file_link)
+                $("#isFullScreen").attr("src", response.online_url)
+                $(".checkfj").attr("href", response.file_link)
+                $("#fujian").siblings(".preview ").show();
+                if (response.is_yl == 1) {
+                    $("#isFullScreen").hide();
+                    $(".yllist span").removeClass("active")
+                    $(".yllist span:nth-child(1)").addClass("cancle")
+                    $(".yllist span:nth-child(2)").addClass("active")
+                    $("input[name='display_type']").val(1)
+                    $("input[name='qz_display_type']").val(1)
+                } else {
+                    $(".yllist span").removeClass("cancle")
+                    $("input[name='qz_display_type']").val(0)
+                }
+                $("input[name='file_link']").val(response.file_link)
+                $("input[name='file_name']").val(response.file_name)
+
+                $("#file-name-p").show();
+                $("#file-name-span").html(response.file_name)
+
+                if ($("input[name='display_type']").val() == 2) {
+				console.log(response.online_url_info)
+                    $("input[name='online_url']").val(response.online_url)
+                    $.ajax({
+                        url: response.online_url_info,
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (data) {
+							var filename=data.FileName
+							var index1=filename.lastIndexOf(".");
+							var index2=filename.length;
+							var postf=filename.substring(index1,index2);
+                        }
+                    })
+                }
+                layer.closeAll('loading');
+                webuploader.reset();
+            });
+            // 文件上传失败，显示上传出错。
+            webuploader.on('uploadError', function (file) {
+                $("#progress_bar").hide();
+                layer.alert('上传失败');
+                layer.closeAll('loading');
+            });
+        }
+        uploader();
+        function filesize(fileurl) {
+            $.ajax({
+                url: "http://" + window.location.host + "/admin.php/MouldArticle/filesize",
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    file_url: fileurl
+                },
+                success: function (data) {
+                    if (data.is_yl == 1) {
+                        $("#isFullScreen").hide();
+                        $(".yllist span").removeClass("active")
+                        $(".yllist span:nth-child(1)").addClass("cancle")
+                        $(".yllist span:nth-child(2)").addClass("active")
+                        $("input[name='display_type']").val(1)
+                        $("input[name='qz_display_type']").val(1)
+                    } else {
+                        $(".yllist span").removeClass("cancle")
+                        $("input[name='qz_display_type']").val(0)
+                    }
+                }
+            })
+        }
+        $(document).ready(function () {
+            var qz = "{$info['qz_display_type']?1:0}";
+            if (qz == "1") {
+                $(".yllist span:nth-child(1)").addClass("cancle")
+            }
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $('input[type="file"]').prettyFile();
+
+            $("#status").on("change", function () {
+                var status = $(this).val();
+                if (status == 2) {
+                    $("#J-reason-container").show();
+                } else {
+                    $("#J-reason-container").hide();
+                    $("#reason").val('');
+                }
+            });
+            //切换模式
+            $(".yllist span").click(function () {
+                $(this).addClass("active").siblings("span").removeClass("active")
+                if ($(this).data("index") == 1) {
+                    $("#isFullScreen").show();
+                    $("input[name='display_type']").val(2)
+                    $("#fujian .preview ").hide()
+                    if ($("#isFullScreen").attr("src") == "") {
+                        layer.msg("请选择附件", { time: 1500 });
+                    }
+                } else {
+                    $("#fujian .preview ").show()
+                    $("input[name='display_type']").val(1)
+                    $("#isFullScreen").hide();
+                }
+            })
+            $(document).on("click", ".yllist span.cancle", function (e) {
+                e.preventDefault();
+                $("input[name='display_type']").val(1)
+                $("#isFullScreen").hide();
+                $(".yllist span").removeClass("active")
+                $(".yllist span:nth-child(2)").addClass("active")
+                layer.msg("上传文件过大，无法启用在线预览模式！", { time: 1500 })
+            })
+
+            //提交表单
+            $("button[type='submit']").click(function (e) {
+                e.preventDefault();
+                var d = {};
+                var t = $('form').serializeArray();
+                $.each(t, function () {
+                    d[this.name] = this.value;
+                });
+                $("form.form-horizontal").submit()
+            })
+            //删除附件
+            $(".delfile").click(function () {
+                $("#fujian_zksc").hide();
+                $("#file-name-p").hide();
+                $("input[name='online_url'],input[name='file_link'],input[name='online_url_page']").val("");
+                $("#isFullScreen").attr("src", '');
+                $(".yllist span").removeClass("cancle");
+                /*var file_link = $("input[name='file_link']").val()
+
+                $.ajax({
+                    url: "http://" + window.location.host + "/admin.php/MouldArticle/delfile",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        file: file_link,
+                        id: $("form.form-horizontal").data("id")
+                    },
+                    success: function (data) {
+                        if (data.is == 0) {
+                            layer.alert("所选附件不存在，请保存后刷新页面重试！", { title: "温馨提示" })
+                        } else {
+                            layer.msg("取消成功", { time: 1500 });
+                            $("#fujian_zksc").hide();
+                            $("input[name='online_url'],input[name='file_link'],input[name='online_url_page']").val("");
+                            $("#isFullScreen").attr("src", '')
+                        }
+                    }
+                })*/
+            })
+        });
+
+    </script>

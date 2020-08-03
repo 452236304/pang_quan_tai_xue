@@ -1,0 +1,9 @@
+[ 2020-07-29T11:01:34+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.014780s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.017321s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.017385s ]
+NOTIC: [2] fopen(logs/timer/2020-07-29.log): failed to open stream: No such file or directory E:\www\pang_quan_tai_xue\Application\Payment\Weixin\Extend\log.php 第 16 行.
+

@@ -1,0 +1,276 @@
+<include file="Public/detail_header" />
+
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data"
+    action="{:U('Org/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'])}">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#panel1" aria-controls="panel1" role="tab"
+                data-toggle="tab">基础资料</a></li>
+        <li role="presentation"><a href="#panel2" aria-controls="panel2" role="tab" data-toggle="tab">相关信息</a></li>
+        <li role="presentation"><a href="#panel3" aria-controls="panel3" role="tab" data-toggle="tab">机构详情</a></li>
+    </ul>
+    <div class="hr-line-dashed"></div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="panel1">
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">审核<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="status" value="0"
+                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                    <label><input type="radio" name="status" value="1"
+                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构类型<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <select data-placeholder="选择机构类型" name="type" class="form-control chosen-select" required>
+                        <option value="0" {$info["type"]|getSelect=select,0,###}>请选择机构类型</option>
+                        <option value="1" {$info["type"]|getSelect=select,1,###}>养老公寓</option>
+                        <option value="2" {$info["type"]|getSelect=select,2,###}>护理院</option>
+                        <option value="3" {$info["type"]|getSelect=select,3,###}>旅居养老</option>
+                        <option value="4" {$info["type"]|getSelect=select,4,###}>医院</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">副标题：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input name="thumb" id="thumb" type="text" class="form-control" value="{$info.thumb}" required="" /><br>
+                    <div>
+                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);" class="btn btn-white"
+                            data-options="iconCls:'icon-redo'" style="width: 60px">选择</a>
+                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                            <if condition="$info.thumb neq ''">
+                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                            </if>
+                        </a>
+                        <div class="red" style="margin-top:5px;">尺寸大小为：260*190</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构图集<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <div class="MulitiImageSelectDiv">
+                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                        </ul>
+                    </div>
+                    <div class="MulitiImageSelecttextarea">
+                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true" required=""
+                            style="width: 100%; height: 100px">{$info.images}</textarea>
+                    </div>
+                    <div>
+                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');"
+                            href="javascript:void(0);" class="btn btn-white" data-options="iconCls:'icon-redo'"
+                            style="width: 90px">批量选择</a>
+                    </div>
+                    <div class="red">尺寸大小为：375*135，建议最多5张图片</div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">省市区<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 input-group J-address" style="padding: 0 15px;">
+                    <!-- 省市区 -->
+                    <select class="form-control province" name="province" style="width:150px;">
+                        <option value="{$info.province}">{$info.province}</option>
+                    </select>
+                    <select class="form-control city" name="city" style="width:150px;">
+                        <option value="{$info.city}">{$info.city}</option>
+                    </select>
+                    <select class="form-control town" name="region" style="width:150px;">
+                        <option value="{$info.region}">{$info.region}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">详细地址<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="address" value="{$info.address}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构星级<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attribute1" value="{$info.attribute1}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">医疗结合<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attribute2" value="{$info.attribute2}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">所在区域<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attribute3" value="{$info.attribute3}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">联系电话<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="tel" value="{$info.tel}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ordernum"
+                        value="{$info.ordernum|default=getMax('org','ordernum')}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">置顶<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="top" value="0"
+                            {$info["top"]|getSelect=radio,###,0}><i></i>否</label>
+                    <label><input type="radio" name="top" value="1"
+                            {$info["top"]|getSelect=radio,###,1}><i></i>是</label>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel2">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">个性需求<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="query2" value="{$info.query2}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">护理级别<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="query3" value="{$info.query3}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">长护险<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="query4" value="{$info.query4}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">月费价格<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="query5" value="{$info.query5}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构特色<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="query6" value="{$info.query6}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">旅居类型<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="query7" value="{$info.query7}" required="">
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel3">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构简介<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <textarea cols="80" id="content1" name="content1" style="height: 400px;" rows="10" required="请填写内容" required="" >{$info.content1}</textarea>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务优势<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <textarea cols="80" id="content2" name="content2" style="height: 400px;" rows="10" required="请填写内容" required="" >{$info.content2}</textarea>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">入住费介绍<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+					<textarea cols="80" id="content3" name="content3" style="height: 400px;" rows="10" required="请填写内容" required="" >{$info.content3}</textarea>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">优惠信息<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+					<textarea cols="80" id="content4" name="content4" style="height: 400px;" rows="10" required="请填写内容" required="" >{$info.content4}</textarea>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构地址<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+					<textarea cols="80" id="content5" name="content5" style="height: 400px;" rows="10" required="请填写内容" required="" >{$info.content5}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" type="submit">保存内容</button>
+            <button class="btn btn-white" type="button"
+                onclick="javascript:history.go(-1)">返回</button>
+        </div>
+    </div>
+</form>
+<include file="Public/detail_footer" />
+<!-- 省市区 -->
+<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/area.js"></script>
+<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+		var editor1 = UE.getEditor('content1');
+		var editor2 = UE.getEditor('content2');
+		var editor3 = UE.getEditor('content3');
+		var editor4 = UE.getEditor('content4');
+		var editor5 = UE.getEditor('content5');
+		
+        <!-- var editor1 = window.InitUEditor("content1", "content1"); -->
+        <!-- var editor2 = window.InitUEditor("content2", "content2"); -->
+        <!-- var editor3 = window.InitUEditor("content3", "content3"); -->
+        <!-- var editor4 = window.InitUEditor("content4", "content4"); -->
+        <!-- var editor5 = window.InitUEditor("content5", "content5"); -->
+
+        //初始化图集
+        InitMulitiImages("images");
+    });
+</script>

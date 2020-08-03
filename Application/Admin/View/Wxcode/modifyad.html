@@ -1,0 +1,135 @@
+<include file="Public/header" />
+<style>
+    #fujian .preview {
+        text-align: left;
+    }
+
+    #fujian .webuploader-pick {
+        color: #000 !important;
+    }
+
+    #fujian .btn-white {
+        color: #333
+    }
+
+    .noscroll {
+        overflow: hidden;
+    }
+
+    input.input-large {
+        color: #000;
+    }
+
+    .yllist {
+        clear: both;
+        overflow: hidden;
+        padding-left: 15px;
+        padding-bottom: 20px;
+    }
+
+    .yllist span {
+        width: 100px;
+        height: 35px;
+        background: #fff;
+        color: #138CDD;
+        line-height: 35px;
+        border-radius: 5px;
+        text-align: center;
+        display: inline-block;
+        margin-right: 100px;
+        cursor: pointer;
+        border: 1px solid #138CDD;
+    }
+
+    .yllist span.active {
+        background: #138CDD;
+        color: #fff;
+    }
+
+    .cke_bottom,
+    #edui1_bottombar {
+        display: none !important;
+    }
+</style>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('Wxcode/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&status='.$map['status'])}" data-id="{$info['id']}">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">二维码<span
+                                style="color:red;margin:5px;">*</span>：</label>
+                        <div class="col-sm-10">
+                            <input name="thumb" id="thumb" type="text" class="form-control"
+                                value="{$info.thumb}" required="" /><br>
+                            <div>
+                                <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);"
+                                    class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                    style="width: 60px">选择</a>
+                                <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                                    <if condition="$info.thumb neq ''">
+                                        <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                                    </if>
+                                </a>
+								<div class="red" style="margin-top:5px;">尺寸大小为：120*120</div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">备注<span style="color:red;margin:5px;">*</span>：</label>
+					    <div class="col-sm-10">
+					        <input type="text" class="form-control" name="remark" value="{$info.remark}"
+					            required="">
+					    </div>
+					</div>
+                    <div class="hr-line-dashed"></div>
+					<div class="form-group">
+					    <label class="col-sm-2 control-label">更新时间<span style="color:red;margin:5px;">*</span>：</label>
+					    <div class="col-sm-10">
+					        <input type="text" class="form-control" value="{$info.updatetime}" readonly="">
+					    </div>
+					</div>
+					<div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+							<input type='hidden' name="type" value="{$map['type']}">
+                            <button class="btn btn-primary" type="submit">保存内容</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <include file="Public/footer" />
+    <link rel="stylesheet" type="text/css" href="__WEBJS__/webuploader.css" />
+    <script src="__WEBJS__/webuploader.min.js" type="text/javascript"></script>
+    <script src="/Public/Home/plugin/layer/layer.js" type="text/javascript"></script>
+
+    <script src="/Public/ckfinder/ckfinder.js" type="text/javascript"></script>
+    <script src="/Public/Home/controller/common/jsframe.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+
+
+    </script>
+
+
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="__TMPL__/xedit/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__TMPL__/xedit/ueditor.all.js"></script>
+    <!--<script type="text/javascript" src="/Public/ckeditor/ckeditor.js"></script>-->
+    <script type="text/javascript">
+        var editor = UE.getEditor('content');
+
+        //初始化图集
+        InitMulitiImages("thumb");
+		
+    </script>

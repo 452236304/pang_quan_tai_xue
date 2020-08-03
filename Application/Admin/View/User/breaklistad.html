@@ -1,0 +1,97 @@
+<include file="Public/header" />
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content row">
+                            <div class="col-sm-9">
+                            </div>
+                            <div class="col-sm-3">
+                                <form method="post" class="form-horizontal" action="{:U('breaklistad','role='.$map['role'])}">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="手机号码 / 昵称" name="keyword" class="form-control" value="{$map.keyword}">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary">搜索</button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="100" class="TC">编号</th>
+                                    <th width="100" class="TC">状态</th>
+                                    <th width="100" class="TC">账户余额</th>
+                                    <th width="100" class="TC">昵称</th>
+                                    <th width="100" class="TC">头像</th>
+                                    <th width="100" class="TC">手机号码</th>
+                                    <th width="100" class="TC">性别</th>
+                                    <th width="100" class="TC">省市区</th>
+                                    <th width="100" class="TC">注册日期</th>
+                                    <th width="100" class="TC">最后登录时间</th>
+                                    <th width="100" class="TC">角色</th>
+                                    <th width="100" class="TC">最近爽约时间</th>
+                                    <th width="200" class="TC">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="data" id="vo" key="n">
+                                    <tr>
+                                        <td align="center">{$n}<input type="hidden" name="id[]" value="{$vo.id}" /></td>
+                                        <td align="center">{$vo.status|getUserStatus=###}</td>
+                                        <td align="center">{$vo.user_money}</td>
+                                        <td align="center">{$vo.nickname}</td>
+                                        <td align="center">
+                                            <a href="{$vo.avatar}" class="fancybox"><img src="{$vo.avatar}" width="80px" /></a>
+                                        </td>
+                                        <td align="center">{$vo.mobile}</td>
+                                        <td align="center">{$vo.gender|getGender=###}</td>
+                                        <td align="center">{$vo.province}{$vo.city}{$vo.region}</td>
+                                        <td align="center">{$vo.registertime|strtotime|date="Y-m-d",###}</td>
+                                        <td align="center">{$vo.logintime|strtotime|date="Y-m-d H:i:s",###}</td>
+                                        <td align="center">{$vo.role|getServiceRole=###}</td>
+                                        <td align="center">{$vo.plane_time|strtotime|date="Y-m-d H:i:s",###}</td>
+                                        <td class="text-navy" align="center">
+                                            <a href="javascript:;" data-url="{:U('User/RemoveBreak','id='.$vo['id'].'&p='.$map['p'].'&role='.$map['role'])}"
+                                                class="J-RemoveBreak">解绑爽约</a>
+                                            <a class="J-OpenTab" href="{:U('ServiceOrderRecord/listad','userid='.$vo['id'])}" data-index="service_order_record_{$vo['id']}" data-title="{$vo['nickname']}-爽约记录">爽约记录</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <td align="center">{$pageshow}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () { 
+
+            $(".fancybox").fancybox({ openEffect: "none", closeEffect: "none" });
+
+            $(".J-RemoveBreak").on("click", function(){
+                var url = $(this).data("url");
+                layer.confirm("是否确认对该用户解绑爽约？", {btn:["确认", "取消"]}, function(){
+                    window.location.href = url;
+                });
+            });
+            
+        });
+    </script>

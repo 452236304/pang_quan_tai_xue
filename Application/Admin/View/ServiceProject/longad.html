@@ -1,0 +1,56 @@
+<include file="Public/detail_header" />
+
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data"
+    action="{:U('ServiceProject/longad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&projectid='.$map['projectid'])}">
+    <!-- Nav tabs -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="panel1">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务内容<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <textarea cols="80" id="content" name="content" style="height: 400px;" rows="10" required="请填写内容" required="">{$info.content}</textarea>
+                </div>
+            </div>
+			
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" type="submit">保存内容</button>
+            <button class="btn btn-white" type="button"
+                onclick="location.href='{:U('ServiceProject/longlist','p='.$map['p'].'&projectid='.$map['projectid'])}'">返回</button>
+        </div>
+    </div>
+</form>
+<include file="Public/detail_footer" />
+<!-- 省市区 -->
+<script type="text/javascript" src="__PLUGINS__/city-select/jquery.cityselect.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $address = {
+            'prov': '{$info.province}',
+            'city': '{$info.city}',
+            'dist': '{$info.region}'
+        };
+        $(".J-address").citySelect($address);
+
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+        var editor1 = UE.getEditor('content');
+
+        //初始化图集
+        InitMulitiImages("images");
+    });
+</script>

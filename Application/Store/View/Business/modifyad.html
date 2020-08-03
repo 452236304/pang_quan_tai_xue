@@ -1,0 +1,144 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()" enctype="multipart/form-data" action="{:U('Business/modifyad','doinfo=modify')}">
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">店铺名称<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">图标<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input name="thumb" id="thumb" type="text" class="form-control"
+                                        value="{$info.thumb}" required="" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                                            <if condition="$info.thumb neq ''">
+                                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                        <div class="red" style="margin-top:5px;">尺寸大小为：216*216</div>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">店铺顶部图片<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input name="head" id="head" type="text" class="form-control"
+							            value="{$info.head}" required="" /><br>
+							        <div>
+							            <a onclick="BrowseServer('Images:/', 'head');" href="javascript:void(0);"
+							                class="btn btn-white" data-options="iconCls:'icon-redo'"
+							                style="width: 60px">选择</a>
+							            <a id="head_Img" title="点击预览大图,点击大图关闭预览" href="{$info.head}" target="_blank">
+							                <if condition="$info.head neq ''">
+							                    <img src="{$info.head}" style="max-height:100px;max-width: 100%" />
+							                </if>
+							            </a>
+							            <div class="red" style="margin-top:5px;">尺寸大小为：750*390</div>
+							        </div>
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">地区<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 J-address">
+                                    <select class="form-control province" name="province"
+                                        style="width:100px;display: inline-block;">
+                                        <option value="{$info.province}">{$info.province}</option>
+                                    </select>
+                                    <select class="form-control city" name="city"
+                                        style="width:100px;display: inline-block;">
+                                        <option value="{$info.city}">{$info.city}</option>
+                                    </select>
+                                    <select class="form-control town" name="region"
+                                        style="width:100px;display: inline-block;">
+                                        <option value="{$info.region}">{$info.region}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">店铺介绍<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <textarea cols="80" id="content" name="content" style="height: 400px;" rows="10" >{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+	<!-- 省市区 -->
+	<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/area.js"></script>
+	<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/select.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            var ue = UE.getEditor('content');
+			var ue = UE.getEditor('spec_content');
+			//初始化图集
+			InitMulitiImages("images");
+        });
+
+        $('select[name=typeid1]').change(function(){
+                var typeid1 = $('select[name=typeid1] option:checked').val();
+                // var typeid2 = $('select[name=typeid2] option:checked').val();
+                $.ajax({
+                    url:'{:U("get_attribute")}',
+                    data:{typeid1:typeid1},
+                    datatype:'html',
+                    type:'get',
+                    success:function(res){
+                        $('select[name=typeid2]').html("<option value=''>请选择</option>"+res);
+                        $('select[name=typeid3]').html('');
+                        $('.chosen-select').trigger("chosen:updated");
+                    }
+                })
+            })
+
+        $('select[name=typeid2]').change(function(){
+                var typeid2 = $('select[name=typeid2] option:checked').val();
+                // var typeid2 = $('select[name=typeid2] option:checked').val();
+                $.ajax({
+                    url:'{:U("get_attribute")}',
+                    data:{typeid2:typeid2},
+                    datatype:'html',
+                    type:'get',
+                    success:function(res){
+                        $('select[name=typeid3]').html("<option value=''>请选择</option>"+res);
+                        $('.chosen-select').trigger("chosen:updated");
+                    }
+                })
+            })
+            
+    </script>

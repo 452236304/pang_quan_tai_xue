@@ -1,0 +1,127 @@
+<include file="Public/header" />
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content row">
+                        <div class="col-sm-7">
+                            <button class="btn btn-primary" type="button"
+                                onclick="location.href='{:U('Pension/pension_advantage_modifyad','p='.$map['p'])}'">＋增加</button>
+                        </div>
+                        <div class="col-sm-5 row">
+                            <form id="search-form" method="post" class="form-horizontal" action="{:U('pension_advantage')}">
+                                <div class="input-group">
+                                    <input type="text" placeholder="标题 / 副标题" name="title" class="form-control"
+                                        value="{$map.title}">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary">搜索</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="form1" name="form1" method="post" action="">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100" class="TC">ID</th>
+                                        <th width="100" class="TC">标题</th>
+                                        <th width="200" class="TC">封面图</th>
+                                        <th width="200" class="TC">排序号</th>
+                                        <th width="200" class="TC">审核</th>
+                                        <th width="100" class="TC">发布日期</th>
+                                        <th width="350" class="TC">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td align="center">{$vo.id}<input type="hidden" name="id[]"
+                                                    value="{$vo.id}" /></td>
+                                            <td align="center">
+                                                {$vo.title}
+                                            </td>
+                                           
+                                            <td align="center"><a href="{$vo.thumb}" class="fancybox"><img
+                                                        src="{$vo.thumb}" width="100" /></a></td>
+                                            <td align="center">
+                                                <input type="text" style="text-align:center; width:50px;"
+                                                    class="form-control" name="ordernum[]" value="{$vo.ordernum}" />
+                                            </td>
+                                            <td align="center">
+                                                <if condition="$vo.status eq 1">
+                                                    <i class="fa fa-check"></i>
+                                                    <else />
+                                                    <i class="fa fa-close"></i>
+                                                </if>
+                                            </td>
+                                            <td align="center">{$vo.createtime|strtotime|date="Y-m-d",###}</td>
+                                            <td class="text-navy" align="center">
+                                                <!-- <if condition="$vo.top eq 1">
+                                                    <a href="javascript:;"
+                                                        data-url="{:U('Org/topad','id='.$vo['id'].'&p='.$map['p'].'&top=0')}"
+                                                        class="J-top">取消置顶</a>
+                                                    <else />
+                                                    <a href="javascript:;"
+                                                        data-url="{:U('Org/topad','id='.$vo['id'].'&p='.$map['p'].'&top=1')}"
+                                                        class="J-top">置顶</a>
+                                                </if> -->
+                                                <!-- <a href="{:U('OrgActivityRelation/listad','orgid='.$vo['id'].'&type=1')}"
+                                                    class="J-OpenTab" data-index="org_activity_relation_{$vo.id}"
+                                                    data-title="{$vo.title}-预约参观">预约参观</a>
+                                                <a href="{:U('OrgActivityRelation/listad','orgid='.$vo['id'].'&type=2')}"
+                                                    class="J-OpenTab" data-index="org_activity_relation_{$vo.id}"
+                                                    data-title="{$vo.title}-机构长住">机构长住</a>
+                                                <a href="{:U('OrgPrice/listad','orgid='.$vo['id'].'&type=1')}"
+                                                    class="J-OpenTab" data-index="org_activity_relation_{$vo.id}"
+                                                    data-title="{$vo.title}-机构短住">机构短住</a> -->
+                                                <!-- <br /> -->
+                                                <!-- <a href="{:U('OrgComment/listad','orgid='.$vo['id'])}" class="J-OpenTab"
+                                                    data-index="orgcomment_{$vo.id}"
+                                                    data-title="{$vo.title}-机构评论列表">评论列表</a> -->
+                                                <a href="{:U('Pension/pension_advantage_modifyad','id='.$vo['id'].'&p='.$map['p'])}">修改</a>
+                                                <a href="javascript:;"
+                                                    data-url="{:U('Pension/pension_advantage_del','id='.$vo['id'].'&p='.$map['p'])}"
+                                                    class="checkDel">删除</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover">
+                                <tr>
+                                    <td align="center">{$pageshow}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({ openEffect: "none", closeEffect: "none" });
+
+            $("#btn-sort").on("click", function () {
+                $("#form1").submit();
+            });
+
+            $("a.J-top").on("click", function () {
+                var url = $(this).data("url");
+                layer.confirm("是否确认更新机构置顶状态？", { btn: ["确认", "取消"] }, function () {
+                    window.location.href = url;
+                });
+            });
+        });
+    </script>

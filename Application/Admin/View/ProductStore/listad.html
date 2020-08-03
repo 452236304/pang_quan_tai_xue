@@ -1,0 +1,192 @@
+<include file="Public/header" />
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content row">
+                        <div class="col-sm-3">
+                            <button class="btn btn-primary" type="button"
+                                onclick="location.href='{:U('ProductStore/modifyad','p='.$map['p'].'&categoryid='.$map['categoryid'])}'">＋增加</button>
+                            <button id="btn-sort" class="btn btn-primary" />重新排序</button>
+                        </div>
+						<form id="search-form" method="get" class="form-horizontal"
+						    action="{:U('ProductStore/listad', 'categoryid='.$map['categoryid'])}">
+						<div class="col-sm-2">
+							<select class="form-control" name='recommend'>
+								<option value="">筛选：爆款推荐</option>
+								<option value="1" {$map["recommend"]|getSelect=select,1,###} >爆款推荐 - 是</option>
+								<option value="0" {$map["recommend"]|getSelect=select,'0',###} >爆款推荐 - 否</option>
+							</select> 
+						</div>
+						<div class="col-sm-2">
+							<select class="form-control" name='seckill'>
+								<option value="">筛选：秒杀</option>
+								<option value="1" {$map["seckill"]|getSelect=select,1,###} >秒杀 - 是</option>
+								<option value="0" {$map["seckill"]|getSelect=select,'0',###} >秒杀 - 否</option>
+							</select> 
+						</div>
+						<div class="col-sm-2">
+							<select class="form-control" name='top'>
+								<option value="">筛选：置顶</option>
+								<option value="1" {$map["top"]|getSelect=select,1,###} >置顶 - 是</option>
+								<option value="0" {$map["top"]|getSelect=select,'0',###} >置顶 - 否</option>
+							</select> 
+						</div>
+                        <div class="col-sm-3 row">
+                            
+                                <div class="input-group">
+                                    <input type="text" placeholder="标题 / 副标题" name="keyword" class="form-control"
+                                        value="{$map.keyword}">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary">搜索</button>
+                                    </span>
+                                </div>
+                            
+                        </div>
+						</form>
+                    </div>
+                </div>
+            </div>
+            <form id="form1" name="form1" method="post"
+                action="{:U('ProductStore/sortad','p='.$map['p'].'&categoryid='.$map['categoryid'])}">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100" class="TC">ID</th>
+                                        <th width="150" class="TC">栏目名称</th>
+                                        <th width="150" class="TC">分类名称</th>
+                                        <th width="300">标题</th>
+                                        <th width="100">猜你喜欢</th>
+                                        <th width="200" class="TC">封面图</th>
+                                        <th width="100" class="TC">平台价格</th>
+                                        <th width="100" class="TC">市场价格</th>
+										<th width="100" class="TC">秒杀</th>
+                                        <th width="100" class="TC">爆款推荐</th>
+                                        <th width="100" class="TC">置顶</th>
+                                        <th width="100" class="TC">排序</th>
+                                        <th width="100" class="TC">审核</th>
+                                        <th width="100" class="TC">发布日期</th>
+                                        <th width="200" class="TC">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td align="center">{$vo.id}<input type="hidden" name="id[]"
+                                                    value="{$vo.id}" /></td>
+                                            <td align="center">{$vo.column_name}</td>
+                                            <td align="center">
+                                                    {$vo.name}
+                                            </td>
+                                            <td>{$vo.title}</td>
+                                            <td><if condition="$vo.guess_like eq 1">启用<else />禁用</if></td>
+                                            <td align="center"><a href="{$vo.thumb}" class="fancybox"><img
+                                                        src="{$vo.thumb}" width="100" /></a></td>
+                                            <td align="center">{$vo.price}</td>
+                                            <td align="center">{$vo.market_price}</td>
+											<td align="center">
+											    <if condition="$vo.seckill eq 1">
+											        是
+											        <else />
+											        否
+											    </if>
+											</td>
+                                            <td align="center">
+                                                <if condition="$vo.recommend eq 1">
+                                                    是
+                                                    <else />
+                                                    否
+                                                </if>
+                                            </td>
+                                            <td align="center">
+                                                <if condition="$vo.top eq 1">
+                                                    是
+                                                    <else />
+                                                    否
+                                                </if>
+                                            </td>
+                                            <td align="center">
+                                                <input type="text" style="text-align:center; width:50px;"
+                                                    class="form-control" name="ordernum[]" value="{$vo.ordernum}" />
+                                            </td>
+                                            <td align="center">
+                                                <if condition="$vo.status eq 1">
+                                                    <i class="fa fa-check"></i>
+                                                    <else />
+                                                    <i class="fa fa-close"></i>
+                                                </if>
+                                            </td>
+                                            <td align="center">{$vo.createdate|strtotime|date="Y-m-d",###}</td>
+                                            <td class="text-navy" align="center">
+                                                <p>
+                                                    <a href="{:U('ProductStore/modifyad','id='.$vo['id'].'&p='.$map['p'])}">修改</a>
+                                                    <a href="javascript:;"
+                                                        data-url="{:U('ProductStore/delad','id='.$vo['id'].'&p='.$map['p'])}"
+                                                        class="checkDel">删除</a>
+                                                    <if condition="$vo.top eq 1">
+                                                        <a href="javascript:;"
+                                                            data-url="{:U('ProductStore/topad','id='.$vo['id'].'&p='.$map['p'].'&top=0')}"
+                                                            class="J-top">取消置顶</a>
+                                                        <else />
+                                                        <a href="javascript:;"
+                                                            data-url="{:U('ProductStore/topad','id='.$vo['id'].'&p='.$map['p'].'&top=1')}"
+                                                            class="J-top">置顶</a>
+                                                    </if>
+                                                </p>
+                                                <p>
+                                                    <if condition="$map['categoryid'] eq 1">
+                                                        <a href="{:U('ProductMealLevelPrice/listad','productid='.$vo['id'])}"
+                                                            class="J-OpenTab"
+                                                            data-index="product_meal_level_price_{$vo.id}"
+                                                            data-title="{$vo.title}-餐次类别">餐次类别</a>
+                                                    </if>
+                                                    <if
+                                                        condition="(($vo.categoryid neq 1) and ($vo.type eq 0)) or (($vo.categoryid eq 5) and ($vo.types eq 0))">
+                                                        <a href="{:U('ProductAttribute/listad','productid='.$vo['id'].'&type='.$map['type'])}"
+                                                            class="J-OpenTab" data-index="product_attribute_{$vo.id}"
+                                                            data-title="{$vo.title}-规格">规格列表</a>
+                                                    </if>
+                                                    <a href="{:U('ProductComment/listad','productid='.$vo['id'])}"
+                                                        class="J-OpenTab" data-index="productcomment_{$vo.id}"
+                                                        data-title="{$vo.title}-商品评论列表">评论列表</a>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover">
+                                <tr>
+                                    <td align="center">{$pageshow}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({ openEffect: "none", closeEffect: "none" });
+
+            $("#btn-sort").on("click", function () {
+                $("#form1").submit();
+            });
+
+            $("a.J-top").on("click", function () {
+                var url = $(this).data("url");
+                layer.confirm("是否确认更新商品置顶状态？", { btn: ["确认", "取消"] }, function () {
+                    window.location.href = url;
+                });
+            });
+        });
+    </script>

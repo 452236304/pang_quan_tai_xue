@@ -1,0 +1,98 @@
+<include file="Public/header" />
+<link href="__JS__/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <form id="form1" name="form1" method="post"
+        action="{:U('ServiceProjectDepositPrice/updatedeposit','projectid='.$map['projectid'])}">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content row">
+                            <div class="col-sm-7">
+                                <button type="submit" class="btn btn-primary" />保存护理月份订金</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100" class="TC">ID</th>
+                                        <th width="100" class="TC">标题</th>
+                                        <th width="100" class="TC">订金</th>
+                                        <th width="100" class="TC">自理价格（月）</th>
+                                        <th width="100" class="TC">轻度失能价格（月）</th>
+                                        <th width="100" class="TC">中度失能价格（月）</th>
+                                        <th width="100" class="TC">重度失能价格（月）</th>
+                                        <th width="100" class="TC">特重护理价格（月）</th>
+                                        <th width="150" class="TC">备注</th>
+                                        <th width="150" class="TC">更新时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td align="center">{$vo.id}<input type="hidden" name="id[]"
+                                                    value="{$vo.id}" /></td>
+                                            <td align="center">{$vo.month} 个月<input type="hidden" name="month[]"
+                                                    value="{$vo.month}" /></td>
+                                            <td align="center">
+                                                <input type="number" style="text-align:center; width:100px;"
+                                                    class="form-control" step="0.01" name="price[]"
+                                                    value="{$vo.price}" />
+                                            </td>
+                                            <td align="center">
+                                                <input type="number" style="text-align:center; width:100px;"
+                                                    class="form-control" step="0.01" name="one_price[]"
+                                                    value="{$vo.one_price}" />
+                                            </td>
+                                            <td align="center">
+                                                <input type="number" style="text-align:center; width:100px;"
+                                                    class="form-control" step="0.01" name="two_price[]"
+                                                    value="{$vo.two_price}" />
+                                            </td>
+                                            <td align="center">
+                                                <input type="number" style="text-align:center; width:100px;"
+                                                    class="form-control" step="0.01" name="three_price[]"
+                                                    value="{$vo.three_price}" />
+                                            </td>
+                                            <td align="center">
+                                                <input type="number" style="text-align:center; width:100px;"
+                                                    class="form-control" step="0.01" name="four_price[]"
+                                                    value="{$vo.four_price}" />
+                                            </td>
+                                            <td align="center">
+                                                <input type="number" style="text-align:center; width:100px;"
+                                                    class="form-control" step="0.01" name="five_price[]"
+                                                    value="{$vo.five_price}" />
+                                            </td>
+                                            <td align="center">
+                                                <input type="text" style="width:200px;" class="form-control"
+                                                    name="remark[]" value="{$vo.remark}" />
+                                            </td>
+                                            <td align="center">
+                                                <notempty name="vo.createdate">
+                                                    {$vo.createdate|strtotime|date="Y-m-d H:i:s",###}
+                                                </notempty>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <include file="Public/footer" />
+    <script src="__JS__/plugins/fancybox/jquery.fancybox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".fancybox").fancybox({ openEffect: "none", closeEffect: "none" });
+        });
+    </script>

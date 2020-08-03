@@ -1,0 +1,52 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <form id="form1" name="form1" method="post">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-content">
+							<button class="btn btn-primary" type="button"
+								onclick="location.href='{:U('Edition/modifyad')}'">＋增加</button>
+						</div>
+					</div>
+				</div>
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100" class="TC">ID</th>
+                                        <th>版本</th>
+										<th>用户端/服务端</th>
+										<th>是否最新版</th>
+										<th>系统</th>
+                                        <th width="100" class="TC">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td align="center">{$vo.id}<input type="hidden" name="id[]"
+                                                    value="{$vo.id}" /></td>
+                                            <td>{$vo.version}</td>
+											<td>{$vo['hybrid']=='user'?'用户端':'服务端'}</td>
+											<td>{$vo['is_new']?'是':'否'}</td>
+											<td>{$vo['system']}</td>
+                                            <td class="text-navy" align="center">
+                                                <a href="{:U('Edition/modifyad','id='.$vo['id'])}">修改</a>
+                                                <a href="javascript:;" data-url="{:U('Edition/delad','id='.$vo['id'])}" class="checkDel">删除</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <include file="Public/footer" />

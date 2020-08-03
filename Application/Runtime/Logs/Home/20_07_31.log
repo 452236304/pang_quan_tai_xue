@@ -1,0 +1,827 @@
+[ 2020-07-31T12:10:51+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000579s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001244s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001335s ]
+NOTIC: [2] fopen(logs/timer/2020-07-31.log): failed to open stream: No such file or directory E:\www\pang_quan_tai_xue\Application\Payment\Weixin\Extend\log.php 第 16 行.
+
+[ 2020-07-31T12:10:56+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000559s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000594s ]
+NOTIC: [2] fopen(logs/timer/2020-07-31.log): failed to open stream: No such file or directory E:\www\pang_quan_tai_xue\Application\Payment\Weixin\Extend\log.php 第 16 行.
+
+[ 2020-07-31T12:11:32+08:00 ] 127.0.0.1 /index.php/home
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000344s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000471s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000509s ]
+NOTIC: [2] fopen(logs/timer/2020-07-31.log): failed to open stream: No such file or directory E:\www\pang_quan_tai_xue\Application\Payment\Weixin\Extend\log.php 第 16 行.
+
+[ 2020-07-31T12:11:45+08:00 ] 127.0.0.1 /index.php/homeFormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000571s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000519s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000564s ]
+ERR: 无法加载控制器:HomeFormSubmit
+
+[ 2020-07-31T12:11:56+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000566s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000767s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000828s ]
+
+[ 2020-07-31T12:15:45+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001207s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001610s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+
+[ 2020-07-31T12:16:16+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000567s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001370s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001441s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0010s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+
+[ 2020-07-31T12:22:22+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001204s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000944s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001012s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0014s ]
+ERR: 1055:Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pang_quan_tai_xue.sj_form_set.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+ [ SQL语句 ] : SELECT `id`,`title`,`type` FROM `sj_form_set` GROUP BY type ORDER BY orderby ASC 
+ERR: 1055:Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'pang_quan_tai_xue.sj_form_set.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+ [ SQL语句 ] : SELECT `id`,`title`,`type` FROM `sj_form_set` GROUP BY type ORDER BY orderby ASC 
+
+[ 2020-07-31T12:22:55+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000624s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001857s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001951s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0011s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+
+[ 2020-07-31T12:30:41+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002768s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000621s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000665s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0007s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+
+[ 2020-07-31T14:31:41+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.017183s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.027769s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.027819s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0012s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000036s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000075s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.094531s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.094592s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.012487s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.012528s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.013959s ]
+INFO: [ app_end ] --END-- [ RunTime:0.014002s ]
+
+[ 2020-07-31T14:32:01+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003133s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000715s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000777s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0081s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000052s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000118s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013938s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014033s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000704s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000765s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001288s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001348s ]
+
+[ 2020-07-31T14:32:10+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000486s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000975s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001050s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000025s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000064s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006220s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006277s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000299s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000324s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000724s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000751s ]
+
+[ 2020-07-31T14:34:59+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000637s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000644s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000687s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0007s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000027s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000064s ]
+NOTIC: [8] Undefined offset: 0 E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 1 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.029116s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029156s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000646s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000682s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000761s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000793s ]
+
+[ 2020-07-31T14:35:00+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001141s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001907s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001998s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000025s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000062s ]
+NOTIC: [8] Undefined offset: 0 E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 1 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009300s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009365s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000680s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000724s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000745s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000775s ]
+
+[ 2020-07-31T14:35:06+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000597s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000817s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000884s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0005s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000023s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000060s ]
+NOTIC: [8] Undefined offset: 0 E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 1 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019418s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019457s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000382s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000415s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001055s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001097s ]
+
+[ 2020-07-31T14:35:18+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000369s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000419s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000447s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000025s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000060s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017570s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017641s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000912s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001006s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001224s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001274s ]
+
+[ 2020-07-31T14:35:49+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000388s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000938s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001031s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000023s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000056s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017925s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017974s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000300s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000322s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000702s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000726s ]
+
+[ 2020-07-31T14:36:09+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000032s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001113s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001147s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001237s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000028s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000066s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035798s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035884s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000848s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000923s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001932s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002019s ]
+
+[ 2020-07-31T14:38:14+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000700s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001463s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001546s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0011s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000027s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000062s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.032567s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032625s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000465s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000493s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001014s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001064s ]
+
+[ 2020-07-31T14:38:41+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000540s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000585s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000622s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000027s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000063s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.035732s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035801s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000507s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000539s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000853s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000890s ]
+
+[ 2020-07-31T14:40:33+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000630s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000577s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000614s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0005s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000028s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000064s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009854s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009958s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000958s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001047s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001109s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001160s ]
+
+[ 2020-07-31T14:40:44+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000612s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000821s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000887s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000859s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000922s ]
+
+[ 2020-07-31T14:46:40+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000202s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001216s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000932s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001025s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001442s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001516s ]
+
+[ 2020-07-31T14:56:27+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000519s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000553s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000584s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+
+[ 2020-07-31T14:56:31+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000955s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000660s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000706s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0005s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+
+[ 2020-07-31T14:57:21+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000380s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000488s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000550s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+
+[ 2020-07-31T14:57:35+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000731s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000911s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001004s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000033s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000073s ]
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 2 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 2 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 2 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 2 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 4 行.
+NOTIC: [8] Undefined variable: itle E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 6 行.
+NOTIC: [8] Undefined variable: itle E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 6 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 8 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 8 行.
+NOTIC: [8] Array to string conversion E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Home\86464d8e895a23f5c3a4564507db9157.php 第 10 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.053282s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.053514s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000700s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000739s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000791s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000825s ]
+
+[ 2020-07-31T14:58:20+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000531s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000973s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001177s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0011s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000052s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000125s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.076389s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.076453s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000460s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000487s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000737s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000763s ]
+
+[ 2020-07-31T15:07:48+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000912s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001041s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001124s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: 2 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+
+[ 2020-07-31T15:07:59+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000955s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001006s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001085s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 2 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+
+[ 2020-07-31T15:08:10+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000622s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000618s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000672s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined offset: 2 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001684s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001772s ]
+
+[ 2020-07-31T15:14:24+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000944s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000661s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000713s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 2 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001021s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001063s ]
+
+[ 2020-07-31T15:14:30+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000598s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000773s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000840s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 2 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001109s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001152s ]
+
+[ 2020-07-31T15:14:58+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000559s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000520s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000579s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined offset: 33 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002125s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002224s ]
+
+[ 2020-07-31T15:15:04+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000490s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000653s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000709s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 33 E:\www\pang_quan_tai_xue\Application\Home\Controller\FormSubmitController.class.php 第 28 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001390s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001449s ]
+
+[ 2020-07-31T15:15:16+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000525s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000483s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001432s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001514s ]
+
+[ 2020-07-31T15:26:26+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000841s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000924s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000990s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0011s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`) VALUES ('111','2','33','4','5','500','1598803200','2','111111111111111111111111111111','用户名','电话','邮箱','需求') [ RunTime:0.0071s ]
+
+[ 2020-07-31T15:26:36+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001172s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000971s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001047s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0009s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+
+[ 2020-07-31T15:30:30+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000845s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000620s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000678s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0009s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`) VALUES ('111','2','33','4','5','500','1598803200','2','111111111111111111111111111111','用户名','电话','邮箱','需求','400.0') [ RunTime:0.0004s ]
+
+[ 2020-07-31T15:31:33+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000398s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000554s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000601s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0007s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','500','1598803200','2','111111111111111111111111111111','用户名','电话','邮箱','需求','400.0','1596180693') [ RunTime:0.0003s ]
+
+[ 2020-07-31T15:32:31+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000847s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000905s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000983s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0007s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0008s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','800','1598803200','2','111111111111111111111111111111','用户名','电话','邮箱','需求','640.0','1596180751') [ RunTime:0.0004s ]
+
+[ 2020-07-31T15:32:56+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000831s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000873s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000976s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0010s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','888','1598803200','2','111111111111111111111111111111','用户名','电话','邮箱','需求','710.4','1596180776') [ RunTime:0.0004s ]
+
+[ 2020-07-31T15:35:42+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000818s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000735s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000800s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0007s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0010s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','888','1598803200','2','/upload/edit/image/20200227/1582769853125877.png','用户名','电话','邮箱','需求','710.4','1596180942') [ RunTime:0.0008s ]
+
+[ 2020-07-31T15:36:44+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000596s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000770s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000828s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0006s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','888','1598803200','2','/upload/images/tupian.jpg','用户名','电话','邮箱','需求','710.4','1596181004') [ RunTime:0.0003s ]
+
+[ 2020-07-31T15:39:11+08:00 ] 127.0.0.1 /index.php/home/FormSubmit/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000596s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000922s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000990s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0011s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','888','1598803200','2','/upload/images/tupian.jpg','用户名','电话','邮箱','需求','710.4','1596181151') [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: HTTP_REFERER E:\www\pang_quan_tai_xue\ThinkPHP\Library\Think\Controller.class.php 第 283 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000100s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000433s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.093011s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.093129s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001258s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001359s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001890s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001946s ]
+
+[ 2020-07-31T16:06:43+08:00 ] 127.0.0.1 /index.php/home/Form/submit
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000621s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000653s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000703s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0008s ]
+SQL: INSERT INTO `sj_form_submit` (`title1`,`title2`,`title3`,`title4`,`title5`,`word_num`,`end_time`,`font_space`,`upload_file`,`user_name`,`user_phone`,`user_mail`,`order_need`,`forcase_price`,`add_time`) VALUES ('111','2','33','4','5','888','1598803200','2','/upload/images/tupian.jpg','用户名','电话','邮箱','需求','710.4','1596182803') [ RunTime:0.0004s ]
+NOTIC: [8] Undefined index: HTTP_REFERER E:\www\pang_quan_tai_xue\ThinkPHP\Library\Think\Controller.class.php 第 283 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000044s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000102s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018073s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018124s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000619s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000650s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001129s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001215s ]
+
+[ 2020-07-31T16:07:11+08:00 ] 127.0.0.1 /index.php/home/Form/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002442s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004446s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004558s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0006s ]
+SQL: SELECT `id`,`title`,`type` FROM `sj_form_set` ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000030s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000065s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037022s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037144s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000976s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001058s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001260s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001325s ]
+
+[ 2020-07-31T16:08:09+08:00 ] 127.0.0.1 /index.php/home/case/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000450s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000470s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000522s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000028s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000074s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015025s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015185s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000506s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000551s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000846s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000878s ]
+
+[ 2020-07-31T16:20:35+08:00 ] 127.0.0.1 /index.php/home/case/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000604s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000586s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000635s ]
+SQL: SHOW COLUMNS FROM `sj_case_cate` [ RunTime:0.0010s ]
+SQL: SELECT `id`,`title` FROM `sj_case_cate` WHERE ( status=1 ) ORDER BY orderby ASC  [ RunTime:0.0003s ]
+ERR: 1146:Table 'pang_quan_tai_xue.sj_case_contene' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `sj_case_contene`
+ERR: 1146:Table 'pang_quan_tai_xue.sj_case_contene' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `sj_case_contene`
+
+[ 2020-07-31T16:20:45+08:00 ] 127.0.0.1 /index.php/home/case/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000710s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001041s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001117s ]
+SQL: SHOW COLUMNS FROM `sj_case_cate` [ RunTime:0.0010s ]
+SQL: SELECT `id`,`title` FROM `sj_case_cate` WHERE ( status=1 ) ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_case_content` [ RunTime:0.0011s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=5 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=6 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=7 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000037s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000093s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016417s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016490s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000782s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000837s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001241s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001302s ]
+
+[ 2020-07-31T16:26:28+08:00 ] 127.0.0.1 /index.php/home/case/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000841s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003248s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003345s ]
+SQL: SHOW COLUMNS FROM `sj_case_cate` [ RunTime:0.0008s ]
+SQL: SELECT `id`,`title` FROM `sj_case_cate` WHERE ( status=1 ) ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_case_content` [ RunTime:0.0007s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=5 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=6 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=7 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000039s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000104s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.018354s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018410s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000853s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000876s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001040s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001066s ]
+

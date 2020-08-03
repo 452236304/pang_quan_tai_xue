@@ -1,0 +1,154 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" id="formData" >
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="title" value="{$data.title}" >
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group images" >
+                            <label class="col-sm-2 control-label">缩略图<span style="color:red;margin:5px;">*</span>：</label>
+                            <script id="upload" type="text/plain" style="display: none" ></script>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="images" id="images" value="{$data.thumb_img}" autocomplete="off" >
+                                    <span class="input-group-btn">
+                                                <button type="button" class="btn btn-primary" id="upload_btn" >上传</button>
+                                            </span>
+                                </div>
+                                <ul class="sortable-list connectList agile-list" id="p-image" >
+                                    <notempty name="data.thumb_img" >
+                                        <li class="success-element col-sm-3">
+                                            <img src="{$data.thumb_img}" alt="" style="max-width: 100%">
+                                            <div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" >
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </li>
+                                    </notempty>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group video" >
+                            <label class="col-sm-2 control-label">视频<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="video" id="video" value="{$data.video_url}" autocomplete="off" >
+                                    <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-primary" id="upload_video_btn" >上传</button>
+                                                            </span>
+                                </div>
+                                <ul class="sortable-list connectList agile-list" id="p-video" >
+                                    <notempty name="data.video_url" >
+                                        <li class="success-element col-sm-3">
+                                            <video src="{$data.video_url}"></video>
+                                            <div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" >
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </li>
+                                    </notempty>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="sort" value="{$data.sort}" >
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="hidden" name="id" value="{$data.id}" >
+                                <input type="hidden" name="type" value="{$type}" >
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+<script>
+    $(document).ready(function () {
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+
+        // 图片上传
+        upload = UE.getEditor('upload');
+
+        upload.ready(function() {
+            upload.addListener('beforeInsertImage', _beforeInsertImage);
+        });
+
+        $("#upload_btn").click(function(event) {
+            var dialog = upload.getDialog("insertimage");
+            dialog.title = '上传图片';
+            dialog.render();
+            dialog.open();
+        });
+
+        //视频上传
+        upload.addListener('afterUpVideo', _afterUpVideo);
+
+        $("#upload_video_btn").click(function(event) {
+            var dialog = upload.getDialog("insertvideo");
+            dialog.title = '上传视频';
+            dialog.render();
+            dialog.open();
+        });
+
+        $("#serviceProject").hide();
+        $("#product").hide();
+        recommend_type = Number("{$data.recommend_type}");
+        chosenSelect(recommend_type);
+        $("input:radio[name='recommend_type']").on('ifChanged', function(event){
+            recommend_type = $(this).val();
+            chosenSelect(recommend_type);
+        });
+
+    });
+
+    $("#formData").submit(function(){
+        $.ajax({
+            url: "{:U('update')}",
+            type: 'POST',
+            dataType: 'json',
+            data: $("#formData").serialize(),
+            success: function(data){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                // window.parent.location.reload();
+            },
+            error: function(data){
+                layer.alert(data.info, {skin: 'layui-layer-lan'});
+            }
+        });
+        return false;
+    })
+
+    function _beforeInsertImage(t, result){
+        $("#p-image").html('');
+        $("#p-image").append('<li class="success-element col-sm-3"><img src="' + result[0]['src'] + '" alt="" style="max-width: 100%"><div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" ><i class="fa fa-trash"></i></div></li>');
+        $('#images').val(result[0]['src']);
+    }
+
+    function remove(obj) {
+        $(obj).parents('.success-element').remove();
+        resetImages();
+    }
+
+    function _afterUpVideo(t, result){
+        $("#p-video").html('<li class="success-element col-sm-3"><video src="' + result[0]['url'] + '"></video><div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" ><i class="fa fa-trash"></i></div></li>');
+        $("#video").val(result[0]['url']);
+    }
+
+</script>

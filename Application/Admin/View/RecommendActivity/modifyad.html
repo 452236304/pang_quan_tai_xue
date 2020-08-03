@@ -1,0 +1,220 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()"
+                            enctype="multipart/form-data"
+                            action="{:U('RecommendActivity/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'].'&categoryid='.$map['categoryid'])}">
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">审核<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0"
+                                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">商品<span
+										style="color:red;margin:5px;">*</span>：</label>
+								<div class="col-sm-10">
+									<select data-placeholder="选择商品" name="product_id" class="form-control chosen-select" required>
+										<option value="">请选择商品</option>
+										<volist name="product" id="v">
+										<option value="{$v.id}" {$info["product_id"]|getSelect=select,$v['id'],###}>{$v['title']}</option>
+										</volist>
+									</select>
+								</div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">规格<span
+										style="color:red;margin:5px;">*</span>：</label>
+								<div class="col-sm-10">
+									<select data-placeholder="选择规格" name="attribute_id" class="form-control chosen-select attribute_id" required>	
+										<volist name="attribute" id="v">
+										<option value="{$v.id}" {$info["attribute_id"]|getSelect=select,$v['id'],###}>{$v['title']}</option>
+										</volist>
+									</select>
+								</div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">副标题：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">分享海报标题<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="post_title" value="{$info.post_title}"
+							            required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">分享海报副标题：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="post_subtitle" value="{$info.post_subtitle}">
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">海报图<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input name="post_image" id="post_image" type="text" class="form-control"
+                                        value="{$info.post_image}" required="" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'post_image');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="post_image_Img" title="点击预览大图,点击大图关闭预览" href="{$info.post_image}" target="_blank">
+                                            <if condition="$info.post_image neq ''">
+                                                <img src="{$info.post_image}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                        <div class="red" style="margin-top:5px;">尺寸大小为：155*155</div>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">提交审核后弹框图片<span
+							            style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input name="examine_image" id="examine_image" type="text" class="form-control"
+							            value="{$info.examine_image}" required="" /><br>
+							        <div>
+							            <a onclick="BrowseServer('Images:/', 'examine_image');" href="javascript:void(0);"
+							                class="btn btn-white" data-options="iconCls:'icon-redo'"
+							                style="width: 60px">选择</a>
+							            <a id="examine_image_Img" title="点击预览大图,点击大图关闭预览" href="{$info.examine_image}" target="_blank">
+							                <if condition="$info.examine_image neq ''">
+							                    <img src="{$info.examine_image}" style="max-height:100px;max-width: 100%" />
+							                </if>
+							            </a>
+							            <div class="red" style="margin-top:5px;">尺寸大小为：465*596</div>
+							        </div>
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">价格<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="price" value="{$info.price}"
+                                    required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">运费<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="freight"
+                                        value="{$info.freight}" step="0.01" required="">
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">开始时间<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input id="starttime" name="starttime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"
+							            value="{$info.starttime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" required="" autocomplete="off"/>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">结束时间<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input id="endtime" name="endtime" class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"
+							            value="{$info.endtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" required="" autocomplete="off"/>
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">自提门店<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10 checkbox">
+									<div class="J-container">
+										<div class="J-child-{$vo.id}" style="margin-bottom:20px;margin-left:25px;">
+											<volist name="store" id="v">
+											<label class="W1">
+												<input type="checkbox" class="i-checks" name="store_id[]"
+													value="{$v.id}" <?php if(in_array($v['id'],$info['store_id'])){echo 'checked="checked"';}?>>
+												<i></i>{$v.title}
+											</label>
+											</volist>
+										</div>
+									</div>
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">详情<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <textarea cols="80" id="content" name="content" style="height: 400px;" rows="10"
+                                        required="请填写内容">{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            var ue = UE.getEditor('content');
+			//初始化图集
+			InitMulitiImages("images");
+			$('select[name=product_id]').change(function(){
+				var product_id = $('select[name=product_id] option:checked').val();
+				$.ajax({
+					url:'{:U("get_attribute")}',
+					data:{
+						product_id:product_id
+					},
+					datatype:'html',
+					type:'get',
+					success:function(res){
+						$('select[name=attribute_id]').html(res);
+						$('.chosen-select').trigger("chosen:updated");
+					}
+				})
+			})
+			
+        });
+    </script>

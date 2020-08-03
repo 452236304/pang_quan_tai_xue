@@ -1,0 +1,76 @@
+<include file="Public/header" />
+<link href="__PLUGINS__/multi-select/css/multi-select.css" rel="stylesheet">
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <form method="post" enctype="multipart/form-data"
+                    action="{:U('ServiceOrder/orderform','doinfo=modify&id='.$order['id'])}">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <select multiple="multiple" id="formid" name="formid[]">
+                                <foreach name="form" item="vo" key="k">
+                                    <optgroup label="{$k}">
+                                        <volist name="vo" id="ivo" key="in">
+                                            <option value='{$ivo.id}'>{$ivo.title}</option>
+                                        </volist>
+                                    </optgroup>
+                                </foreach>
+                            </select>
+                            <div class="ibox-content" style="padding-left:100px;">
+                                <button class="btn btn-primary" type="submit">确认设置服务订单表单</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">服务订单表单</th>
+                                </tr>
+                                <tr>
+                                    <th width="100" class="TC">ID</th>
+                                    <th width="100" class="TC">栏目</th>
+                                    <th width="200" class="TC">标题</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="selected" id="vo" key="n">
+                                    <tr>
+                                        <td align="center">{$vo.id}</td>
+                                        <td align="center">{$vo.category}</td>
+                                        <td align="center">{$vo.title}</td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script src="__PLUGINS__/multi-select/js/jquery.multi-select.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var config = {
+                selectableOptgroup: true,
+                selectableHeader: "<div style='text-align:center;padding:5px 0;background:#1ab394;color:#fff;border-radius:5px 5px 0 0;'>待选服务表单</div>",
+                selectionHeader: "<div style='text-align:center;padding:5px 0;background:#1ab394;color:#fff;border-radius:5px 5px 0 0;'>已选服务表单</div>",
+            };
+            $('#formid').multiSelect(config);
+
+            var select = "{$order.formids}";
+            if (select) {
+                select = select.split(',');
+            } else {
+                select = [];
+            }
+            $('#formid').multiSelect("select", select);
+        });
+    </script>

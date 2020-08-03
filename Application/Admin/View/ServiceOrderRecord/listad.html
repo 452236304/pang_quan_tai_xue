@@ -1,0 +1,125 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <form id="form1" name="form1" method="post" action="{:U('ServiceOrderRecord/listad', 'type='.$map['type'].'&userid='.$map['userid'])}">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins row">
+                        <div class="col-sm-7"></div>
+                        <div class="input-group col-sm-5">
+                            <input type="text" placeholder="流水号 / 用户昵称 / 标题  / 联系人 / 联系电话" name="keyword" class="form-control"
+                                value="{$map.keyword}">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="100" class="TC">编号</th>
+                                        <th width="150" class="TC">流水号</th>
+                                        <th width="200">标题</th>
+                                    <if condition="$map.type eq 2">
+                                        <th width="100" class="TC">服务栏目</th>
+                                        <th width="150" class="TC">服务用户姓名</th>
+                                        <th width="100" class="TC">服务等级</th>
+                                        <th width="100" class="TC">服务时长</th>
+                                    </if>
+                                    <if condition="$map.type eq 1">
+                                        <th width="100" class="TC">餐次</th>
+                                    </if>
+                                        <th width="100" class="TC">联系人</th>
+                                        <th width="100" class="TC">联系电话</th>
+                                        <th width="100" class="TC">地区</th>
+                                        <th width="100" class="TC">订单状态</th>
+                                        <th width="100" class="TC">支付状态</th>
+                                        <th width="150" class="TC">支付时间</th>
+                                        <th width="100" class="TC">订单金额</th>
+                                        <th width="150" class="TC">审核</th>
+                                        <th width="150" class="TC">下单时间</th>
+                                        <th width="150" class="TC">爽约时间</th>
+                                        <th width="100" class="TC">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <volist name="data" id="vo" key="n">
+                                        <tr>
+                                            <td align="center">{$n}<input type="hidden" name="id[]" value="{$vo.id}" /></td>
+                                            <td align="center">{$vo.sn}</td>
+                                            <td>{$vo.title}</td>
+                                        <if condition="$map.type eq 2">
+                                            <td align="center">{$vo.category}</td>
+                                            <td align="center">{$vo.service_realname}</td>
+                                            <td align="center">{$vo.service_level}</td>
+                                            <td align="center">{$vo.time}{$vo.time_type|getTimeType=###}</td>
+                                        </if>
+                                        <if condition="$map.type eq 1">
+                                            <td align="center">{$vo.res_type|getMealLevel=###}</td>
+                                        </if>
+                                            <td align="center">{$vo.contact}</td>
+                                            <td align="center">{$vo.moble}</td>
+                                            <td align="center">{$vo.province} / {$vo.city} / {$vo.region}</td>
+                                            <td align="center">
+                                                <if condition="$vo.status eq 1">
+                                                    已确认
+                                                <elseif condition="$vo.status eq 2" />
+                                                    已取消
+                                                <elseif condition="$vo.status eq 4" />
+                                                    已完成
+                                                <elseif condition="$vo.status eq 5" />
+                                                    申请退款
+                                                <elseif condition="$vo.status eq 6" />
+                                                    已退款
+                                                <else />
+                                                    未知状态
+                                                </if>
+                                            </td>
+                                            <td align="center">
+                                                <if condition="$vo.pay_status eq 0">
+                                                    待支付
+                                                <elseif condition="$vo.pay_status eq 3" />
+                                                    已支付
+                                                <else />
+                                                    未知状态
+                                                </if>
+                                            </td>
+                                            <td align="center">
+                                                <notempty name="vo['pay_date']">
+                                                    {$vo.pay_date|strtotime|date="Y-m-d H:i",###}
+                                                </notempty>
+                                            </td>
+                                            <td align="center">{$vo.amount}</td>
+                                            <td align="center">
+                                                <if condition="$vo.admin_status eq 1">
+                                                    <i class="fa fa-check"></i>
+                                                    <else />
+                                                    <i class="fa fa-close"></i>
+                                                </if>
+                                            </td>
+                                            <td align="center">{$vo.createdate|strtotime|date="Y-m-d H:i",###}</td>
+                                            <td align="center">{$vo.plane_time|strtotime|date="Y-m-d H:i:s",###}</td>
+                                            <td class="text-navy" align="center">
+                                                <a href="{:U('ServiceOrderRecord/modifyad','id='.$vo['id'].'&userid='.$map['userid'])}">查看订单</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover">
+                                <tr>
+                                    <td align="center">{$pageshow}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <include file="Public/footer" />

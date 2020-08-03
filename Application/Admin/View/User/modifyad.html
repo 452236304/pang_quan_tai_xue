@@ -1,0 +1,489 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form id="form-data" method="post" class="form-horizontal" onsubmit="return check()"
+                            enctype="multipart/form-data"
+                            action="{:U('User/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&role='.$map['role'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户状态<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择类别" name="status" class="form-control chosen-select">
+                                        <option value="200" {$info["status"]|getSelect=select,'200',###}>正常
+                                        </option>
+                                        <option value="300" {$info["status"]|getSelect=select,'300',###}>锁定
+                                        </option>
+                                        <option value="400" {$info["status"]|getSelect=select,'400',###}>注销
+                                        </option>
+                                        <option value="500" {$info["status"]|getSelect=select,'500',###}>异常
+                                        </option>
+                                        <option value="0" {$info["status"]|getSelect=select,'0',###}>禁用
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <if condition="$map.role gt 1">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">审核状态<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10 radio i-checks" style="padding-left: 15px;">
+                                        <label><input type="radio" name="role_status" value="0"
+                                                {$info["role_status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                        <label><input type="radio" name="role_status" value="2"
+                                                {$info["role_status"]|getSelect=radio,###,2}><i></i>待审核</label>
+                                        <label><input type="radio" name="role_status" value="1"
+                                                {$info["role_status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </if>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">手机号码<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="mobile" value="{$info.mobile}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">登录密码：</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">确认密码：</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="confirm-password">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">昵称<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="nickname" value="{$info.nickname}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <if condition="$map.role gt 1">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">真实姓名<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="realname" value="{$info.realname}"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">身份证号码<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="idcard" value="{$info.idcard}"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </if>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">头像：</label>
+                                <div class="col-sm-10">
+                                    <input name="avatar" id="avatar" type="text" class="form-control"
+                                        value="{$info.avatar}" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'avatar');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="avatar_Img" title="点击预览大图,点击大图关闭预览" href="{$info.avatar}"
+                                            target="_blank">
+                                            <if condition="$info.avatar neq ''">
+                                                <img src="{$info.avatar}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">性别<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择性别" name="gender" class="form-control chosen-select">
+                                        <option value="0" {$info["gender"]|getSelect=select,'0',###}>保密</option>
+                                        <option value="1" {$info["gender"]|getSelect=select,'1',###}>男</option>
+                                        <option value="2" {$info["gender"]|getSelect=select,'2',###}>女</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">省市区<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 J-address">
+                                    <select class="form-control province" name="province"
+                                        style="width:100px;display: inline-block;">
+                                        <option value="{$info.province}">{$info.province}</option>
+                                    </select>
+                                    <select class="form-control city" name="city"
+                                        style="width:100px;display: inline-block;">
+                                        <option value="{$info.city}">{$info.city}</option>
+                                    </select>
+                                    <select class="form-control town" name="region"
+                                        style="width:100px;display: inline-block;">
+                                        <option value="{$info.region}">{$info.region}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">详细地址：</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="address"
+                                        style="height:50px;">{$info.address}</textarea>
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">收货地址：</label>
+							    <div class="col-sm-10">
+							        <textarea class="form-control" style="height:100px;"
+							         readonly>{$info.accept_address}</textarea>
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <if condition="$map.role eq 1">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">签名：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="sign" value="{$info.sign}">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">兴趣：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="interest"
+                                            value="{$info.interest}">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <else />
+                                <if condition="$map.role eq 2">
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">所属餐厅<span
+                                                style="color:red;margin:5px;">*</span>：</label>
+                                        <div class="col-sm-10">
+                                            <select data-placeholder="选择所属餐厅" name="resid"
+                                                class="form-control chosen-select">
+                                                <option value="0">选择所属餐厅</option>
+                                                <foreach name="restaurant" item="v">
+                                                    <option value="{$v['id']}"
+                                                        {$info['resid']|getSelect=select,$v['id'],###}>{$v.title}
+                                                    </option>
+                                                </foreach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </if>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">出生年月<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input name="birth" class="form-control layer-date" placeholder="YYYY-MM-DD"
+                                            value="{$info.birth}"
+                                            onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" required="" />
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">身高(cm)<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="height" value="{$info.height}"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">体重(kg)<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="weight" value="{$info.weight}"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <if condition="$map['role'] eq 3 || $map['role'] eq 4 || $map['role'] eq 5 || $map['role'] eq 6">
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">专业等级<span
+                                                style="color:red;margin:5px;">*</span>：</label>
+                                        <div class="col-sm-10 radio i-checks" style="padding-left: 15px;">
+                                            <label><input type="radio" name="major_level" value="1"
+                                                    {$info["major_level"]|getSelect=radio,###,1}><i></i>初</label>
+                                            <label><input type="radio" name="major_level" value="2"
+                                                    {$info["major_level"]|getSelect=radio,###,2}><i></i>中</label>
+                                            <label><input type="radio" name="major_level" value="3"
+                                                    {$info["major_level"]|getSelect=radio,###,3}><i></i>高</label>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">服务等级<span
+                                                style="color:red;margin:5px;">*</span>：</label>
+                                        <div class="col-sm-10">
+                                            <select data-placeholder="选择服务等级" name="service_level"
+                                                class="form-control chosen-select">
+                                                <option value="1" {$info["service_level"]|getSelect=select,'1',###}>1星
+                                                </option>
+                                                <option value="2" {$info["service_level"]|getSelect=select,'2',###}>2星
+                                                </option>
+                                                <option value="3" {$info["service_level"]|getSelect=select,'3',###}>3星
+                                                </option>
+                                                <option value="4" {$info["service_level"]|getSelect=select,'4',###}>4星
+                                                </option>
+                                                <option value="5" {$info["service_level"]|getSelect=select,'5',###}>5星
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </if>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">工作年限<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="work_year"
+                                            value="{$info.work_year}" required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">学历<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <select data-placeholder="选择学历" name="education"
+                                            class="form-control chosen-select">
+                                            <option value="3" {$info["education"]|getSelect=select,'3',###}>高中及以下
+                                            </option>
+                                            <option value="2" {$info["education"]|getSelect=select,'2',###}>中专
+                                            </option>
+                                            <option value="1" {$info["education"]|getSelect=select,'1',###}>大专及以上
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">擅长语言<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="language" value="{$info.language}"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">专业特长<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="major" class="form-control" style="height: 100px;resize: none;"
+                                            required="">{$info.major}</textarea>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">简介<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="intro" class="form-control" style="height: 100px;resize: none;"
+                                            required="">{$info.intro}</textarea>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">好评度<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="comment_percent"
+                                            value="{$info.comment_percent}" required="">
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">置顶<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10 radio i-checks" style="padding-left: 15px;">
+                                        <label><input type="radio" name="top" value="0"
+                                                {$info["top"]|getSelect=radio,###,0}><i></i>否</label>
+                                        <label><input type="radio" name="top" value="1"
+                                                {$info["top"]|getSelect=radio,###,1}><i></i>是</label>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">推荐<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10 radio i-checks" style="padding-left: 15px;">
+                                        <label><input type="radio" name="recommend" value="0"
+                                                {$info["recommend"]|getSelect=radio,###,0}><i></i>否</label>
+                                        <label><input type="radio" name="recommend" value="1"
+                                                {$info["recommend"]|getSelect=radio,###,1}><i></i>是</label>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">签名<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input name="sign_image" id="sign_image" type="text" class="form-control"
+                                            value="{$info.sign_image}" required="" /><br>
+                                        <a onclick="BrowseServer('Images:/', 'sign_image');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="sign_image_Img" title="点击预览大图,点击大图关闭预览" href="{$info.sign_image}"
+                                            target="_blank">
+                                            <if condition="$info.sign_image neq ''">
+                                                <img src="{$info.sign_image}"
+                                                    style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">体检表<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input name="test_image" id="test_image" type="text" class="form-control"
+                                            value="{$info.test_image}" required="" /><br>
+                                        <div>
+                                            <a onclick="BrowseServer('Images:/', 'test_image');"
+                                                href="javascript:void(0);" class="btn btn-white"
+                                                data-options="iconCls:'icon-redo'" style="width: 60px">选择</a>
+                                            <a id="test_image_Img" title="点击预览大图,点击大图关闭预览" href="{$info.test_image}"
+                                                target="_blank">
+                                                <if condition="$info.test_image neq ''">
+                                                    <img src="{$info.test_image}"
+                                                        style="max-height:100px;max-width: 100%" />
+                                                </if>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">人脸识别照片<span
+                                            style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input name="face" id="face" type="text" class="form-control"
+                                            value="{$info.face}" required="" /><br>
+                                        <div>
+                                            <a onclick="BrowseServer('Images:/', 'face');" href="javascript:void(0);"
+                                                class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                                style="width: 60px">选择</a>
+                                            <a id="face_Img" title="点击预览大图,点击大图关闭预览" href="{$info.face}"
+                                                target="_blank">
+                                                <if condition="$info.face neq ''">
+                                                    <img src="{$info.face}" style="max-height:100px;max-width: 100%" />
+                                                </if>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+								    <label class="col-sm-2 control-label">身份证照片<span
+								            style="color:red;margin:5px;">*</span>：</label>
+								    <div class="col-sm-10">
+								        <div class="MulitiImageSelectDiv">
+								            <ul id="idcard_image_MulitiImageSelect" class="MulitiImageSelectUl">
+								            </ul>
+								        </div>
+								        <div class="MulitiImageSelecttextarea">
+								            <textarea type="text" name="idcard_image" id="idcard_image" class="MulitiImageSelect"
+								                multiline="true" style="width: 100%; height: 100px"
+								                >{$info.idcard_image}</textarea>
+								        </div>
+								        <div>
+								            <a id="idcard_image_select" onclick="MulitiBrowseServer('Images:/', 'idcard_image');"
+								                href="javascript:void(0);" class="btn btn-white"
+								                data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+								        </div>
+								    </div>
+								</div>
+                                <div class="hr-line-dashed"></div>
+                            </if>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">邀请码：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="referral_code"
+                                        value="{$info.referral_code}" readonly>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">被邀请码：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="be_referral_code"
+                                        value="{$info.be_referral_code}" readonly>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type='submit'>保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <!-- 省市区 -->
+    <script type="text/javascript" src="__PLUGINS__/jQueryProvinces/area.js"></script>
+    <script type="text/javascript" src="__PLUGINS__/jQueryProvinces/select.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $('input[type="file"]').prettyFile();
+
+        });
+        function check() {
+            var $data = $("#form-data").serializeObject();
+            if ($data['password']) {
+                if ($data['password'] != $data['confirm-password']) {
+                    alert('密码与确认密码不一致');
+                    return false;
+                }
+            }
+			if({$map['role']} != 1){
+				if(!$data['idcard_image']){
+					alert('缺少身份证图片');
+					return false;
+				}
+			}
+            return true;
+        }
+		//初始化图集
+		InitMulitiImages("idcard_image");
+    </script>

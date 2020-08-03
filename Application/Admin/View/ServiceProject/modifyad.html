@@ -1,0 +1,417 @@
+<include file="Public/detail_header" />
+
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data"
+    action="{:U('ServiceProject/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&top='.$map['top'].'&recommend='.$map['recommend'].'&seckill='.$map['seckill'])}?keyword={$map.keyword}" onsubmit='return check()'>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#panel1" aria-controls="panel1" role="tab"
+                data-toggle="tab">基础资料{$map['keyword']}</a></li>
+        <li role="presentation"><a href="#panel2" aria-controls="panel2" role="tab" data-toggle="tab">相关信息</a></li>
+        <li role="presentation"><a href="#panel3" aria-controls="panel3" role="tab" data-toggle="tab">服务详情</a></li>
+    </ul>
+    <div class="hr-line-dashed"></div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="panel1">
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">审核<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="status" value="0"
+                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                    <label><input type="radio" name="status" value="1"
+                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">栏目<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <select data-placeholder="选择栏目" name="categoryid" class="form-control chosen-select">
+                        <option value="0" {$info["categoryid"]|getSelect=select,0,###}>无</option>
+                        <volist name="categoryList" id="vo" key="n">
+                            <option value="{$vo.id}" {$info["categoryid"]|getSelect=select,$vo['id'],###}>{$vo.title}
+                            </option>
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">副标题：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标签1：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attr1" value="{$info.label.attr1}">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标签2：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attr2" value="{$info.label.attr2}">
+                </div>
+            </div>
+			<!-- <div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">首页标签(前)：</label>
+			    <div class="col-sm-10">
+			        <input type="text" class="form-control" name="home_label" value="{$info.home_label}">
+			    </div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">首页标签(后)：</label>
+			    <div class="col-sm-10">
+			        <input type="text" class="form-control" name="home_label_after" value="{$info.home_label_after}">
+			    </div>
+			</div> -->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input name="thumb" id="thumb" type="text" class="form-control" value="{$info.thumb}"
+                        required="" /><br>
+                    <div>
+                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);" class="btn btn-white"
+                            data-options="iconCls:'icon-redo'" style="width: 60px">选择</a>
+                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                            <if condition="$info.thumb neq ''">
+                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                            </if>
+                        </a>
+                        <div class="red" style="margin-top:5px;">尺寸大小为：300*300</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务图集<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <div class="MulitiImageSelectDiv">
+                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                        </ul>
+                    </div>
+                    <div class="MulitiImageSelecttextarea">
+                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true"
+                            style="width: 100%; height: 100px" required="">{$info.images}</textarea>
+                    </div>
+                    <div>
+                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');"
+                            href="javascript:void(0);" class="btn btn-white" data-options="iconCls:'icon-redo'"
+                            style="width: 90px">批量选择</a>
+                    </div>
+                    <div class="red">尺寸大小为：750*750，最多5张图片</div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">价格：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="price" value="{$info.price}">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">市场价格<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="market_price" value="{$info.market_price}"
+                        step="0.01" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分佣金额<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="brokerage" value="{$info.brokerage}"
+                           step="0.01" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">平台补贴：</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="platform_money" value="{$info.platform_money}"
+                        step="0.01">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务开始时间<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <select data-placeholder="选择服务开始时间" name="begin_hour" class="form-control chosen-select">
+                        <option value="8" {$info["begin_hour"]|getSelect=select,8,###}>8点</option>
+                        <option value="9" {$info["begin_hour"]|getSelect=select,9,###}>9点</option>
+                        <option value="10" {$info["begin_hour"]|getSelect=select,10,###}>10点</option>
+                        <option value="11" {$info["begin_hour"]|getSelect=select,11,###}>11点</option>
+                        <option value="12" {$info["begin_hour"]|getSelect=select,12,###}>12点</option>
+                        <option value="13" {$info["begin_hour"]|getSelect=select,13,###}>13点</option>
+                        <option value="14" {$info["begin_hour"]|getSelect=select,14,###}>14点</option>
+                        <option value="15" {$info["begin_hour"]|getSelect=select,15,###}>15点</option>
+                        <option value="16" {$info["begin_hour"]|getSelect=select,16,###}>16点</option>
+                        <option value="17" {$info["begin_hour"]|getSelect=select,17,###}>17点</option>
+                        <option value="18" {$info["begin_hour"]|getSelect=select,18,###}>18点</option>
+                        <option value="19" {$info["begin_hour"]|getSelect=select,19,###}>19点</option>
+                        <option value="20" {$info["begin_hour"]|getSelect=select,20,###}>20点</option>
+                        <option value="21" {$info["begin_hour"]|getSelect=select,21,###}>21点</option>
+                        <option value="22" {$info["begin_hour"]|getSelect=select,22,###}>22点</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务结束时间<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <select data-placeholder="选择服务结束时间" name="end_hour" class="form-control chosen-select">
+                        <option value="8" {$info["end_hour"]|getSelect=select,8,###}>8点</option>
+                        <option value="9" {$info["end_hour"]|getSelect=select,9,###}>9点</option>
+                        <option value="10" {$info["end_hour"]|getSelect=select,10,###}>10点</option>
+                        <option value="11" {$info["end_hour"]|getSelect=select,11,###}>11点</option>
+                        <option value="12" {$info["end_hour"]|getSelect=select,12,###}>12点</option>
+                        <option value="13" {$info["end_hour"]|getSelect=select,13,###}>13点</option>
+                        <option value="14" {$info["end_hour"]|getSelect=select,14,###}>14点</option>
+                        <option value="15" {$info["end_hour"]|getSelect=select,15,###}>15点</option>
+                        <option value="16" {$info["end_hour"]|getSelect=select,16,###}>16点</option>
+                        <option value="17" {$info["end_hour"]|getSelect=select,17,###}>17点</option>
+                        <option value="18" {$info["end_hour"]|getSelect=select,18,###}>18点</option>
+                        <option value="19" {$info["end_hour"]|getSelect=select,19,###}>19点</option>
+                        <option value="20" {$info["end_hour"]|getSelect=select,20,###}>20点</option>
+                        <option value="21" {$info["end_hour"]|getSelect=select,21,###}>21点</option>
+                        <option value="22" {$info["end_hour"]|getSelect=select,22,###}>22点</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">时长类型<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="time_type" value="1"
+                            {$info["time_type"]|getSelect=radio,###,1}><i></i>小时</label>
+                    <label><input type="radio" name="time_type" value="2"
+                            {$info["time_type"]|getSelect=radio,###,2}><i></i>天</label>
+                    <label><input type="radio" name="time_type" value="3"
+                            {$info["time_type"]|getSelect=radio,###,3}><i></i>月</label>
+                    <label><input type="radio" name="time_type" value="4"
+                            {$info["time_type"]|getSelect=radio,###,4}><i></i>日间</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务时长<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="time" value="{$info.time}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">专业等级<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="major_level" value="1"
+                            {$info["major_level"]|getSelect=radio,###,1}{$info['id']=='' ? 'checked="checked"' : ''
+                            }><i></i>初</label>
+                    <label><input type="radio" name="major_level" value="2"
+                            {$info["major_level"]|getSelect=radio,###,2}><i></i>中</label>
+                    <label><input type="radio" name="major_level" value="3"
+                            {$info["major_level"]|getSelect=radio,###,3}><i></i>高</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">上传医嘱<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="doctor" value="0"
+                            {$info["doctor"]|getSelect=radio,###,0}><i></i>否</label>
+                    <label><input type="radio" name="doctor" value="1"
+                            {$info["doctor"]|getSelect=radio,###,1}><i></i>是</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">线下评估<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="assess" value="0"
+                            {$info["assess"]|getSelect=radio,###,0}><i></i>否</label>
+                    <label><input type="radio" name="assess" value="1"
+                            {$info["assess"]|getSelect=radio,###,1}><i></i>是</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">销量：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="sales" value="{$info.sales}">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">浏览量：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="browser_count" value="{$info.browser_count}">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ordernum"
+                        value="{$info.ordernum|default=getMax('service_project','ordernum')}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">精选推荐<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="recommend" value="0"
+                            {$info["recommend"]|getSelect=radio,###,0}><i></i>否</label>
+                    <label><input type="radio" name="recommend" value="1"
+                            {$info["recommend"]|getSelect=radio,###,1}><i></i>是</label>
+                </div>
+            </div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">精选推荐排序号<span
+			            style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10">
+			        <input type="text" class="form-control" name="recommend_orderby"
+			            value="{$info.recommend_orderby|default=getMax('product','recommend_orderby', $map)}" required="">
+			    </div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group myform">
+			    <label class="col-sm-2 control-label">热门抢购<span style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10 radio i-checks">
+			        <label><input type="radio" name="seckill" value="0"
+			                {$info["seckill"]|getSelect=radio,###,0}><i></i>否</label>
+			        <label><input type="radio" name="seckill" value="1"
+			                {$info["seckill"]|getSelect=radio,###,1}><i></i>是</label>
+			    </div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">热门抢购排序号<span
+			            style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10">
+			        <input type="text" class="form-control" name="seckill_orderby"
+			            value="{$info.seckill_orderby|default=getMax('product','seckill_orderby', $map)}" required="">
+			    </div>
+			</div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">置顶<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="top" value="0"
+                            {$info["top"]|getSelect=radio,###,0}><i></i>否</label>
+                    <label><input type="radio" name="top" value="1"
+                            {$info["top"]|getSelect=radio,###,1}><i></i>是</label>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel2">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">平台认证<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attribute1" value="{$info.attribute1}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">品质保障<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attribute2" value="{$info.attribute2}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">安全保障<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="attribute3" value="{$info.attribute3}" required="">
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="panel3">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务提示<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <textarea cols="80" id="tips_content" name="tips_content" style="height: 400px;" rows="10"
+                    >{$info.tips_content}</textarea>
+                </div>
+            </div>
+            <if condition="$info.assess neq 1">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务详情<span style="color:red;margin:5px;">*</span>：</label>
+                    <div class="col-sm-10">
+                        <textarea cols="80" id="content" name="content" style="height: 400px;" rows="10"
+                        >{$info.content}</textarea>
+                    </div>
+                </div>
+            </if>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" type="submit">保存内容</button>
+            <button class="btn btn-white" type="button"
+                onclick="location.href='{:U('ServiceProject/listad','p='.$map['p'].'&top='.$map['top'].'&recommend='.$map['recommend'].'&seckill='.$map['seckill'])}?keyword={$map.keyword}'">返回</button>
+        </div>
+    </div>
+</form>
+<include file="Public/detail_footer" />
+<!-- 省市区 -->
+<script type="text/javascript" src="__PLUGINS__/city-select/jquery.cityselect.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $address = {
+            'prov': '{$info.province}',
+            'city': '{$info.city}',
+            'dist': '{$info.region}'
+        };
+        $(".J-address").citySelect($address);
+
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+        
+        //var editor1 = window.InitUEditor("tips_content", "tips_content");
+        //var editor2 = window.InitUEditor("content", "content");
+		var editor1 = UE.getEditor('tips_content');
+		var editor2 = UE.getEditor('content');
+        //初始化图集
+        InitMulitiImages("images");
+		
+    });
+	
+    function check() {
+        var categoryid = $('select[name=categoryid] option:selected').val();
+        if (categoryid == 0) {
+            layer.msg('请选择栏目');
+            return false;
+        }
+		var tips = $('textarea[name=tips_content]').val();
+		if(tips==''){
+			layer.msg('请填写服务提示');
+			return false;
+		}
+		var tips = $('textarea[name=content]').val();
+		if(tips==''){
+			layer.msg('请填写服务详情');
+			return false;
+		}
+		return true;
+    }
+</script>

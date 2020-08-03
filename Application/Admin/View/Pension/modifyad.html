@@ -1,0 +1,421 @@
+<include file="Public/detail_header" />
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=G56BZ-TW4HW-XEWRG-OSDVP-RWGJJ-ZRBAG"></script>
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data"
+    action="{:U('pension/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'])}">
+    <!-- Nav tabs -->
+    
+    <div class="hr-line-dashed"></div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="panel1">
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">审核<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="status" value="0"
+                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                    <label><input type="radio" name="status" value="1"
+                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+			<div class="form-group myform">
+			    <label class="col-sm-2 control-label">状态<span style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10 radio i-checks">
+			        <label><input type="radio" name="shelf" value="0"
+			                {$info["shelf"]|getSelect=radio,###,0}><i></i>下架</label>
+			        <label><input type="radio" name="shelf" value="1"
+			                {$info["shelf"]|getSelect=radio,###,1}><i></i>上架</label>
+			    </div>
+			</div>
+			<div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构类型<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <select data-placeholder="选择机构类型" name="type" class="form-control chosen-select" required>
+                        <option value="0" {$info["type"]|getSelect=select,0,###}>请选择机构类型</option>
+                        <option value="养老公寓" {$info["type"]|getSelect=select,"养老公寓",###}>养老公寓</option>
+                        <option value="护理院" {$info["type"]|getSelect=select,"护理院",###}>护理院</option>
+                        <option value="疗养院" {$info["type"]|getSelect=select,"疗养院",###}>疗养院</option>
+                        <option value="养老照顾中心" {$info["type"]|getSelect=select,"养老照顾中心",###}>养老照顾中心</option>
+                        <option value="养老社区/CCRC" {$info["type"]|getSelect=select,"养老社区/CCRC",###}>养老社区/CCRC</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">副标题：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                </div>
+            </div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">价格：</label>
+			    <div class="col-sm-10">
+			        <input type="number" class="form-control" name="price" value="{$info.price}" step="0.01">
+			    </div>
+			</div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input name="thumb" id="thumb" type="text" class="form-control" value="{$info.thumb}" required="" /><br>
+                    <div>
+                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);" class="btn btn-white"
+                            data-options="iconCls:'icon-redo'" style="width: 60px">选择</a>
+                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                            <if condition="$info.thumb neq ''">
+                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                            </if>
+                        </a>
+                        <div class="red" style="margin-top:5px;">尺寸大小为：344*344</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构图集<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <div class="MulitiImageSelectDiv">
+                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                        </ul>
+                    </div>
+                    <div class="MulitiImageSelecttextarea">
+                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true" required=""
+                            style="width: 100%; height: 100px">{$info.images}</textarea>
+                    </div>
+                    <div>
+                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');"
+                            href="javascript:void(0);" class="btn btn-white" data-options="iconCls:'icon-redo'"
+                            style="width: 90px">批量选择</a>
+                    </div>
+                    <div class="red">尺寸大小为：750*400，建议最多5张图片</div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">省市区<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 input-group J-address" style="padding: 0 15px;">
+                    <!-- 省市区 -->
+                    <select class="form-control province" name="province" id="province" style="width:150px;">
+                        <option value="{$info.province}">{$info.province}</option>
+                    </select>
+                    <select class="form-control city" name="city" id="city" style="width:150px;">
+                        <option value="{$info.city}">{$info.city}</option>
+                    </select>
+                    <select class="form-control town" name="region" id="region" style="width:150px;">
+                        <option value="{$info.region}">{$info.region}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">详细地址<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="address" value="{$info.address}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">经纬度<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 row">
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="longitude" readOnly="true"  value="{$info.longitude}" placeholder="经度">
+                    </div>
+                    <div class="col-xs-1">
+                        <span>———</span>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="latitude" readOnly="true"  value="{$info.latitude}" placeholder="纬度">
+                    </div><span style="color:red;">（设置了省市和正确的具体地址便可获取经纬度）</span>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">收住对象<span style="color:red;margin:5px;">*</span>：</label>
+
+                <div class="col-sm-10 checkbox">
+                        <div class="J-container">
+                            <div class="J-child-{$vo.id}" style="margin-bottom:20px;margin-left:25px;">
+								<volist name="pension_type" id="v">
+								<if condition="$v['type'] eq 1">
+                                <label class="W1">
+                                    <input type="checkbox" class="i-checks" name="object[]"
+                                        value="{$v.title}" {$info["object"]|getSelect=check,$v['title'],###}>
+                                    <i></i>{$v.title}
+                                </label>
+								</if>
+								</volist>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">特色服务<span style="color:red;margin:5px;">*</span>：</label>
+
+                <div class="col-sm-10 checkbox">
+                        <div class="J-container">
+                            <div class="J-child-{$vo.id}" style="margin-bottom:20px;margin-left:25px;">
+								<volist name="pension_type" id="v">
+								<if condition="$v['type'] eq 2">
+								<label class="W1">
+								    <input type="checkbox" class="i-checks" name="item[]"
+								        value="{$v.title}" {$info["item"]|getSelect=check,$v['title'],###}>
+								        <i></i>{$v.title}
+								</label>
+								</if>
+								</volist>
+                            </div>
+                        </div>
+                </div>
+            </div>
+             <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">户型设置<span style="color:red;margin:5px;">*</span>：</label>
+
+                <div class="col-sm-10 checkbox">
+                        <div class="J-container">
+                            <div class="J-child-{$vo.id}" style="margin-bottom:20px;margin-left:25px;">
+								<volist name="pension_type" id="v">
+								<if condition="$v['type'] eq 3">
+								<label class="W1">
+								    <input type="checkbox" class="i-checks" name="layout[]"
+								        value="{$v.title}" {$info["layout"]|getSelect=check,$v['title'],###}>
+								        <i></i>{$v.title}
+								</label>
+								</if>
+								</volist>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">价格区间<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 row">
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="price_start" value="{$info.price_start|default=''}" placeholder="最低价格">
+                    </div>
+                    <div class="col-xs-1">
+                        <span>———</span>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="price_end" value="{$info.price_end|default=''}" placeholder="最高价格">
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr-line-dashed"></div>
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">机构性质<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="nature" value="民办"
+                            {$info["nature"]|getSelect=check,###,"民办"}><i></i>民办</label>
+                    <label><input type="radio" name="nature" value="公办"
+                            {$info["nature"]|getSelect=check,###,"公办"}><i></i>公办</label>
+                    <label><input type="radio" name="nature" value="公办民营"
+                            {$info["nature"]|getSelect=check,###,"公办民营"}><i></i>公办民营</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">床位数量<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="bed"
+                        value="{$info.bed|default=''}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">入住事项<span
+                        style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <textarea cols="80" id="check_in" name="check_in" style="height: 400px;" rows="10"
+                      >{$info.check_in}</textarea>
+                </div>
+            </div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">优惠信息<span
+			            style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10">
+			        <textarea cols="80" id="discount" name="discount" style="height: 400px;" rows="10"
+			          >{$info.discount}</textarea>
+			    </div>
+			</div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">机构介绍<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="introduce" rows="3">{$info.introduce|default=''}</textarea>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">热度<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="hot"
+                        value="{$info.hot|default=''}" required="">
+                </div>
+            </div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">占地面积<span style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10">
+			        <input type="text" class="form-control" name="area"
+			            value="{$info.area}" required="">
+			    </div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label class="col-sm-2 control-label">成立时间<span style="color:red;margin:5px;">*</span>：</label>
+			    <div class="col-sm-10">
+			        <input id="foundtime" name="foundtime" class="form-control layer-date" placeholder="YYYY-MM-DD"
+			            value="{$info.foundtime}" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" required="" autocomplete="off"/>
+			    </div>
+			</div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ordernum"
+                        value="{$info.ordernum|default=getMax('pension','ordernum')}" required="">
+                </div>
+            </div>
+            <!-- <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务优势需要多选<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <select data-placeholder="选择服务优势advantage" name="advantage" class="form-control chosen-select" required>
+                        <option value="0" {$info["advantage"]|getSelect=select,0,###}>请选择服务优势</option>
+                        <volist name="select_pension_advantage" id="vo" key="n">
+                            <option value="1" {$info["advantage"]|getSelect=select,"1",###}>长护脸</option>
+                        </volist>
+                    </select>
+                </div>
+            </div> -->
+			<!--<div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务优势：</label>
+
+                <div class="col-sm-10 checkbox">
+                    
+                        <div class="J-container">
+                            
+                            <div class="J-child-{$vo.id}" style="margin-bottom:20px;">
+                                <volist name="datas" id="vo">
+                                    <label class="W1">
+                                        <input type="checkbox" class="i-checks" name="advantage[]"
+                                            value="{$vo.id}"
+                                            {$info["advantage"]|getSelect=check,$vo["id"],###}>
+                                        <i></i>{$vo.title}
+                                    </label>
+                                </volist>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div> -->
+
+
+            <!-- <div class="hr-line-dashed"></div>
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">置顶<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="top" value="0"
+                            {$info["top"]|getSelect=radio,###,0}><i></i>否</label>
+                    <label><input type="radio" name="top" value="1"
+                            {$info["top"]|getSelect=radio,###,1}><i></i>是</label>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" type="submit">保存内容</button>
+            <button class="btn btn-white" type="button"
+                onclick="javascript:history.go(-1)">返回</button>
+        </div>
+    </div>
+</form>
+<include file="Public/detail_footer" />
+<!-- 省市区 -->
+<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/area.js"></script>
+<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+		var editor1 = UE.getEditor('check_in');
+		var editor2 = UE.getEditor('discount');
+		
+        <!-- var editor1 = window.InitUEditor("content1", "content1"); -->
+        <!-- var editor2 = window.InitUEditor("content2", "content2"); -->
+        <!-- var editor3 = window.InitUEditor("content3", "content3"); -->
+        <!-- var editor4 = window.InitUEditor("content4", "content4"); -->
+        <!-- var editor5 = window.InitUEditor("content5", "content5"); -->
+
+        //初始化图集
+        InitMulitiImages("images");
+    });
+</script>
+<script type="text/javascript">
+
+        // var address = $('input[name=address]').val();
+        // var province = $('#province option:selected').val();
+        // var city = $('#city option:selected').val();
+        // var geo = new qq.maps.Geocoder();
+        // geo.getLocation('中国,'+city+','+address)//地址
+        // geo.setComplete(function(res){
+        //     console.log(res,res.detail.location);//得到经纬度
+
+        //     $('input[name=longitude]').val(res.detail.location.lat);
+        //     $('input[name=latitude]').val(res.detail.location.lng);
+        // })
+
+        $('input[name="address"]').blur(function(){
+            // alert('1111');
+            var province = $('#province option:selected').val();
+            // alert(province);
+            if(province==''){
+                layer.alert('请设置省份');
+            }
+            var city = $('#city option:selected').val();
+            if(city==''){
+                layer.alert('请设置城市');
+            }
+
+            var region = $('#region option:selected').val();
+
+            var addresssed = $('input[name=address]').val();
+            $.ajax({
+                url:"{:U('Pension/selectlatlng')}",
+                type:'post',
+                data:{address:province+city+region+addresssed},
+                dataType: "json",
+                success:function(res){
+                    console.log(JSON.parse(res));
+                    // json转数组
+                    var data = JSON.parse(res);
+                    
+                    $('input[name=longitude]').val(data.result.location.lng);
+                    $('input[name=latitude]').val(data.result.location.lat);
+                    // lat:纬度
+                    // lng:经度
+                },
+            });
+        })
+        
+</script>

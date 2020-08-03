@@ -1,0 +1,170 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()" enctype="multipart/form-data"
+                            action="{:U('Banner/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'].'&notice='.$notice)}">
+							<if condition="$map['type'] eq 14">
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="title"
+							            value="{$info.title}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							</if>
+							<if condition="$map['type'] eq 23">
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="title"
+							            value="{$info.title}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">副标题<span style="color:red;margin:5px;">*</span>：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="subtitle"
+							            value="{$info.subtitle}" required="">
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							</if>
+                            <if condition="$map['type'] eq 21">
+                                <if condition="$notice eq 1">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">公告（选填）：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="notice"
+                                                value="{$info.notice}" >
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                </if>
+                            </if>
+                            <if condition="$notice neq 1">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
+                                    <div class="col-sm-10">
+                                        <input name="image" id="image" type="text" class="form-control"
+                                            value="{$info.image}"  /><br>
+                                        <div>
+                                            <a onclick="BrowseServer('Images:/', 'image');" href="javascript:void(0);"
+                                                class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                                style="width: 60px">选择</a>
+                                            <a id="image_Img" title="点击预览大图,点击大图关闭预览" href="{$info.image}" target="_blank">
+                                                <if condition="$info.image neq ''">
+                                                    <img src="{$info.image}" style="max-height:100px;max-width: 100%" />
+                                                </if>
+                                            </a>
+    										<switch name="map['type']">
+    											<case value="12"><div class="red" style="margin-top:5px;">尺寸大小为：355*80</div></case>
+    											<case value="14"><div class="red" style="margin-top:5px;">尺寸大小为：91*95</div></case>
+												<case value="22"><div class="red" style="margin-top:5px;">尺寸大小为：350*260</div></case>
+												<case value="23"><div class="red" style="margin-top:5px;">尺寸大小为：130*130</div></case>
+												<case value="24"><div class="red" style="margin-top:5px;">尺寸大小为：344*482</div></case>
+    											<default /><div class="red" style="margin-top:5px;">尺寸大小为：380*149</div>
+    										</switch>
+                                        </div>
+                                    </div>
+                                </div>
+                            </if>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">跳转类型<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择跳转类型" name="param_type"
+                                        class="form-control chosen-select" required>
+                                        <option value="-1" {$info["param"]["param_type"]|getSelect=select,-1,###}>
+                                            请选择跳转类型
+                                        </option>
+                                        <foreach name="param" item="v" key="k">
+                                            <option value="{$v.type}"
+                                                {$info["param"]["param_type"]|getSelect=select,$v["type"],###}>
+                                                {$v.title}
+                                            </option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">目标ID / 跳转链接<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="param_id"
+                                        value="{$info['param']['param_id']}" required="">
+                                </div>
+                            </div>
+                            <!-- <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">跳转参数（移动端内打开）：</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="param" style="resize:none;height:50px;">{$info.param}</textarea>
+                                    <span class="red">参数结构为｛"type": 0, "id": 0｝，跳转参数优先级高于跳转链接</span>
+                                </div>
+                            </div> -->
+                            <div class="hr-line-dashed"></div>
+							<if condition="$map['type'] != 12">
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">审核<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0"
+                                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="ordernum"
+                                        value="{$info.ordernum|default=getMax('banner','ordernum', $map)}" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+							</if>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注：</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="remark"
+                                        style="resize:none;height:50px;">{$info.remark}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="location.href='{:U('Banner/listad','p='.$map['p'].'&type='.$map['type'].'&notice='.$notice)}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script>
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $('input[type="file"]').prettyFile();
+        });
+		function check(){
+			var value=$('select[name=param_type] option:selected').val();
+			if(value=='-1'){
+				layer.msg('请选择跳转类型');
+				return false;
+			}
+		}
+    </script>

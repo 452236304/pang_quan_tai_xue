@@ -1,0 +1,90 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="100" class="TC">编号</th>
+                                    <th width="100" class="TC">邀请的用户</th>
+                                    <th width="100" class="TC">购买的课程</th>
+                                    <th width="100" class="TC">申请提现金额</th>
+                                    <th width="150" class="TC">有效时间</th>
+                                    <th width="150" class="TC">领券时间</th>
+                                    <th width="100" class="TC">领券用户</th>
+                                    <th width="200" class="TC">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="data" id="vo" key="n">
+                                    <tr>
+                                        <td align="center">{$n}<input type="hidden" name="couponid[]" value="{$vo.couponid}" /></td>
+                                        <td align="center">
+                                            <a class="J-User" href="{:U('User/modifyad', 'id='.$vo['ruuserid'])}" data-index="user_{$vo.ruuserid}" data-title="{$vo['runickname']}-用户详情">
+                                                {$vo.runickname}
+                                            </a>
+                                        </td>
+                                        <td align="center">
+                                            <a class="J-Class" href="{:U('Class/modifyad', 'id='.$vo['classid'])}" data-index="class_{$vo.classid}" data-title="{$vo['otitle']}-课程详情">
+                                                {$vo.otitle}
+                                            </a>
+                                        </td>
+                                        <td align="center">{$vo.money}</td>
+                                        <td align="center">{$vo.use_end_date|strtotime|date="Y-m-d H:i",###}</td>
+                                        <td align="center">{$vo.createdate|strtotime|date="Y-m-d H:i",###}</td>
+                                        <td align="center">
+                                            <a class="J-User" href="{:U('User/modifyad', 'id='.$vo['userid'])}" data-index="user_{$vo.userid}" data-title="{$vo['nickname']}-用户详情">
+                                                {$vo.nickname}
+                                            </a>
+                                        </td>
+                                        <td class="text-navy" align="center">
+                                            <a href="javascript:;" class="J-query-bank" data-account="{$vo.aliyun_account}" data-name="{$vo.aliyun_name}">
+                                                查看支付宝信息
+                                            </a>
+                                        <if condition="$status eq 2">
+                                            <a href="javascript:;" class="J-withdraw-pass" data-url="{:U('UserWithdraw/pass','id='.$vo['couponid'])}">
+                                                申请通过
+                                            </a>
+                                        </if>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(function(){
+            $("a.J-User,a.J-Class").on("click", function(){
+                var o = $(this).attr("href"),
+                    m = $(this).data("index"),
+                    l = $.trim($(this).data("title"));
+                parent.window.ContabsOpenTab(o, m, l);
+                return false;
+            });
+
+            $("a.J-query-bank").on("click", function(){
+                var account = $(this).data("account");
+                var name = $(this).data("name");
+
+                var tips = "支付宝账号："+account+"<br/>";
+                tips += "支付宝实名："+name;
+                layer.alert(tips);
+            });
+
+            $("a.J-withdraw-pass").on("click", function(){
+                var url = $(this).data("url");
+                layer.confirm("是否确认申请提现通过？", {btn:["确认", "取消"]}, function(){
+                    window.location.href = url;
+                });
+            });
+        });
+    </script>

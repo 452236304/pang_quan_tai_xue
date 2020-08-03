@@ -1,0 +1,50 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <button class="btn btn-primary list-add" type="button" data-url="{:U('update')}?type={$type}" data-title="增加分类" >＋增加</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th width="100" class="TC">编号</th>
+                                <th>名称</th>
+                                <th width="100" class="TC">排序</th>
+                                <th width="100" class="TC">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <volist name="data" id="vo" key="n">
+                                <tr>
+                                    <td align="center">{$n}</td>
+                                    <td>{$vo.name}</td>
+                                    <td align="center">{$vo.sort}</td>
+                                    <td class="text-navy" align="center">
+                                        <a href="javascript:;" data-url="{:U('update')}?type={$type}&id={$vo.id}" data-title="分类详情" class="list-update" >修改</a>
+                                        <a href="javascript:;" data-url="{:U('remove')}?type={$type}&id={$vo.id}"
+                                           class="list-remove" >删除</a>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<include file="Public/footer" />
+<block name="js" >
+<script>
+
+</script>
+</block>

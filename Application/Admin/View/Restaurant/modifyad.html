@@ -1,0 +1,125 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data" action="{:U('Restaurant/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">审核：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0" {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1" {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">副标题：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="subtitle" value="{$info.subtitle}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">封面图：</label>
+                                <div class="col-sm-10">
+                                    <input name="thumb" id="thumb" type="text" class="form-control" value="{$info.thumb}" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'" style="width: 60px">选择</a>
+                                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                                            <if condition="$info.thumb neq ''">
+                                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">服务图集：</label>
+                                <div class="col-sm-10">
+                                    <div class="MulitiImageSelectDiv">
+                                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                                        </ul>
+                                    </div>
+                                    <div class="MulitiImageSelecttextarea">
+                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true"
+                                  style="width: 100%; height: 100px">{$info.images}</textarea>
+                                    </div>
+                                    <div>
+                                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');" href="javascript:void(0);"
+                                           class="btn btn-white" data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+                                    </div>
+                                    <div class="desc">尺寸大小为：800*800，最多5张图片</div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">省市区：</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b J-address">
+                                        <!-- 省市区 -->
+                                        <select class="form-control prov" name="province" style="width:100px;"></select>
+                                        <select class="form-control city" name="city" style="width:100px;"></select>
+                                        <select class="form-control dist" name="region" style="width:100px;"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">介绍：</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="content" style="resize:none;height:100px;">{$info.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序号：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="ordernum" value="{$info.ordernum|default=getMax('restaurant','ordernum', $map)}"
+                                           required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="location.href='{:U('Restaurant/listad','p='.$map['p'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <!-- 省市区 -->
+    <script type="text/javascript" src="__PLUGINS__/city-select/jquery.cityselect.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            $address = {
+                'prov': '{$info.province}',
+                'city': '{$info.city}',
+                'dist': '{$info.region}'
+            };
+            $(".J-address").citySelect($address);
+
+            //初始化图集
+            InitMulitiImages("images");
+        });
+    </script>

@@ -1,0 +1,157 @@
+<include file="Public/header" />
+<style>
+    .col-sm-10{
+        padding-top: 7px;
+    }
+</style>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                          action="{:U('FormSubmit/modifyad','doinfo=modifyad&id='.$info['id'].'&p='.$map['p'])}">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">订单类型<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.title1}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">科目类型<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.title2}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">学历背景<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.title3}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">引用数<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.title4}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">写作格式<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.title5}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">字数数量<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.word_num}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">字体行距<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <switch name="info.font_space">
+                                    <case value="1">Double spaced</case>
+                                    <case value="2">Single spaced</case>
+                                    <case value="3">1.5 spaced</case>
+                                </switch>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">订单需求<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.order_need}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">文件说明<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <if condition="!empty($info['upload_file'])">
+                                    <a href="{$info.upload_file}">下载查看</a>
+                                </if>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">截止时间<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.end_time|date|date="Y-m-d H:i:s",###}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">预估价格<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.forcase_price}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提交时间<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.add_time|date|date="Y-m-d H:i:s",###}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名称<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.user_name}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.user_phone}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">接收邮箱<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                {$info.user_mail}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">审核：</label>
+                            <div class="col-sm-10 radio i-checks">
+                                <label><input type="radio" name="status" value="0"
+                                              {$info["status"]|getSelect=radio,###,0}><i></i>未审核</label>
+                                <label><input type="radio" name="status" value="1"
+                                              {$info["status"]|getSelect=radio,###,1}><i></i>审核成功</label>
+                                <label><input type="radio" name="status" value="2"
+                                              {$info["status"]|getSelect=radio,###,2}><i></i>审核失败</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">审核时间：</label>
+                            <div class="col-sm-10">
+                                {$data.status_time|date|date="Y-m-d H:i:s",###}
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                                <button class="btn btn-white" type="button"
+                                        onclick="location.href='{:U('FormSubmit/listad','p='.$map['p'])}'">返回</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+<script>
+    $(document).ready(function () {
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+
+        var editor = UE.getEditor('content');
+    });
+</script>

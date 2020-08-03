@@ -1,0 +1,99 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data"
+                            action="{:U('Prize/modifyad','doinfo=modify&id='.$info['id'].'&activity_id='.$map['activity_id'].'&type='.$map['type'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">奖品名称：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}">
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">奖品类型<span
+										style="color:red;margin:5px;">*</span>：</label>
+								<div class="col-sm-10">
+									<select data-placeholder="选择类型" name="type" class="form-control chosen-select" required >
+										<option value="0" {$info["type"]|getSelect=select,0,###}>无奖品</option>
+										<option value="1" {$info["type"]|getSelect=select,1,###}>椿分</option>
+										<option value="2" {$info["type"]|getSelect=select,2,###}>优惠券</option>
+										<option value="3" {$info["type"]|getSelect=select,3,###}>抽奖次数</option>
+									</select>
+								</div>
+							</div>
+							<div class="type type1" style="{$info['type']==1?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">椿分：</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" name="point" value="{$info.point}"
+											step="1">
+									</div>
+								</div>
+							</div>
+							<div class="type type2" style="{$info['type']==2?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">优惠券奖品：</label>
+									<div class="col-sm-10">
+										<select data-placeholder="选择优惠券" name="coupon_id" class="form-control chosen-select">
+											<volist name="coupon" id="v" key="k">
+											<option value="{$v.id}" {$info["coupon_id"]|getSelect=select,$v['id'],###}>{$v.title}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="type type3" style="{$info['type']==3?'display:block;':'display:none;'}">
+								<div class="hr-line-dashed"></div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">抽奖次数(奖品)：</label>
+									<div class="col-sm-10">
+										<input type="number" class="form-control" name="prize_num" value="{$info.prize_num}"
+											step="1">
+									</div>
+								</div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">中奖率：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="probability" value="{$info.probability}" step="0.01">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">奖品数量：</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" name="num" value="{$info.num}">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="location.href='{:U('Prize/listad','activity_id='.$map['activity_id'].'&type='.$map['type'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+	<script>
+		$('select[name=type]').change(function(){
+			var type = $('select[name=type] option:selected').val();
+			//console.log(type);
+			$('.type').css('display','none');
+			$('.type'+type).css('display','block');
+		})
+	</script>

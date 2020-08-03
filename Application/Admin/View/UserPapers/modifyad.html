@@ -1,0 +1,127 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" enctype="multipart/form-data" action="{:U('UserPapers/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&userid='.$map['userid'])}">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">状态：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0" {$info["status"]|getSelect=radio,###,0}><i></i>审核</label>
+                                    <label><input type="radio" name="status" value="1" {$info["status"]|getSelect=radio,###,1}><i></i>通过</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">名称：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="name" value="{$info.name}">
+                                </div>
+                            </div>
+                            <if condition="$info.type eq 5 or $info.id eq ''">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">职称：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="job" value="{$info.job}">
+                                    </div>
+                                </div>
+                            </if>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">证件类型：</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="选择类型" name="type" class="form-control chosen-select">
+                                        <option value="1" {$info["type"]|getSelect=select,'1',###}>身份证</option>
+                                        <option value="2" {$info["type"]|getSelect=select,'2',###}>健康证</option>
+                                        <option value="3" {$info["type"]|getSelect=select,'3',###}>学历证</option>
+                                        <option value="4" {$info["type"]|getSelect=select,'4',###}>专业证</option>
+                                        <option value="5" {$info["type"]|getSelect=select,'5',###}>从业证</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">开始时间：</label>
+                                <div class="col-sm-10">
+                                    <input id="begintime" name="begintime" class="form-control layer-date"
+                                           placeholder="YYYY-MM-DD hh:mm" value="{$info.begintime}"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" />
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">截止时间：</label>
+                                <div class="col-sm-10">
+                                    <input id="validtime" name="validtime" class="form-control layer-date"
+                                           placeholder="YYYY-MM-DD hh:mm" value="{$info.validtime}"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" />
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">证件图片集合：</label>
+                                <div class="col-sm-10">
+                                    <div class="MulitiImageSelectDiv">
+                                        <ul id="images_MulitiImageSelect" class="MulitiImageSelectUl">
+                                        </ul>
+                                    </div>
+                                    <div class="MulitiImageSelecttextarea">
+                                        <textarea type="text" name="images" id="images" class="MulitiImageSelect" multiline="true" style="width: 100%; height: 100px">{$info.images}</textarea>
+                                    </div>
+                                    <div>
+                                        <a id="images_select" onclick="MulitiBrowseServer('Images:/', 'images');" href="javascript:void(0);" class="btn btn-white"
+                                            data-options="iconCls:'icon-redo'" style="width: 90px">批量选择</a>
+                                    </div>
+                                    <div class="desc">尺寸大小为：800*800，最多5张图片</div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="location.href='{:U('UserPapers/listad','p='.$map['p'].'&userid='.$map['userid'])}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var start = {
+                elem:"#begintime",format:"YYYY-MM-DD hh:mm",
+                min:laydate.now(),max:"2099-12-31",
+                istime:true,istoday:false,
+                choose:function(datas){
+                    end.min = datas;
+                    end.start = datas;
+                }
+            };
+            laydate(start);
+
+            var end = {
+                elem:"#validtime",format:"YYYY/MM/DD hh:mm",
+                min:laydate.now(),max:"2099-12-31 23:59",
+                istime:true,istoday:false,
+                choose:function(datas){
+                    start.max = datas;
+                }
+            };
+            laydate(end);
+
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            
+            //初始化图集
+            InitMulitiImages("images");
+        });
+    </script>

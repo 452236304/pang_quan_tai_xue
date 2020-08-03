@@ -1,0 +1,124 @@
+<div id="modal-demo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">对话框标题</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a>
+            </div>
+            <div class="modal-body">
+                <p>对话框内容…</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">确定</button>
+                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__JS__/jquery.min.js?v=2.1.4"></script>
+<script src="__JS__/bootstrap.min.js?v=3.3.6"></script>
+<script src="__JS__/content.min.js?v=1.0.0"></script>
+<script src="__JS__/plugins/chosen/chosen.jquery.js"></script>
+<script src="__JS__/plugins/jsKnob/jquery.knob.js"></script>
+<script src="__JS__/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="__JS__/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="__JS__/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="__JS__/plugins/switchery/switchery.js"></script>
+<script src="__JS__/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<script src="__JS__/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__JS__/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<script src="__JS__/plugins/clockpicker/clockpicker.js"></script>
+<script src="__JS__/plugins/cropper/cropper.min.js"></script>
+<script src="__JS__/plugins/iCheck/icheck.min.js"></script>
+<script src="__JS__/demo/form-advanced-demo.min.js"></script>
+
+<!--<script src="__JS__/jquery.min.js?v=2.1.4"></script>-->
+<script src="__JS__/bootstrap.min.js?v=3.3.6"></script>
+<script src="__JS__/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__JS__/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="__JS__/plugins/layer/layer.min.js"></script>
+<!-- 时间 -->
+<script src="__JS__/plugins/layer/laydate/laydate.js"></script>
+<script src="__JS__/hplus.min.js?v=4.1.0"></script>
+<script src="__JS__/contabs.min.js" type="text/javascript"></script>
+<script src="__JS__/plugins/pace/pace.min.js"></script>
+<script src="__JS__/H-ui/H-ui.js"></script>
+
+<script src="/Public/Admin/plugins/layui/layui.js"></script>
+<script src="__JS__/global.js"></script>
+<script src="__JS__/list.js"></script>
+
+<script src="/Public/ckfinder/ckfinder.js"></script>
+<script src="/Public/ckfinder/handle.js"></script>
+<script src="__JS__/plugins/chosen/chosen.jquery.js"></script>
+<script src="__JS__/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="__TMPL__/xedit/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__TMPL__/xedit/ueditor.all.js"></script>
+<!--<script type="text/javascript" src="/Public/ckeditor/ckeditor.js"></script>-->
+<script type="text/javascript">
+    window.InitUEditor = function (id, name) {
+        if (!id) {
+            id = "content";
+        }
+        if (!name) {
+            name = "content";
+        }
+        var editor = UE.getEditor(id, {
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo', 'bold', 'italic', 'underline', 'forecolor', 'backcolor', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'strikethrough', 'subscript', 'simpleupload', 'insertimage', 'audio', 'inserttable', 'edittable', 'edittd', 'link']
+            ],
+            autoHeightEnabled: false,
+            autoFloatEnabled: false,
+            textarea: name,
+            removeFormatAttributes: ""
+        }).addListener('beforefullscreenchange', function (event, isFullScreen) {
+            if (isFullScreen) {
+                $("body").addClass("noscroll")
+                $("#isFullScreen").css({ "height": "100%", "width": "100%", "left": 0 });
+            } else {
+                $("body").removeClass("noscroll")
+                $("#isFullScreen").css({ "height": "400px", "width": "98%", "left": "16px" });
+            }
+        });
+
+        return editor;
+    }
+
+    $("a.J-OpenTab").on("click", function () {
+        var o = $(this).attr("href"),
+            m = $(this).data("index"),
+            l = $.trim($(this).data("title"));
+        return OpenTab(o, m, l);
+    });
+
+    window.OpenTab = function ($o, $m, $l) {
+        parent.window.ContabsOpenTab($o, $m, $l);
+        return false;
+    }
+
+    $("input[type='number']").on("keypress", function () {
+        return (/[0-9\.]/.test(String.fromCharCode(event.keyCode)));
+    });
+
+	window.tipsnews = function(role,group,num){
+	    $("#side-menu li").each(function(index, el) {
+	     var url = $(this).find('.J_menuItem').first().attr('href');
+	     var str = '/business.html';
+	     if( url&&url.indexOf(str)!=-1 ){
+			$(this).find('.J_menuItem').first().find('.pull-right').remove();
+	        if(num)$(this).find('.J_menuItem').first().append('<span class="label label-warning pull-right">'+num+'</span>');
+	     }
+	    });
+	}
+	
+	
+</script>
+<!--<iframe src="https://www.ydchun.com/html/business.html?account={$sysuserinfo.truename}&pwd=123456&id={$sysuserinfo.id}" style="height:0;width:0;"></iframe>-->
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
+
+</html>

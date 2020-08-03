@@ -1,0 +1,144 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()"
+                            enctype="multipart/form-data"
+                            action="{:U('ApplyCompany/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'])}">
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">审核<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="2"
+                                            {$info["status"]|getSelect=radio,###,2}><i></i>拒绝</label>
+                                    <label><input type="radio" name="status" value="1"
+                                            {$info["status"]|getSelect=radio,###,1}><i></i>通过</label>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">公司名称：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" value="{$info.name}" disabled="true">
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">营业执照号：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" value="{$info.license}" disabled="true">
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">营业执照：</label>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <a id="license_link_Img" title="点击预览大图,点击大图关闭预览" href="{$info.license_link}" target="_blank">
+                                            <if condition="$info.license_link neq ''">
+                                                <img src="{$info.license_link}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">入驻板块：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" 
+									<switch name="info['settled']">
+									<case value='0'>value="服务"</case>
+									<case value='1'>value="商品"</case>
+									<case value='2'>value="机构"</case>
+									</switch>
+                                    disabled="true">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">联系人：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"
+                                           value="{$info.contact}" disabled="true" >
+                                </div>
+                            </div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">联系电话：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control"
+							               value="{$info.mobile}" disabled="true" >
+							    </div>
+							</div>
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">不通过的原因：</label>
+							    <div class="col-sm-10">
+							        <input type="text" class="form-control" name="remark"
+							               value="{$info.remark}">
+							    </div>
+							</div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button"
+                                        onclick="javascript:history.go(-1)">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+            var ue = UE.getEditor('content');
+			var ue = UE.getEditor('spec_content');
+			//初始化图集
+			InitMulitiImages("images");
+        });
+
+        $('select[name=typeid1]').change(function(){
+                var typeid1 = $('select[name=typeid1] option:checked').val();
+                // var typeid2 = $('select[name=typeid2] option:checked').val();
+                $.ajax({
+                    url:'{:U("get_attribute")}',
+                    data:{typeid1:typeid1},
+                    datatype:'html',
+                    type:'get',
+                    success:function(res){
+                        $('select[name=typeid2]').html("<option value=''>请选择</option>"+res);
+                        $('select[name=typeid3]').html('');
+                        $('.chosen-select').trigger("chosen:updated");
+                    }
+                })
+            })
+
+        $('select[name=typeid2]').change(function(){
+                var typeid2 = $('select[name=typeid2] option:checked').val();
+                // var typeid2 = $('select[name=typeid2] option:checked').val();
+                $.ajax({
+                    url:'{:U("get_attribute")}',
+                    data:{typeid2:typeid2},
+                    datatype:'html',
+                    type:'get',
+                    success:function(res){
+                        $('select[name=typeid3]').html("<option value=''>请选择</option>"+res);
+                        $('.chosen-select').trigger("chosen:updated");
+                    }
+                })
+            })
+            
+    </script>

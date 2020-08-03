@@ -1,0 +1,62 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <button class="btn btn-primary" type="button" onclick="location.href='{:U('Coupon/modifyad','type='.$map['type'])}'">＋增加</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="100" class="TC">编号</th>
+                                    <th>标题</th>
+                                    <th width="100" class="TC">优惠券金额</th>
+                                    <th width="100" class="TC">总数量</th>
+                                    <th width="100" class="TC">已发放数量</th>
+                                    <th width="100" class="TC">有效天数</th>
+                                    <th width="100" class="TC">审核</th>
+                                    <th width="200" class="TC">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="data" id="vo" key="n">
+                                    <tr>
+                                        <td align="center">{$n}<input type="hidden" name="id[]" value="{$vo.id}" /></td>
+                                        <td>{$vo.title}</td>
+                                        <td align="center">{$vo.money}</td>
+                                        <td align="center">{$vo.count}</td>
+                                        <td align="center">{$vo.sales}</td>
+                                        <td align="center">{$vo.use_date}</td>
+                                        <td align="center">
+                                            <if condition="$vo.status eq 1">
+                                                <i class="fa fa-check"></i>
+                                                <else />
+                                                <i class="fa fa-close"></i>
+                                            </if>
+                                        </td>
+                                        <td class="text-navy" align="center">
+                                            <a href="{:U('Coupon/modifyad','id='.$vo['id'].'&type='.$map['type'])}">修改</a>
+                                            <a href="javascript:;" data-url="{:U('Coupon/delad','id='.$vo['id'].'&type='.$map['type'])}" class="checkDel">删除</a>
+											<br>
+											<a href="{:U('Coupon/sendcoupon','couponid='.$vo['id'].'&type='.$map['type'])}">发放优惠券</a>
+											<br>
+											<a href="{:U('Coupon/classsendcoupon','couponid='.$vo['id'].'&type='.$map['type'])}">发放至用户组</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />

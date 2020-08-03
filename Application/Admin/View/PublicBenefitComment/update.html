@@ -1,0 +1,181 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" id="formData" >
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动名称<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="title" value="{$data.title}" required="">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评论类型<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="replay_name" value="{$data.replay_name}" required="">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评论用户头像<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <img src="{$data.avatar}" alt="" style="max-width: 100%">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户昵称<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="nickname" value="{$data.nickname}" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">评论内容<span style="color:red;margin:5px;">*</span>：</label>
+                            <div class="col-sm-10">
+                                <textarea>{$data.content}</textarea>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="form-group video" <neq name="data.resource_type" value="2" >style="display: none"</neq> >
+                <label class="col-sm-2 control-label">视频<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="video" id="video" value="{$data.resource}" >
+                        <span class="input-group-btn">
+                                        <button type="button" class="btn btn-primary" id="upload_video_btn" >上传</button>
+                                    </span>
+                    </div>
+                    <ul class="sortable-list connectList agile-list" id="p-video" >
+                        <li class="success-element col-sm-3">
+                            <video src="{$data.resource}"></video>
+                            <div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" >
+                                <i class="fa fa-trash"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">内容<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <script name="content" id="container" type="text/plain" style="height: 400px" >{$data.content}</script>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-2 control-label">排序号：</label>-->
+                <!--<div class="col-sm-10">-->
+                    <!--<input type="text" class="form-control" name="sort" value="{$data.sort}" placeholder="99" >-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                   
+                    <button class="btn btn-primary" type="submit">保存内容</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<include file="Public/footer" />
+<script>
+    $(document).ready(function () {
+        ue = UE.getEditor('container');
+
+        // 图片上传
+        upload = UE.getEditor('upload');
+
+        upload.ready(function() {
+            upload.addListener('beforeInsertImage', _beforeInsertImage);
+        });
+
+        $("#upload_btn").click(function(event) {
+            var dialog = upload.getDialog("insertimage");
+            dialog.title = '上传图片';
+            dialog.render();
+            dialog.open();
+        });
+
+        //视频上传
+        upload.addListener('afterUpVideo', _afterUpVideo);
+
+        $("#upload_video_btn").click(function(event) {
+            var dialog = upload.getDialog("insertvideo");
+            dialog.title = '上传视频';
+            dialog.render();
+            dialog.open();
+        });
+
+    });
+
+    $("#resource_type").change(function(){
+        var resource_type = $(this).val();
+        if( resource_type == 1 ){
+            $('.images').show();
+            $('.video').hide();
+        }else if( resource_type == 2 ){
+            $('.images').hide();
+            $('.video').show();
+        }else{
+            $('.images').hide();
+            $('.video').hide();
+        }
+    });
+
+    $("#formData").submit(function(){
+        console.log(upload.getContent());
+        $.ajax({
+            url: "{:U('update')}",
+            type: 'POST',
+            dataType: 'json',
+            data: $("#formData").serialize(),
+            success: function(data){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                // window.parent.location.reload();
+            },
+            error: function(data){
+                layer.alert(data.info, {skin: 'layui-layer-lan'});
+            }
+        });
+        return false;
+    })
+
+    function _beforeInsertImage(t, result){
+        for (var i = 0; i < result.length; i++) {
+            $("#p-image").append('<li class="success-element col-sm-3"><img src="' + result[0]['src'] + '" alt="" style="max-width: 100%"><div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" ><i class="fa fa-trash"></i></div></li>');
+        }
+        resetImages();
+    }
+
+    function resetImages(){
+        $('#images').val('');
+        $("#p-image img").each(function(){
+            if( $('#images').val() == '' ){
+                $('#images').val($(this).attr('src'));
+            }else{
+                $('#images').val( $('#images').val() + ',' + $(this).attr('src'));
+            }
+        })
+    }
+
+    function remove(obj) {
+        $(obj).parents('.success-element').remove();
+        resetImages();
+    }
+
+    function _afterUpVideo(t, result){
+        $("#p-video").html('<li class="success-element col-sm-3"><video src="' + result[0]['url'] + '"></video><div class="btn btn-danger btn-xs btn-trash"  onclick="remove(this)" style="display: block" ><i class="fa fa-trash"></i></div></li>');
+        $("#video").val(result[0]['url']);
+    }
+</script>

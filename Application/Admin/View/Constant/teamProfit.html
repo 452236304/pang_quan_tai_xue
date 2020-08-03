@@ -1,0 +1,92 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal" id="formData" >
+                        <table class="table table-bordered">
+                            <thder>
+                                <tr class="success" >
+                                    <td class="text-center col-sm-3" ></td>
+                                    <td class="text-center col-sm-3" >A(间推合伙人)</td>
+                                    <td class="text-center col-sm-3" >B(直推合伙人)</td>
+                                    <td class="text-center col-sm-3" >C</td>
+                                </tr>
+                            </thder>
+                            <tbody>
+                            <tr>
+                                <td class="text-center warning" >B购买</td>
+                                <td class="text-center" >
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="请输入分红比例" name="part1[]" value="{$data.value.part1.0}"  >
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                </td>
+                                <td class="text-center" >
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="请输入分红比例" name="part1[]" value="{$data.value.part1.1}" >
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                </td>
+                                <td class="text-center" ></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center warning" >C购买</td>
+                                <td class="text-center" >
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="请输入分红比例" name="part2[]" value="{$data.value.part2.0}" >
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                </td>
+                                <td class="text-center" >
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="请输入分红比例" name="part2[]" value="{$data.value.part2.1}" >
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                </td>
+                                <td class="text-center" >
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="请输入分红比例" name="part2[]" value="{$data.value.part2.2}" >
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        【分佣规则】：购买者不分佣，往前推2级内分佣。   3.2  A分享给B，B购买；A获取该商品和服务佣金的100%；   3.3  A分享给B，B分享给C，C购买；B获取70%，A获取30%   3.4  A分享给B，B分享给C，C分享给D，D购买；C获取70%，B获取30%,A没有分佣；   3.5  A分享给B，B分享给C，C分享给D，D分享给E，E进行购买；D获取获取70%,C获取30%,B和A都没有分润；类似向下推；
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-offset-5">
+                                <input type="hidden" name="id" value="{$data.id}" >
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />
+<script>
+    $("#formData").submit(function(){
+        $.ajax({
+            url: "{:U('teamProfit')}",
+            type: 'POST',
+            dataType: 'json',
+            data: $("#formData").serialize(),
+            success: function(data){
+                if( data.status ){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    location.reload();
+                }else{
+                    layer.alert(data.info, {skin: 'layui-layer-lan'});
+                }
+            }
+        });
+        return false;
+    });
+</script>

@@ -1,0 +1,110 @@
+<include file="Public/detail_header" />
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=G56BZ-TW4HW-XEWRG-OSDVP-RWGJJ-ZRBAG"></script>
+
+<form method="post" class="form-horizontal" enctype="multipart/form-data"
+    action="{:U('pension/pension_type_modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'])}">
+    <!-- Nav tabs -->
+    
+    <div class="hr-line-dashed"></div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="panel1">
+            <div class="form-group myform">
+                <label class="col-sm-2 control-label">审核<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10 radio i-checks">
+                    <label><input type="radio" name="status" value="0"
+                            {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                    <label><input type="radio" name="status" value="1"
+                            {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ordernum"
+                        value="{$info.ordernum|default=getMax('pension_type','ordernum')}" required="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hr-line-dashed"></div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-primary" type="submit">保存内容</button>
+            <button class="btn btn-white" type="button"
+                onclick="javascript:history.go(-1)">返回</button>
+        </div>
+    </div>
+</form>
+<include file="Public/detail_footer" />
+<!-- 省市区 -->
+<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/area.js"></script>
+<script type="text/javascript" src="__PLUGINS__/jQueryProvinces/select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(".i-checks").iCheck({
+            checkboxClass: "icheckbox_square-green",
+            radioClass: "iradio_square-green",
+        });
+		var editor1 = UE.getEditor('content1');
+		var editor2 = UE.getEditor('content2');
+		var editor3 = UE.getEditor('content3');
+		var editor4 = UE.getEditor('content4');
+		var editor5 = UE.getEditor('content5');
+		
+        <!-- var editor1 = window.InitUEditor("content1", "content1"); -->
+        <!-- var editor2 = window.InitUEditor("content2", "content2"); -->
+        <!-- var editor3 = window.InitUEditor("content3", "content3"); -->
+        <!-- var editor4 = window.InitUEditor("content4", "content4"); -->
+        <!-- var editor5 = window.InitUEditor("content5", "content5"); -->
+
+        //初始化图集
+        InitMulitiImages("images");
+    });
+</script>
+<script type="text/javascript">
+        var address = $('input[name=address]').val();
+        var province = $('#province option:selected').val();
+        var city = $('#city option:selected').val();
+        var geo = new qq.maps.Geocoder();
+        geo.getLocation('中国,'+city+','+address)//地址
+        geo.setComplete(function(res){
+            console.log(res,res.detail.location);//得到经纬度
+
+            $('input[name=longitude]').val(res.detail.location.lat);
+            $('input[name=latitude]').val(res.detail.location.lng);
+        })
+
+        $('input[name="address"]').blur(function(){
+            // alert('1111');
+            var province = $('#province option:selected').val();
+            // alert(province);
+            if(province==''){
+                layer.alert('请设置省份');
+            }
+            var city = $('#city option:selected').val();
+            if(city==''){
+                layer.alert('请设置城市');
+            }
+            var address = $('input[name=address]').val();
+            var geo = new qq.maps.Geocoder();
+            geo.getLocation('中国,'+city+','+address);//地址
+            geo.setComplete(function(res){
+                console.log(res,res.detail.location)//得到经纬度
+
+                $('input[name=longitude]').val(res.detail.location.lat);
+                $('input[name=latitude]').val(res.detail.location.lng);
+            })
+        })
+            
+        
+
+</script>

@@ -1,0 +1,102 @@
+<include file="Public/header" />
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <form method="post" class="form-horizontal" onsubmit="return check()" enctype="multipart/form-data" action="{:U('Category/modifyad','doinfo=modify&id='.$info['id'])}">
+                            <div class="form-group myform">
+                                <label class="col-sm-2 control-label">状态<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10 radio i-checks">
+                                    <label><input type="radio" name="status" value="0" {$info["status"]|getSelect=radio,###,0}><i></i>禁用</label>
+                                    <label><input type="radio" name="status" value="1" {$info["status"]|getSelect=radio,###,1}><i></i>启用</label>
+                                </div>
+                            </div>
+							<if condition="!$info['id']">
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">上级分类：</label>
+								<div class="col-sm-10">
+									<select data-placeholder="选择上级分类" name="pid" class="form-control chosen-select" required>
+										<volist name="Category_p_data" id="v">
+										<option value="{$v['id']}" {$info["pid"]|getSelect=select,$v['id'],###}>{$v['title']}</option>
+										</volist>
+									</select>
+								</div>
+							</div>
+							</if>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">分类图<span
+                                        style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input name="thumb" id="thumb" type="text" class="form-control"
+                                        value="{$info.thumb}" required="" /><br>
+                                    <div>
+                                        <a onclick="BrowseServer('Images:/', 'thumb');" href="javascript:void(0);"
+                                            class="btn btn-white" data-options="iconCls:'icon-redo'"
+                                            style="width: 60px">选择</a>
+                                        <a id="thumb_Img" title="点击预览大图,点击大图关闭预览" href="{$info.thumb}" target="_blank">
+                                            <if condition="$info.thumb neq ''">
+                                                <img src="{$info.thumb}" style="max-height:100px;max-width: 100%" />
+                                            </if>
+                                        </a>
+                                        <div class="red" style="margin-top:5px;">尺寸大小为：45*45</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">分类名称<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="title" value="{$info.title}" required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注：</label>
+                                <div class="col-sm-10">
+                                    <textarea name="remark" class="form-control" style="height: 100px;resize: none;">{$info.remark}</textarea>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序号<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="ordernum" value="{$info.ordernum|default=getMax('business_category','ordernum', $map)}"
+                                        required="">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="button" onclick="location.href='{:U('Category/listad', 'p='.$map['p'].'&depth='.$depth)}'">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="Public/footer" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".i-checks").iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green",
+            });
+
+            var editor = window.InitUEditor("content", "content");
+        });
+		function check(){
+			var value=$('select[name=parentid] option:selected').val();
+			if(value=='0'){
+				layer.msg('请选择所属栏目');
+				return false;
+			}
+		}
+    </script>
