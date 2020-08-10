@@ -1,0 +1,657 @@
+[ 2020-08-05T12:21:13+08:00 ] 192.168.56.1 /admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000563s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000990s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001038s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0372s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0003s ]
+
+[ 2020-08-05T12:21:14+08:00 ] 192.168.56.1 /admin.php/admin/index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000707s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000993s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001035s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000125s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000164s ]
+NOTIC: [8] Undefined variable: return E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 85 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.131399s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.131436s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.017779s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.017817s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.007862s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007912s ]
+
+[ 2020-08-05T12:21:14+08:00 ] 192.168.56.1 /admin.php/admin/public/verify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000987s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001635s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001742s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Public/verify' ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002560s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002652s ]
+
+[ 2020-08-05T12:21:16+08:00 ] 192.168.56.1 /admin.php/admin/index/favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000625s ]
+
+[ 2020-08-05T12:21:19+08:00 ] 192.168.56.1 /admin.php/admin/index/login/doinfo/userlogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000529s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000980s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001020s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0257s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `username` = 'admin' LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `sj_sysuser` SET `logintime`='1596601279' WHERE ( id=1 ) [ RunTime:0.0002s ]
+
+[ 2020-08-05T12:21:20+08:00 ] 192.168.56.1 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000525s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001026s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001064s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0250s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0086s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000194s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000228s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.077972s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.078158s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001233s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001356s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001582s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001622s ]
+
+[ 2020-08-05T12:21:22+08:00 ] 192.168.56.1 /admin.php/admin/form_submit/listad.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000492s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001516s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001575s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='FormSubmit/listad' ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0017s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_form_submit` [ RunTime:0.0480s ]
+NOTIC: [8] Undefined index: keyword E:\www\pang_quan_tai_xue\Application\Admin\Controller\FormSubmitController.class.php 第 74 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `sj_form_submit` LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_form_submit` ORDER BY add_time DESC LIMIT 0,10   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000159s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000208s ]
+NOTIC: [8] Undefined index: type E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 69 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 116 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 121 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 116 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 121 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 121 行.
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 127 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 266 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\77ac4b710ecdf6fb44907bcb509e52ac.php 第 266 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.073022s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.073065s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000880s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000904s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001439s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001487s ]
+
+[ 2020-08-05T12:21:24+08:00 ] 192.168.56.1 /admin.php/admin/form_set/listad/type/2.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000533s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000987s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001024s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='FormSet/listad' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0334s ]
+NOTIC: [8] Undefined index: keyword E:\www\pang_quan_tai_xue\Application\Admin\Controller\FormSetController.class.php 第 99 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `sj_form_set` WHERE `type` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_form_set` WHERE `type` = 2 ORDER BY type ASC,orderby ASC LIMIT 0,10   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000220s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000273s ]
+NOTIC: [2] date() expects parameter 2 to be long, string given E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\036092f3b953af20c6de1a7c0ed2ca1e.php 第 104 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\036092f3b953af20c6de1a7c0ed2ca1e.php 第 244 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\036092f3b953af20c6de1a7c0ed2ca1e.php 第 244 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.060267s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060316s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001724s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001773s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001583s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001655s ]
+
+[ 2020-08-05T12:21:24+08:00 ] 192.168.56.1 /admin.php/admin/form_set/listad/type/3.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000531s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000980s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001016s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='FormSet/listad' ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_form_set` [ RunTime:0.0010s ]
+NOTIC: [8] Undefined index: keyword E:\www\pang_quan_tai_xue\Application\Admin\Controller\FormSetController.class.php 第 99 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `sj_form_set` WHERE `type` = 3 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_form_set` WHERE `type` = 3 ORDER BY type ASC,orderby ASC LIMIT 0,10   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000137s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000170s ]
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\036092f3b953af20c6de1a7c0ed2ca1e.php 第 244 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\036092f3b953af20c6de1a7c0ed2ca1e.php 第 244 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.059919s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.059953s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000872s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000899s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001292s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001348s ]
+
+[ 2020-08-05T12:22:08+08:00 ] 192.168.163.1 /admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000849s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001593s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001690s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0003s ]
+
+[ 2020-08-05T12:22:08+08:00 ] 192.168.163.1 /admin.php/admin/index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000887s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001068s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001115s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000121s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000155s ]
+NOTIC: [8] Undefined variable: return E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 85 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.042887s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.042953s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002331s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002384s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001756s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001812s ]
+
+[ 2020-08-05T12:22:09+08:00 ] 192.168.163.1 /admin.php/admin/public/verify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001555s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001798s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001896s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Public/verify' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001622s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001700s ]
+
+[ 2020-08-05T12:22:10+08:00 ] 192.168.163.1 /admin.php/admin/index/favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000731s ]
+
+[ 2020-08-05T12:22:13+08:00 ] 192.168.163.1 /admin.php/admin/index/login/doinfo/userlogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000504s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000998s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001037s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `username` = 'admin' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `sj_sysuser` SET `logintime`='1596601333' WHERE ( id=1 ) [ RunTime:0.0002s ]
+
+[ 2020-08-05T12:22:13+08:00 ] 192.168.163.1 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000532s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000976s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001011s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0016s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000187s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000224s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.083666s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.083708s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000891s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000919s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001562s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001609s ]
+
+[ 2020-08-05T12:22:26+08:00 ] 192.168.237.1 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000555s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001135s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001217s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0003s ]
+
+[ 2020-08-05T12:22:26+08:00 ] 192.168.237.1 /admin.php/admin/index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000812s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002429s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002504s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000124s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000164s ]
+NOTIC: [8] Undefined variable: return E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 85 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.029284s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.029337s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001181s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001222s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001378s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001493s ]
+
+[ 2020-08-05T12:22:26+08:00 ] 192.168.237.1 /admin.php/admin/public/verify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003867s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004103s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Public/verify' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001212s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001284s ]
+
+[ 2020-08-05T12:22:27+08:00 ] 192.168.237.1 /admin.php/admin/index/favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000861s ]
+
+[ 2020-08-05T12:22:30+08:00 ] 192.168.237.1 /admin.php/admin/index/login/doinfo/userlogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000501s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000979s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001014s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0010s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `username` = 'admin' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `sj_sysuser` SET `logintime`='1596601350' WHERE ( id=1 ) [ RunTime:0.0002s ]
+
+[ 2020-08-05T12:22:31+08:00 ] 192.168.237.1 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000553s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001202s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001250s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000183s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000222s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.060398s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060438s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000917s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000943s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001336s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001383s ]
+
+[ 2020-08-05T12:22:41+08:00 ] 192.168.30.86 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000712s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001400s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0004s ]
+
+[ 2020-08-05T12:22:41+08:00 ] 192.168.30.86 /admin.php/admin/index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000549s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001642s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001717s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000177s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000259s ]
+NOTIC: [8] Undefined variable: return E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 85 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+NOTIC: [8] Undefined variable: sysuserinfo E:\www\pang_quan_tai_xue\Application\Runtime\Cache\Admin\041185b974292283d2f6098acc3220ec.php 第 208 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.025004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.025034s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000883s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000906s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001645s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001709s ]
+
+[ 2020-08-05T12:22:41+08:00 ] 192.168.30.86 /admin.php/admin/public/verify.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001414s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001395s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001470s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Public/verify' ) LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002064s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002157s ]
+
+[ 2020-08-05T12:22:42+08:00 ] 192.168.30.86 /admin.php/admin/index/favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000550s ]
+
+[ 2020-08-05T12:22:45+08:00 ] 192.168.30.86 /admin.php/admin/index/login/doinfo/userlogin.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000497s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001094s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001135s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/login' ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `username` = 'admin' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `sj_sysuser` SET `logintime`='1596601365' WHERE ( id=1 ) [ RunTime:0.0002s ]
+
+[ 2020-08-05T12:22:45+08:00 ] 192.168.30.86 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000028s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001223s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002037s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002117s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0207s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0010s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000216s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000259s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.078090s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.078174s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001548s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001607s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002542s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002609s ]
+
+[ 2020-08-05T12:23:43+08:00 ] 192.168.30.86 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001299s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000972s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001011s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000216s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000255s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.067621s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.067680s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000906s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000935s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002872s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002941s ]
+
+[ 2020-08-05T12:23:46+08:00 ] 192.168.30.86 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000541s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000592s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000636s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000323s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000383s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.072049s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.072117s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000649s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000688s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000643s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000673s ]
+
+[ 2020-08-05T12:23:46+08:00 ] 192.168.30.86 /admin.php/admin/index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000500s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000994s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001032s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0013s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000176s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000211s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.066356s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.066400s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000891s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000919s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001170s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001222s ]
+
+[ 2020-08-05T12:24:19+08:00 ] 192.168.56.1 /admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000979s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000833s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000974s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001491s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001577s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.074669s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.074711s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000330s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000356s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001040s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001095s ]
+
+[ 2020-08-05T12:25:25+08:00 ] 192.168.56.1 /admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000891s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001545s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001632s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000216s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000256s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.087094s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.087154s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000884s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000912s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001495s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001544s ]
+
+[ 2020-08-05T12:25:42+08:00 ] 192.168.56.1 /admin.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000654s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000451s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000512s ]
+SQL: SHOW COLUMNS FROM `sj_sysitem` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( url='Index/index' ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuser` [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `sj_sysuserclass` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `sj_sysitem` WHERE ( ismenu=1 and id in(0,1,2,3,4,5,6,7,8,9,10,10310,10311,10312,10313,10314,10315,10316,10317,10318,10319,10321) ) ORDER BY orderby asc  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `sj_sysuser` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+SQL: SELECT * FROM `sj_sysuserclass` WHERE `id` = 1 LIMIT 1   [ RunTime:0.0001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000181s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000215s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062108s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062154s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000326s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000354s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000562s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000590s ]
+

@@ -1,20 +1,511 @@
-订单类型:<br>
-<foreach name="title.title1" item="vo" >
-    {$key}|{$vo}<br>
-</foreach>
-科目类型:<br>
-<foreach name="title.title2" item="vo" >
-    {$key}|{$vo}<br>
-</foreach>
-学历背景:<br>
-<foreach name="title.title3" item="vo" >
-    {$key}|{$vo}<br>
-</foreach>
-引用数:<br>
-<foreach name="title.title4" item="vo" >
-    {$key}|{$vo}<br>
-</foreach>
-写作格式:<br>
-<foreach name="title.title5" item="vo" >
-    {$key}|{$vo}<br>
-</foreach>
+<include file="Public/Home/static/header.html" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+
+<style>
+    .zixun:hover{
+        background: rgba(253, 144, 37, 1) !important;
+    }
+</style>
+
+<!-- 顶部导航栏 -->
+<div class="Boxbg Box1">
+    <div class="NavBox layout">
+        <div class="logo">
+            <a href="#"><img src="__PUBLIC__/Home/img/img_6.png" alt=""></a>
+        </div>
+        <ul class="nav clearfix nav_order">
+            <li class="navAct"><a href="#">万能学姐</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">服务内容</a></li>
+            <li><a href="#">写作套餐</a></li>
+            <li><a href="#">成功案例</a></li>
+            <li><a href="#">好评反馈</a></li>
+            <li><a href="#">联系我们</a></li>
+        </ul>
+        <div class="navRight">
+            <img src="__PUBLIC__/Home/img/img_19.png" alt="">
+            <div class="phone phone_order">
+                <p>07727717620</p>
+                <p>18810101330</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 下订单 -->
+<div class="box1 layout inputBox">
+    <div class="oTit">
+        <h5 class="oTxt">开始下单</h5>
+    </div>
+    <form id="submit" action="" method="post" enctype="multipart/form-data">
+        <div class="OrBox">
+            <!-- 左边 -->
+            <ul class="OrLeft OrLeft1" id="OrLeft">
+                <li class="OrLeli">
+                    <p class="Ortype">订单类型 <span> * </span> </p>
+                    <div class="menuOnder menuType">
+                        <h6>请选择订单类型</h6>
+                        <img src="__PUBLIC__/Home/img/img52.png" alt="" class="down_se">
+                        <ul class="option">
+                            <foreach name="title.title1" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title1" value="">
+                    </div>
+                </li>
+                <li class="OrLeli">
+                    <p class="Ortype">科目类型 <span> * </span> </p>
+                    <div class="menuOnder">
+                        <h6>请选择科目类型</h6>
+                        <img src="__PUBLIC__/Home/img/img52.png" alt="" class="down_se">
+                        <ul class="option">
+                            <foreach name="title.title2" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title2" value="{$Think.get.title2}">
+                    </div>
+                </li>
+                <li class="OrLeli">
+                    <p class="Ortype">
+                        学历背景
+                        <span> * </span> </p>
+                    <div class="menuOnder ">
+                        <h6>请选择学历背景</h6>
+                        <img src="__PUBLIC__/Home/img/img52.png" alt="" class="down_se">
+                        <ul class="option">
+                            <foreach name="title.title3" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title3" value="{$Think.get.title3}">
+                    </div>
+                </li>
+                <li class="OrLeli">
+                    <p class="Ortype">
+                        引用数
+                        <span> * </span> </p>
+                    <div class="menuOnder ">
+                        <h6>请输入引用数的数量</h6>
+                        <img src="__PUBLIC__/Home/img/img52.png" alt="" class="down_se">
+                        <ul class="option">
+                            <foreach name="title.title4" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title4" value="">
+                    </div>
+                </li>
+                <li class="OrLeli">
+                    <p class="Ortype">
+                        写作格式
+                        <span> * </span> </p>
+                    <div class="menuOnder ">
+                        <h6>请选择写作格式</h6>
+                        <img src="__PUBLIC__/Home/img/img52.png" alt="" class="down_se">
+                        <ul class="option">
+                            <foreach name="title.title5" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title5" value="">
+                    </div>
+                </li>
+                <li>
+                    <p class="Ortype">
+                        字数数量
+                        <span> * </span> </p>
+                    <div class="zs_num">
+                        <button id="sub" type="button">-</button>
+                        <input placeholder="500" name="word_num" type="number" value="{$Think.get.word_num}"></input>
+                        <button id="add" type="button">+</button>
+                    </div>
+                </li>
+                <li>
+                    <p class="Ortype">
+                        截止日期
+                        <span> * </span> </p> <input type="text" id="endTime" readonly="" value="{$end_time}"
+                                                     placeholder="请选择截止的时间" name="end_time" lay-key="1" class="Inputdata">
+                </li>
+                <li>
+                    <p class="Ortype">
+                        字体行距
+                        <span> * </span> </p>
+                    <div class="fontline clearfix">
+                        <label class="fot_act"><input type="radio" checked="checked" name="font_space" class="radio"
+                                                      value="1"> Double spaced </label>
+                        <label><input type="radio" checked="checked" name="font_space" class="radio" value="2"> Single
+                            spaced </label>
+                        <label><input type="radio" checked="checked" name="font_space" class="radio" value="3"> 1.5 spaced
+                        </label>
+                    </div>
+                </li>
+                <li>
+                    <p class="Ortype">上传文件</p>
+                    <div class="uploadBox" id="filePicker">
+                        <img src="__PUBLIC__/Home/img/img_20.png" class="iconImg">
+                        <div class="dropText">将文件放在此处或浏览计算机</div>
+                        <a href="javascript:;" class="file gradient">
+                            <div class="flieBox">
+                                <input type="file" name="upload_file" id="file" style="width: inherit;height: inherit;">
+                            </div>
+                        </a>
+                        <div class="showFileName1"></div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="OrLeft">
+                <li>
+                    <p class="Ortype">
+                        您的名称
+                        <span> * </span> </p><input type="text" name="user_name" class="right_input" placeholder="请输入联系人的名字">
+                </li>
+                <li>
+                    <p class="Ortype">
+                        联系电话
+                        <span> * </span> </p><input type="text" name="user_phone" class="right_input" placeholder="请输入联系人的手机号码">
+                </li>
+                <li>
+                    <p class="Ortype">
+                        接收邮箱
+                        <span> * </span> </p><input type="text" name="user_mail" class="right_input" placeholder="请输入接收的邮箱号码">
+                </li>
+                <li class="right_fot">
+                    <p class="Ortype">
+                                                订单要求
+                                            </p>
+                    <textarea id="" class="right_text" name="order_need" placeholder="请输入订单要求（将文章的Topic写在此处）"></textarea>
+                </li>
+                <li class="right_price">
+                    <div class="right_p1">
+                        <p>预估价格</p>
+                        <span>实际以联系客服为准</span>
+                    </div>
+                    <div class="right_p2">
+                        <span>￥</span>{$Think.get.price_num}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <div class="zixun">开始询价</div>
+</div>
+<!-- 订单确认 -->
+<div class="box2 layout inputBox" style="display: none;">
+    <div class="oTit oTit1">
+        <h5 class="oTxt">订单确认</h5>
+        <p class="last_step">上一步</p>
+    </div>
+    <div class="affirm clearfix">
+        <ul class="affList">
+            <li><span>您的名称</span>
+                <p class="_user_name">{$data.user_name}</p>
+            </li>
+            <li><span>联系电话</span>
+                <p class="_user_phone">{$data.user_phone}</p>
+            </li>
+            <li><span>接收邮箱</span>
+                <p class="_user_mail">{$data.user_mail}</p>
+            </li>
+            <li><span>订单要求</span>
+                <p class="_order_need">{$data.order_need}</p>
+            </li>
+        </ul>
+        <ul class="affList">
+            <li><span>订单类型</span>
+                <p class="_title1">{$data.title1}</p>
+            </li>
+            <li><span>科目类型</span>
+                <p class="_title2">{$data.title2}</p>
+            </li>
+            <li><span>引用数量</span>
+                <p class="_title4">{$data.title4}</p>
+            </li>
+            <li><span>字体行距</span>
+                <p class="_font_space">{$data.font_space}</p>
+            </li>
+        </ul>
+        <ul class="affList">
+            <li><span>字体数量</span>
+                <p class="_word_num">{$data.word_num}</p>
+            </li>
+            <li><span>截止日期</span>
+                <p class="_end_time">{$data.end_time}</p>
+            </li>
+            <li><span>内容专业</span>
+                <p>研究生（master）</p>
+            </li>
+            <li><span>上传文件</span>
+                <p class="_upload_file">暂无文件</p>
+            </li>
+        </ul>
+    </div>
+    <div class="affPrice"><span>预估金额：</span>
+        <p class="affP1 _forcase_price"><span> ￥</span>{$data.forcase_price}</p>
+    </div>
+    <div class="submit zixun2">立即询价</div>
+</div>
+<!-- 提交成功弹窗 -->
+<div class="win">
+    <div class="winBox">
+        <img src="__PUBLIC__/Home/img/img_16.png" alt="" class="colse colseBox">
+        <img src="__PUBLIC__/Home/img/img_17.png" alt="" class="sut_icon">
+        <div class="winTxt">
+            <p class="winTxt1">提交成功！</p>
+            <p class="winTxt2">您的咨询已经收到，15分钟内平台将会<br>
+                联系您进一步洽谈，请保持您手机畅通，谢谢。</p>
+        </div>
+        <div class="winKnow colseBox">知道了</div>
+    </div>
+</div>
+<!-- 底部 -->
+<div class="foot">
+    <div class="footBox layout">
+        <div class="foot_t foot_top">
+            <a href=""><img src="__PUBLIC__/Home/img/img_7.png" alt="" class="logo"></a>
+            <ul class="fot_nav clearfix">
+                <li class=""><a href="#">万能学姐</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">服务内容</a></li>
+                <li><a href="#">写作套餐</a></li>
+                <li><a href="#">成功案例</a></li>
+                <li><a href="#">好评反馈</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+        <div class="foot_t foot_mid">
+            <div class="mid_left">
+                <p class="mid_l">联系方式</p>
+                <p>地址：广州市金城街25号1单元7层2020号</p>
+                <p>电话：077-2771-7620</p>
+                <p>手机：188 1010 1330</p>
+            </div>
+            <div class="mid_right">
+                <div class="mid_r">
+                    <div class="mid_phone"><img src="__PUBLIC__/Home/img/img_37.png" alt="">统一服务热线</div>
+                    <p>077-2771-7620</p>
+                </div>
+                <div class="mid_code">
+                    <img src="__PUBLIC__/Home/img/img_3.png" alt="">
+                    <p>扫码关注我们</p>
+                </div>
+            </div>
+        </div>
+        <div class="foot_bot">版权所有：万能学姐 CopyRight@2020 gyjtjxc.com lnc</div>
+    </div>
+</div>
+
+
+<include file="Public/Home/static/footer.html" />
+<script src="__PUBLIC__/Home/js/laydate/laydate.js"></script>
+<script src="__PUBLIC__/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function(){
+        var title2 = "{$Think.get.title2}";
+        var title3 = "{$Think.get.title3}";
+
+        if(title2 != '')
+        {
+            $('input[name="title2"]').siblings('h6').text($('input[name="title2"]').siblings('ul').find('li[data-id='+title2+']').text());
+        }
+        if(title3 != '')
+        {
+            $('input[name="title3"]').siblings('h6').text($('input[name="title3"]').siblings('ul').find('li[data-id='+title3+']').text());
+        }
+    });
+
+    $('.zixun2').click(function () {
+        var formData = new FormData();
+        formData.append("upload_file",$("#file")[0].files[0]);
+        $data = $("#submit").serializeArray();
+        for(i=0;i<$data.length;i++)
+        {
+            if($data[i].name == "order_need")
+            {
+
+            }
+            else if($data[i].value == '')
+            {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.closeBtn = 0;
+                    layer.open({
+                        title: '提示',
+                        closeBtn: 0,
+                        content: '请不要留空',
+                    });
+                });
+                return;
+                break;
+            }
+            formData.append($data[i].name,$data[i].value);
+        }
+
+        $.ajax({
+            type:"POST",
+            data:formData,
+            contentType: false,
+            processData: false,
+            url:"{:U('Home/Form/submit')}",
+            dataType:"json",
+            success:function(data){
+                if(data.code == 1)
+                {
+                    $('.win').css('display','grid');
+                }
+                else
+                {
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.closeBtn = 0;
+                        layer.open({
+                            title: '提示',
+                            closeBtn: 0,
+                            content: data.msg,
+                        });
+                    });
+                }
+            },
+        });
+    });
+
+    $('.zixun').click(function () {
+        $data = $("#submit").serializeArray();
+        for(i=0;i<$data.length;i++)
+        {
+            if($data[i].name == "order_need")
+            {
+
+            }
+            else if($data[i].value == '')
+            {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.closeBtn = 0;
+                    layer.open({
+                        title: '提示',
+                        closeBtn: 0,
+                        content: '请不要留空',
+                    });
+                });
+                return;
+                break;
+            }
+
+            var text = '';
+            if($data[i].name == 'title1' || $data[i].name == 'title2' || $data[i].name == 'title3' || $data[i].name == 'title4' || $data[i].name == 'title5')
+            {
+                text = $("input[name='"+$data[i].name+"']").siblings('ul').find("li[data-id="+$data[i].value+"]").text();
+
+            }
+            else if($data[i].name == 'font_space')
+            {
+                if($data[i].value == 1)
+                {
+                    text = 'Double spaced';
+                }
+                else if($data[i].value == 2)
+                {
+                    text = 'Singlespaced';
+                }
+                else($data[i].value == 3)
+                {
+                    text = '1.5 spaced';
+                }
+            }
+            else
+            {
+                text = $data[i].value;
+            }
+            $('._'+$data[i].name).text(text?text:'无');
+        }
+
+        var _upload_file = $(".showFileName1").html();
+        if(_upload_file == '' || _upload_file == '您未上传文件，或者您上传文件类型有误！')
+        {
+            _upload_file = '暂无文件';
+        }
+        $('._upload_file').text(_upload_file);
+        $('._forcase_price').html($('.right_p2').html());
+        $('.box1').hide();
+        $('.box2').show();
+    });
+
+    $('.last_step').click(function () {
+        $('.box1').show();
+        $('.box2').hide();
+    })
+
+    $(".file").on("change", "input[type='file']", function (){
+        var filePath = $(this).val();
+        if (filePath.indexOf("jpg") != -1 || filePath.indexOf("jpeg") != -1 || filePath.indexOf("png") != -1 || filePath.indexOf("gif") != -1 || filePath.indexOf("xlsx") != -1 || filePath.indexOf("xls") != -1 || filePath.indexOf("docx") != -1 || filePath.indexOf("doc") != -1) {
+            var arr = filePath.split('\\');
+            var fileName = arr[arr.length - 1];
+            $(".showFileName1").html(fileName).css('color','#000');
+        }else{
+            $(".showFileName1").html("您未上传文件，或者您上传文件类型有误！").show().css('color','red');
+            return false
+        }
+    });
+
+    $('.colseBox').click(function () {
+        window.location.href = "{:U('Home/Form/index')}";
+    });
+
+    $("#submit input[name='word_num']").bind("input propertychange",function () {
+        get_price($(this).val());
+    });
+
+    $("#sub").click(function () {
+        var inp = $(this).siblings('input');
+        var val = inp.val();
+        if(val == '' || val == null)
+        {
+            val = 0;
+        }
+        else
+        {
+            val = parseInt(val);
+        }
+        if(val <= 100)
+        {
+            var now_val = 0;
+        }
+        else
+        {
+            var now_val = val - 100;
+        }
+        get_price(now_val);
+        inp.val(now_val);
+        return ;
+    });
+
+    $("#add").click(function () {
+        var inp = $(this).siblings('input');
+        var val = inp.val();
+        if(val == '' || val == null)
+        {
+            val = 0;
+        }
+        else
+        {
+            val = parseInt(val);
+        }
+        var now_val = val + 100
+        get_price(now_val);
+        inp.val(now_val);
+        return ;
+    });
+
+    function get_price($word_num)
+    {
+        $('.right_p2').html('<span>￥</span>'+($word_num * 0.8).toFixed(2));
+    }
+
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime',
+        theme: '#FD9025'
+    });
+
+</script>

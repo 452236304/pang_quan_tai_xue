@@ -301,7 +301,7 @@ class CurlFactory implements CurlFactoryInterface
     /**
      * Remove a header from the options array.
      *
-     * @param string $name    Case-insensitive header to remove
+     * @param string $name    Index-insensitive header to remove
      * @param array  $options Array of options to modify
      */
     private function removeHeader($name, array &$options)

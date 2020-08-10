@@ -20,7 +20,7 @@ class BannerController extends BaseController {
             $show_notice['image'] = array('neq', '');
         }
 
-        $data = $model->where($map)->where($show_notice)->order("ordernum asc")->select();
+        $data = $model->where($map)->where($show_notice)->order("cate ASC,ordernum asc")->select();
 		$params=$this->GetParam();
 		foreach($data as $k=>$v){
 			$v['param']=json_decode($v['param'],true);
@@ -58,6 +58,7 @@ class BannerController extends BaseController {
 			$d["title"] = I("post.title",'');
 			$d["subtitle"] = I("post.subtitle",'');
             $d["status"] = I("post.status", 1);
+            $d["cate"] = I("post.cate", 1);
             $d["image"] = I("post.image");
             $d["ordernum"] = I("post.ordernum", 0);
             $d["remark"] = I("post.remark");

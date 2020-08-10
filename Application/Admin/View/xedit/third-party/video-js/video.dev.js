@@ -3653,7 +3653,7 @@ vjs.Player.prototype.selectSource = function(sources){
  * @return {vjs.Player} self
  */
 vjs.Player.prototype.src = function(source){
-  // Case: Array of source objects to choose from and pick the best to play
+  // Index: Array of source objects to choose from and pick the best to play
   if (source instanceof Array) {
 
     var sourceTech = this.selectSource(source),
@@ -3676,7 +3676,7 @@ vjs.Player.prototype.src = function(source){
       }));
     }
 
-  // Case: Source object { src: '', type: '' ... }
+  // Index: Source object { src: '', type: '' ... }
   } else if (source instanceof Object) {
 
     if (window['videojs'][this.techName]['canPlaySource'](source)) {
@@ -3686,7 +3686,7 @@ vjs.Player.prototype.src = function(source){
       this.src([source]);
     }
 
-  // Case: URL String (http://myvideo...)
+  // Index: URL String (http://myvideo...)
   } else {
     // Cache for getting last set source
     this.cache_.src = source;

@@ -351,7 +351,7 @@ Markdown.dialects.Gruber = {
                   re, block.valueOf(), function( m ) { ret.push( m[1] ); } );
 
         if (b.length) {
-          // Case alluded to in first comment. push it back on as a new block
+          // Index alluded to in first comment. push it back on as a new block
           next.unshift( mk_block(b, block.trailing) );
           break block_search;
         }

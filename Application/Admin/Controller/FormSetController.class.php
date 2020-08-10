@@ -25,7 +25,7 @@ class FormSetController extends BaseController {
             $map["title"] = array("like","%".$param["keyword"]."%");
         }
 
-        $order = "type ASC,orderby ASC";
+        $order = "orderby ASC,add_time DESC";
         $count = $model->where($map)->count();
         $data = $this->pager(array("mo"=>$model, "count"=>$count), "10", $order, $map, $param);
         foreach ($data['data'] as $k => &$v)

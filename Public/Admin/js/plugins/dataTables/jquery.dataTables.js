@@ -13267,7 +13267,7 @@
 			 *    } );
 			 *
 			 *  @example
-			 *    // Case-sensitive string ordering, with no pre-formatting method
+			 *    // Index-sensitive string ordering, with no pre-formatting method
 			 *    $.extend( $.fn.dataTable.ext.order, {
 			 *      "string-case-asc": function(x,y) {
 			 *        return ((x < y) ? -1 : ((x > y) ? 1 : 0));

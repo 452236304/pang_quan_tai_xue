@@ -70,7 +70,7 @@
                             <label class="col-sm-2 control-label">文件说明<span style="color:red;margin:5px;">*</span>：</label>
                             <div class="col-sm-10">
                                 <if condition="!empty($info['upload_file'])">
-                                    <a href="{$info.upload_file}">下载查看</a>
+                                    <a href="/{$info.upload_file}">下载查看</a>
                                 </if>
                             </div>
                         </div>
@@ -116,11 +116,11 @@
                             <label class="col-sm-2 control-label">审核：</label>
                             <div class="col-sm-10 radio i-checks">
                                 <label><input type="radio" name="status" value="0"
-                                              {$info["status"]|getSelect=radio,###,0}><i></i>未审核</label>
+                                              {$info["status"]|getSelect=radio,###,0}><i></i>待审核</label>
                                 <label><input type="radio" name="status" value="1"
-                                              {$info["status"]|getSelect=radio,###,1}><i></i>审核成功</label>
+                                              {$info["status"]|getSelect=radio,###,1}><i></i>已完成</label>
                                 <label><input type="radio" name="status" value="2"
-                                              {$info["status"]|getSelect=radio,###,2}><i></i>审核失败</label>
+                                              {$info["status"]|getSelect=radio,###,2}><i></i>订单作废</label>
                             </div>
                         </div>
                         <div class="form-group">

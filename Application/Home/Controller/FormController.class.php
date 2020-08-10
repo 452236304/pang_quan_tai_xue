@@ -1,10 +1,15 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
 
-class FormController extends Controller
+//use Home\UploadFileController;
+//use Think\Controller;
+
+use app\common\controller\Upload_file;
+
+class FormController extends BaseController
 {
     protected $title = [];
+    protected $err = ['code'=>0,'data'=>[],'msg'=>''];
     public function __construct()
     {
         parent::__construct();
@@ -13,30 +18,87 @@ class FormController extends Controller
 
     public function index()
     {
+        $end_time = I('get.end_time');
+        $this->assign('end_time', $end_time);
         $this->assign('title', $this->title);
+        $this->assign('head_title', '下单页面');
         $this->display();
     }
 
     public function submit()
     {
         $data = I('post.');
+        if(empty($data))
+        {
+            $this->err['msg'] = '请不要留空';
+            $this->ajaxReturn($this->err);
+        }
+        foreach ($data as $k => $v )
+        {
+            if($k == 'order_need')
+            {
+                continue;
+            }
+            if(empty($v))
+            {
+                $this->err['msg'] = '请不要留空';
+                $this->ajaxReturn($this->err);
+                break;
+            }
+        }
+        if(!preg_match("/^1[34578]\d{9}$/", $data['user_phone']))
+        {
+            $this->err['msg'] = '请正常填写手机号';
+            $this->ajaxReturn($this->err);
+        }
+        if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/", $data['user_mail']))
+        {
+            $this->err['msg'] = '请正常填写邮箱';
+            $this->ajaxReturn($this->err);
+        }
+
         $title = $this->title;
         $data['title1'] = $title['title1'][$data['title1']];
         $data['title2'] = $title['title2'][$data['title2']];
         $data['title3'] = $title['title3'][$data['title3']];
         $data['title4'] = $title['title4'][$data['title4']];
         $data['title5'] = $title['title5'][$data['title5']];
-        $data['forcase_price'] = bcmul(floatval($data['word_num']), 0.8, 2);
+        $data['word_num'] = intval($data['word_num']);
+        $data['forcase_price'] = bcmul($data['word_num'], 0.8, 2);
         $data['end_time'] = strtotime($data['end_time']);
         $data['add_time'] = time();
+
+        if(!empty($_FILES['upload_file']))
+        {
+            $this->fileInfo = $_FILES['upload_file'];
+            $this->filePath = './upload/userfiles/';
+            $this->fileSize = 10 * 1048576;
+            $this->fileType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword'];
+            $this->fileExt = ['jpg', 'jpeg', 'png', 'gif','xlsx','xls','docx','doc'];
+            $this->flag = false;
+            $res = $this->upload_file();
+            if($res['error'] != 1)
+            {
+                $this->err['msg'] = $res['msg'];
+                $this->ajaxReturn($this->err);
+            }
+            $data['upload_file'] = $res['data'];
+        }
+        else
+        {
+            $data['upload_file'] = '';
+        }
 
         $res = D('form_submit')->add($data);
         if(!$res)
         {
-            $this->error('申请失败');
+            $this->err['msg'] = '询价失败';
+            $this->ajaxReturn($this->err);
         }
 
-        $this->success('申请成功');
+        $this->err['code'] = 1;
+        $this->err['msg'] = '询价成功';
+        $this->ajaxReturn($this->err);
     }
 
     /**
@@ -45,7 +107,7 @@ class FormController extends Controller
     public function getTitle()
     {
         $model = D('form_set');
-        $set = $model->field('id,title,type')->order('orderby ASC')->select();
+        $set = $model->field('id,title,type')->order('orderby ASC,add_time DESC')->select();
         $title = [];
         foreach ($set as $k => $v)
         {
@@ -69,5 +131,160 @@ class FormController extends Controller
             }
         }
         $this->title = $title;
+    }
+
+
+
+    public $fileInfo = [];
+    public $filePath;
+    public $fileName;
+    public $fileSize;
+    public $fileType;
+    public $fileExt;
+    public $flag;
+    protected $errMsg = ['error'=>0, 'msg'=>'', 'data'=>''];
+    /**
+     * 上传文件
+     * @return array
+     */
+    public function upload_file()
+    {
+        if($this->checkError() && $this->checkSize() && $this->checkExt() && $this->checkType() && $this->checkPost() && $this->checkImg())
+        {
+            if(!empty($this->errMsg['msg']))
+            {
+                return $this->errMsg;
+            }
+
+            $path = $this->filePath  . date('Ymd');
+            if(!is_dir($path))
+            {
+                mkdir($path, 0777, true);
+                chmod($path, 0777);
+            }
+            $this->fileName = uniqid(rand(1000, 9999)) . '.' . pathinfo($this->fileInfo['name'])['extension'];
+            $destination = $path . '/' . $this->fileName;
+            if(move_uploaded_file($this->fileInfo['tmp_name'], $destination))
+            {
+                $this->errMsg['error'] = 1;
+                $this->errMsg['data'] = $destination;
+            }
+            else
+            {
+                $this->errMsg['msg'] = '移动文件失败';
+            }
+        }
+
+        return $this->errMsg;
+    }
+
+
+    /**
+     * 检查图片真实
+     * @return string
+     */
+    protected function checkImg()
+    {
+        if($this->flag)
+        {
+            if(!getimagesize($this->fileInfo['tmp_name']))
+            {
+                $this->errMsg['msg'] = '不是真实图片';
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 检查post上传
+     * @return string
+     */
+    protected function checkPost()
+    {
+        if(!is_uploaded_file($this->fileInfo['tmp_name']))
+        {
+            $this->errMsg['msg'] = '不是POST上传';
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检查类型
+     * @return mixed
+     */
+    protected function checkType()
+    {
+        if(!in_array($this->fileInfo['type'], $this->fileType))
+        {
+            $this->errMsg['msg'] = '文件类型错误';
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检查后缀
+     * @return mixed
+     */
+    protected function checkExt()
+    {
+        if(!in_array(pathinfo($this->fileInfo['name'])['extension'], $this->fileExt))
+        {
+            $this->errMsg['msg'] = '文件错误';
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检查文件大小
+     * @return string
+     */
+    protected function checkSize()
+    {
+        if($this->fileSize < $this->fileInfo['size'])
+        {
+            $this->errMsg['msg'] = '上传文件大于:'. ($this->fileSize / 1048576) .'M';
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检查文件错误码
+     * @return string
+     */
+    protected function checkError()
+    {
+        $msg = '';
+        switch ($this->fileInfo['error']) {
+            case 1:
+                $msg = "上传的文件超过了 php.ini 中 upload_max_filesize选项限制的值";
+                break;
+            case 2:
+                $msg = "上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值";
+                break;
+            case 3:
+                $msg = "文件只有部分被上传";
+                break;
+            case 4:
+                $msg = "没有文件被上传";
+                break;
+            case 6:
+                $msg = "找不到临时文件夹";
+                break;
+            case 7:
+                $msg = "文件写入失败";
+                break;
+        }
+
+        if(!empty($msg))
+        {
+            $this->errMsg['msg'] = $msg;
+            return false;
+        }
+        return true;
     }
 }

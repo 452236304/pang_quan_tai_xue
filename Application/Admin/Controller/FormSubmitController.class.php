@@ -57,7 +57,7 @@ class FormSubmitController extends BaseController {
                 $model->where("id=".$id)->save($d);
             }
 
-            $url = U('Form/listad')."?".http_build_query($this->getMap());
+            $url = U('FormSubmit/listad')."?".http_build_query($this->getMap());
             header('Location:'.$url);
             //$this->redirect($url);
         }

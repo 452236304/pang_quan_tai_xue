@@ -64,9 +64,9 @@
                                 <td align="center">{$vo.add_time|date|date="Y-m-d H:i:s",###}</td>
                                 <td align="center">
                                     <switch name="vo.status">
-                                        <case value="0">未审核</case>
-                                        <case value="1">审核成功</case>
-                                        <case value="2">审核失败</case>
+                                        <case value="0">待审核</case>
+                                        <case value="1">已完成</case>
+                                        <case value="2">订单作废</case>
                                     </switch>
                                 </td>
                                 <td align="center">{$vo.status_time|date|date="Y-m-d H:i:s",###}</td>

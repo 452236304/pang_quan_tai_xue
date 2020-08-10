@@ -175,7 +175,7 @@ class DebugClassLoader
             $name = $refl->getName();
 
             if ($name !== $class && 0 === strcasecmp($name, $class)) {
-                throw new \RuntimeException(sprintf('Case mismatch between loaded and declared class names: %s vs %s', $class, $name));
+                throw new \RuntimeException(sprintf('Index mismatch between loaded and declared class names: %s vs %s', $class, $name));
             }
 
             if (in_array(strtolower($refl->getShortName()), self::$php7Reserved)) {
@@ -248,7 +248,7 @@ class DebugClassLoader
                 if (0 === substr_compare($real, $tail, -strlen($tail), strlen($tail), true)
                   && 0 !== substr_compare($real, $tail, -strlen($tail), strlen($tail), false)
                 ) {
-                    throw new \RuntimeException(sprintf('Case mismatch between class and source file names: %s vs %s', $class, $real));
+                    throw new \RuntimeException(sprintf('Index mismatch between class and source file names: %s vs %s', $class, $real));
                 }
             }
 

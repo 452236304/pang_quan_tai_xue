@@ -1,0 +1,422 @@
+<include file="Public/Home/static/header.html" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
+
+<!-- 顶部导航栏 -->
+<div class="Boxbg Box">
+    <div class="NavBox layout">
+        <div class="logo">
+            <a href="#"><img src="__PUBLIC__/Home/img/img_38.png" alt=""></a>
+        </div>
+        <ul class="nav clearfix">
+            <li class="navAct"><a href="#">万能学姐</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">服务内容</a></li>
+            <li><a href="#">写作套餐</a></li>
+            <li><a href="#">成功案例</a></li>
+            <li><a href="#">好评反馈</a></li>
+            <li><a href="#">联系我们</a></li>
+        </ul>
+        <div class="navRight">
+            <img src="__PUBLIC__/Home/img/img_37.png" alt="">
+            <div class="phone">
+                <p>07727717620</p>
+                <p>18810101330</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 内容01 -->
+<div class="orderBox">
+    <img src="__PUBLIC__/Home/img/img_36.png" alt="" class="order_bg">
+    <div class="layout orderBg">
+        <div class="order" id="sel">
+            <p class="orderTit">预估价格</p>
+            <div class="select_down" id="sel">
+                <dl>
+                    <dt>
+                        <h3>请选择科目类型</h3>
+<!--                        <a href="javascript:;"></a>-->
+                        <ul>
+                            <foreach name="title.title2" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title2" value="">
+                    </dt>
+                    <dt>
+                        <h3>请选择选择学历背景</h3>
+<!--                        <a href="javascript:;"></a>-->
+                        <ul>
+                            <foreach name="title.title3" item="vo" >
+                                <li data-id="{$key}">{$vo}</li>
+                            </foreach>
+                        </ul>
+                        <input type="hidden" name="title3" value="">
+                    </dt>
+                    <dt>
+                        <input type="text" id="endTime" name="end_time" readonly="" value="" placeholder="请选择截止的时间" lay-key="1" class="menuInput">
+                    </dt>
+                    <dt class="zsBox">
+                        <p class="zs_tit">字数</p>
+                        <div class="zs_num">
+                            <button id="sub" type="button">-</button>
+                            <input placeholder="500" name="word_num"></input>
+                            <button id="add" type="button">+</button>
+                        </div>
+                    </dt>
+                </dl>
+            </div>
+            <div class="price">
+                <p class="price_tit">原价：</p>
+                <p class="price_con" id="price_num"><span>￥</span>0.00 </p>
+            </div>
+            <div class="place" id="gogogo">开始下单</div>
+        </div>
+    </div>
+</div>
+<!-- 为什么选择万能学姐 -->
+<div class="WhyBox">
+    <div class="layout WhyTop">
+        <div class="WhyTit">
+            <h5>为什么选择<span>万能学姐</span></h5>
+            <p>Why did you choose the omnipotent sister?</p>
+        </div>
+        <ul class="whyFlow">
+            <li>
+                <div class="why_icon"></div>
+                <h6>严谨的做事流程</h6>
+                <p>最迟30分钟内确认并决定是否接单；<br>接单后及时沟通任何一处疑问，<br>细节决定成败。</p>
+            </li>
+            <li>
+                <div class="why_icon"></div>
+                <h6>严苛的筛查机制</h6>
+                <p>Editor一次作业评价不合格，立即清退。<br>团队成员均是专业对口学霸。</p>
+            </li>
+            <li>
+                <div class="why_icon"></div>
+                <h6>负责的售后服务</h6>
+                <p>有效期内（只要成绩未最终确定），<br>提供无限次修改，直至您满意为止。</p>
+            </li>
+            <li>
+                <div class="why_icon"></div>
+                <h6>靠谱的代写质量</h6>
+                <p>Turnitin Check,语法流畅，逻辑清晰，<br>保证超低的重复率，绝对原创。 <br>助教、客服2V1互动。</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- 关于万能学姐 -->
+<div class="aboutBox layout">
+    <div class="WhyTit">
+        <h5>关于万能学姐</span></h5>
+        <p>About the omnipotent sister</p>
+    </div>
+    <div class="aboutCont">
+        <div class="bgTxt">EASY PASS</div>
+        <div class="aboutLeft">
+            <h6>万能学姐由海归硕博精英团队为您提供服务
+                适用于全部课程，高分通过，全程托管</h6>
+            <hr class="hr">
+            <p class="LeftP">
+                学霸及老师均是英国、美国与中国知名学府博士和硕士。英国学霸老师主要来自帝国理工，伦敦政经，伦敦大学，华威大学等等；中国学霸老师主要以复旦、同济、交大、财大、上外等知名学府为主；美国学霸主要来自 UC
+                系大学及 MIT 、 pSU 等名校。</p>
+            <p class="LeftP">
+                万能学姐所提供的老师资源对海外留学生恰到好处，绝大多数就是同校学长学姐中的学霸，所以他们对学校开设的专业课内容以及学习方式有着独到深刻的见解。会有针对性的设定适合学生的学习计划，在提高学生的学术知识的同时，帮助其养成良好的学习习惯和方法。特别是在最后
+                5 、 6 月份 FINAL 的考试复习准备阶段，效果尤为明显，也正因为如此，我们的老师往往能够更好的指导学弟学妹收获自己满意的分数。</p>
+        </div>
+        <div class="aboutRight"><img src="__PUBLIC__/Home/img/img_28.png" alt=""></div>
+    </div>
+</div>
+<!-- 我们的交易流程 -->
+<div class="flowBox">
+    <div class="layout">
+        <div class="flowRight">
+            <div class="WhyTit flowTit">
+                <h5>我们的交易流程</span></h5>
+                <p>Our transaction process</p>
+            </div>
+            <ul class="flowList">
+                <li><span>01</span>您提供具体需求，预算和时间</li>
+                <li><span>02</span>我们评估以后给出报价</li>
+                <li><span>03</span>您接受我们的报价，即可付款</li>
+                <li><span>04</span>我们完成以后会提供Turnitin报告或代码运行截图供您验收</li>
+                <li><span>05</span>您收到内容后请及时查看并反馈</li>
+                <li><span>06</span>双方确认收货并好评</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 写作套餐价格 -->
+<div class="layout priceBox">
+    <div class="priceLeft">
+        <img src="__PUBLIC__/Home/img/img_9.png" alt="" class="tit_bg">
+        <div class="Ptit">写作套餐价格</div>
+        <p class="pSubtit">Writing package price</p>
+        <img src="__PUBLIC__/Home/img/img_8.png" alt="">
+    </div>
+    <ul class="priceRight clearfix">
+        <li>
+            <div class="priceTop">
+                <div class="priceTop_icon"></div>
+                <div class="Toptxt">
+                    <p>基础套餐</p>
+                    <span>最低800元/字（60+水平）</span>
+                </div>
+            </div>
+            <div class="pricemid">
+                <div>
+                    <div class="priImg"></div>
+                    <p>一份完整的精品学术文书</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>良心无抄袭</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>中国大学硕士及PHD写手</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>24小时管家式售后礼遇</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>免费Turnitin无收录查重report</p>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="priceTop">
+                <div class="priceTop_icon"></div>
+                <div class="Toptxt">
+                    <p>精品套餐</p>
+                    <span>（80+水平）</span>
+                </div>
+            </div>
+            <div class="pricemid">
+                <div>
+                    <div class="priImg"></div>
+                    <p>一份完整的顶级学术文书</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>良心无抄袭</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>英美白人大学专家写手</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>免费Turnitin无收录查重report</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>无限次线上答疑</p>
+                </div>
+                <div>
+                    <div class="priImg"></div>
+                    <p>优先订单处理</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- 成功案例 -->
+<div class="caseBox layout">
+    <div class="WhyTit">
+        <h5>成功案例</span></h5>
+        <p>Successful cases</p>
+    </div>
+    <ul class="caseNav">
+        <foreach name="cate" item="vo" >
+            <li class="{$key==0?caseact:''}">{$vo.title}</li>
+        </foreach>
+    </ul>
+    <div class="rListBox">
+        <foreach name="content" item="vo" >
+            <ul class="casrList clearfix" style="display: {$key==0?block:none};">
+                <foreach name="vo" item="v" >
+                <li>
+                    <img src="{$v.img_url}" alt="">
+                    <div class="cTit">
+                        <h6>{$v.title}</h6>
+                        <p>{$v.content}</p>
+                    </div>
+                </li>
+                </foreach>
+            </ul>
+        </foreach>
+    </div>
+</div>
+<!-- 好评反馈 -->
+<div class="feed">
+    <div class="feedBox layout">
+        <div class="WhyTit">
+            <h5>好评反馈</span></h5>
+            <p>High praise and feedback</p>
+        </div>
+        <div class="fBanner">
+            <div class="swiper-container feedBanner">
+                <div class="swiper-wrapper">
+                    <foreach name="banner" item="vo" >
+                    <div class="swiper-slide feedBbox">
+                        <foreach name="vo" item="v" >
+                            <img src="{$v.image}" alt="">
+                        </foreach>
+                    </div>
+                    </foreach>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="feedNext">
+                <img src="__PUBLIC__/Home/img/img_10.png" class="swiper-next">
+                <img src="__PUBLIC__/Home/img/img_34.png" class="swiper-prev">
+            </div>
+        </div>
+    </div>
+    <!-- 右边导航栏 -->
+    <div class="sideBox">
+        <img src="__PUBLIC__/Home/img/img53.png" alt="" class="side_logo">
+        <ul class="sidewx">
+            <li><img src="__PUBLIC__/Home/img/img_15.png" alt="">
+                <p>lemon_faa</p></li>
+            <li><img src="__PUBLIC__/Home/img/img_15.png" alt="">
+                <p>Vivian991115</p></li>
+            <li><img src="__PUBLIC__/Home/img/img_15.png" alt="">
+                <p>SS52852800</p></li>
+        </ul>
+        <div class="sidecode">
+            <img src="__PUBLIC__/Home/img/img_3.png" alt="">
+            <p>扫码关注我们</p>
+        </div>
+        <div class="sidephone">
+            <p class="sidep1">统一服务热线</p>
+            <p class="sidep0">077-2771-7620</p>
+        </div>
+        <div class="sidetop" id="slideBack">
+            <img src="__PUBLIC__/Home/img/img54.png" alt="">
+            <p>回到顶部</p>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="foot">
+        <div class="footBox layout">
+            <div class="foot_t foot_top">
+                <a href=""><img src="__PUBLIC__/Home/img/img_7.png" alt="" class="logo"></a>
+                <ul class="fot_nav clearfix">
+                    <li class=""><a href="#">万能学姐</a></li>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">服务内容</a></li>
+                    <li><a href="#">写作套餐</a></li>
+                    <li><a href="#">成功案例</a></li>
+                    <li><a href="#">好评反馈</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="foot_t foot_mid">
+                <div class="mid_left">
+                    <p class="mid_l">联系方式</p>
+                    <p>地址：广州市金城街25号1单元7层2020号</p>
+                    <p>电话：077-2771-7620</p>
+                    <p>手机：188 1010 1330</p>
+                </div>
+                <div class="mid_right">
+                    <div class="mid_r">
+                        <div class="mid_phone"><img src="__PUBLIC__/Home/img/img_37.png" alt="">统一服务热线</div>
+                        <p>077-2771-7620</p>
+                    </div>
+                    <div class="mid_code">
+                        <img src="__PUBLIC__/Home/img/img_3.png" alt="">
+                        <p>扫码关注我们</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foot_bot">版权所有：万能学姐 CopyRight@2020 gyjtjxc.com lnc</div>
+        </div>
+    </div>
+</div>
+<include file="Public/Home/static/footer.html" />
+<script src="__PUBLIC__/Home/js/laydate/laydate.js"></script>
+<script src="__PUBLIC__/Home/js/main.js"></script>
+<script>
+    $('#gogogo').click(function () {
+        var title2 = $("input[name='title2']").val();
+        var title3 = $("input[name='title3']").val();
+        var end_time = $("input[name='end_time']").val();
+        var word_num = $("input[name='word_num']").val();
+        var price_num = (word_num * 0.8).toFixed(2);
+
+        window.location.href = "{:U('/Home/Form/index')}?title2="+title2+'&title3='+title3+'&word_num='+word_num+'&price_num='+price_num+'&end_time='+end_time;
+    })
+
+    $("input[name='word_num']").bind("input propertychange",function () {
+        get_price($(this).val());
+    });
+
+    $("#sub").click(function () {
+        var inp = $(this).siblings('input');
+        var val = inp.val();
+        if(val == '' || val == null)
+        {
+            val = 0;
+        }
+        else
+        {
+            val = parseInt(val);
+        }
+        if(val <= 100)
+        {
+            var now_val = 0;
+        }
+        else
+        {
+            var now_val = val - 100;
+        }
+        get_price(now_val);
+        inp.val(now_val);
+        return ;
+    });
+
+    $("#add").click(function () {
+        var inp = $(this).siblings('input');
+        var val = inp.val();
+        if(val == '' || val == null)
+        {
+            val = 0;
+        }
+        else
+        {
+            val = parseInt(val);
+        }
+        var now_val = val + 100
+        get_price(now_val);
+        inp.val(now_val);
+        return ;
+    });
+
+    function get_price($word_num)
+    {
+        $('#price_num').html('<span>￥</span>'+($word_num * 0.8).toFixed(2));
+    }
+
+
+
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime',
+        theme: '#FD9025'
+    });
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true, //可选选项，自动滑动\
+        pagination: {
+            el: '.fBanner .swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.feedNext .swiper-prev',
+            prevEl: '.feedNext .swiper-next',
+        },
+    })
+</script>

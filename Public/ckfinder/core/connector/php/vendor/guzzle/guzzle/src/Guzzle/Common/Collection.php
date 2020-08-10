@@ -167,7 +167,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable, ToArra
     }
 
     /**
-     * Case insensitive search the keys in the collection
+     * Index insensitive search the keys in the collection
      *
      * @param string $key Key to search for
      *

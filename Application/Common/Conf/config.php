@@ -11,7 +11,7 @@ return array(
     'DB_HOST'   => '127.0.0.1', // 服务器地址
     'DB_NAME'   => 'pang_quan_tai_xue', // 数据库名
     'DB_USER'   => 'root', // 用户名
-    'DB_PWD'    => '123456',  // 密码
+    'DB_PWD'    => 'db250ceeb7d09fb9',  // 密码
     'DB_PORT'   => '3306', // 端口
     'DB_PREFIX' => 'sj_', // 数据库表前缀
     'URL_CASE_INSENSITIVE' => true, //忽略url地址大小写

@@ -8,46 +8,46 @@
                     <div class="ibox-content">
                         <form method="post" class="form-horizontal" onsubmit="return check()" enctype="multipart/form-data"
                             action="{:U('Banner/modifyad','doinfo=modify&id='.$info['id'].'&p='.$map['p'].'&type='.$map['type'].'&notice='.$notice)}">
-							<if condition="$map['type'] eq 14">
-							<div class="form-group">
-							    <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
-							    <div class="col-sm-10">
-							        <input type="text" class="form-control" name="title"
-							            value="{$info.title}" required="">
-							    </div>
-							</div>
-							<div class="hr-line-dashed"></div>
-							</if>
-							<if condition="$map['type'] eq 23">
-							<div class="form-group">
-							    <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>
-							    <div class="col-sm-10">
-							        <input type="text" class="form-control" name="title"
-							            value="{$info.title}" required="">
-							    </div>
-							</div>
-							<div class="hr-line-dashed"></div>
-							<div class="form-group">
-							    <label class="col-sm-2 control-label">副标题<span style="color:red;margin:5px;">*</span>：</label>
-							    <div class="col-sm-10">
-							        <input type="text" class="form-control" name="subtitle"
-							            value="{$info.subtitle}" required="">
-							    </div>
-							</div>
-							<div class="hr-line-dashed"></div>
-							</if>
-                            <if condition="$map['type'] eq 21">
-                                <if condition="$notice eq 1">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">公告（选填）：</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="notice"
-                                                value="{$info.notice}" >
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                </if>
-                            </if>
+<!--							<if condition="$map['type'] eq 14">-->
+<!--							<div class="form-group">-->
+<!--							    <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>-->
+<!--							    <div class="col-sm-10">-->
+<!--							        <input type="text" class="form-control" name="title"-->
+<!--							            value="{$info.title}" required="">-->
+<!--							    </div>-->
+<!--							</div>-->
+<!--							<div class="hr-line-dashed"></div>-->
+<!--							</if>-->
+<!--							<if condition="$map['type'] eq 23">-->
+<!--							<div class="form-group">-->
+<!--							    <label class="col-sm-2 control-label">标题<span style="color:red;margin:5px;">*</span>：</label>-->
+<!--							    <div class="col-sm-10">-->
+<!--							        <input type="text" class="form-control" name="title"-->
+<!--							            value="{$info.title}" required="">-->
+<!--							    </div>-->
+<!--							</div>-->
+<!--							<div class="hr-line-dashed"></div>-->
+<!--							<div class="form-group">-->
+<!--							    <label class="col-sm-2 control-label">副标题<span style="color:red;margin:5px;">*</span>：</label>-->
+<!--							    <div class="col-sm-10">-->
+<!--							        <input type="text" class="form-control" name="subtitle"-->
+<!--							            value="{$info.subtitle}" required="">-->
+<!--							    </div>-->
+<!--							</div>-->
+<!--							<div class="hr-line-dashed"></div>-->
+<!--							</if>-->
+<!--                            <if condition="$map['type'] eq 21">-->
+<!--                                <if condition="$notice eq 1">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="col-sm-2 control-label">公告（选填）：</label>-->
+<!--                                        <div class="col-sm-10">-->
+<!--                                            <input type="text" class="form-control" name="notice"-->
+<!--                                                value="{$info.notice}" >-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="hr-line-dashed"></div>-->
+<!--                                </if>-->
+<!--                            </if>-->
                             <if condition="$notice neq 1">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">封面图<span style="color:red;margin:5px;">*</span>：</label>
@@ -76,31 +76,31 @@
                                 </div>
                             </if>
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">跳转类型<span style="color:red;margin:5px;">*</span>：</label>
-                                <div class="col-sm-10">
-                                    <select data-placeholder="选择跳转类型" name="param_type"
-                                        class="form-control chosen-select" required>
-                                        <option value="-1" {$info["param"]["param_type"]|getSelect=select,-1,###}>
-                                            请选择跳转类型
-                                        </option>
-                                        <foreach name="param" item="v" key="k">
-                                            <option value="{$v.type}"
-                                                {$info["param"]["param_type"]|getSelect=select,$v["type"],###}>
-                                                {$v.title}
-                                            </option>
-                                        </foreach>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">目标ID / 跳转链接<span style="color:red;margin:5px;">*</span>：</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="param_id"
-                                        value="{$info['param']['param_id']}" required="">
-                                </div>
-                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label class="col-sm-2 control-label">跳转类型<span style="color:red;margin:5px;">*</span>：</label>-->
+<!--                                <div class="col-sm-10">-->
+<!--                                    <select data-placeholder="选择跳转类型" name="param_type"-->
+<!--                                        class="form-control chosen-select" required>-->
+<!--                                        <option value="-1" {$info["param"]["param_type"]|getSelect=select,-1,###}>-->
+<!--                                            请选择跳转类型-->
+<!--                                        </option>-->
+<!--                                        <foreach name="param" item="v" key="k">-->
+<!--                                            <option value="{$v.type}"-->
+<!--                                                {$info["param"]["param_type"]|getSelect=select,$v["type"],###}>-->
+<!--                                                {$v.title}-->
+<!--                                            </option>-->
+<!--                                        </foreach>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hr-line-dashed"></div>-->
+<!--                            <div class="form-group">-->
+<!--                                <label class="col-sm-2 control-label">目标ID / 跳转链接<span style="color:red;margin:5px;">*</span>：</label>-->
+<!--                                <div class="col-sm-10">-->
+<!--                                    <input type="text" class="form-control" name="param_id"-->
+<!--                                        value="{$info['param']['param_id']}" required="">-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <!-- <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">跳转参数（移动端内打开）：</label>
@@ -109,6 +109,15 @@
                                     <span class="red">参数结构为｛"type": 0, "id": 0｝，跳转参数优先级高于跳转链接</span>
                                 </div>
                             </div> -->
+<!--                            <div class="hr-line-dashed"></div>-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">分页<span style="color:red;margin:5px;">*</span>：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="cate"
+                                           value="{$info.cate|default=getMax('banner','cate', $map)}" required="">
+                                    <span class="red" style="margin-top:5px;">提示：一个页面最多显示三个</span>
+                                </div>
+                            </div>
                             <div class="hr-line-dashed"></div>
 							<if condition="$map['type'] != 12">
                             <div class="form-group myform">

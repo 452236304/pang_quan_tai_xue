@@ -1,0 +1,35 @@
+[ 2020-08-06T14:29:27+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.013116s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.019640s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.019776s ]
+NOTIC: [2] fopen(logs/timer/2020-08-06.log): failed to open stream: No such file or directory E:\www\pang_quan_tai_xue\Application\Payment\Weixin\Extend\log.php 第 16 行.
+
+[ 2020-08-06T14:31:59+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000990s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001328s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001403s ]
+SQL: SHOW COLUMNS FROM `sj_case_cate` [ RunTime:0.0829s ]
+SQL: SELECT `id`,`title` FROM `sj_case_cate` WHERE ( status=1 ) ORDER BY orderby ASC  [ RunTime:0.0349s ]
+SQL: SHOW COLUMNS FROM `sj_case_content` [ RunTime:0.0375s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=5 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=6 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`title`,`content`,`img_url` FROM `sj_case_content` WHERE ( cate_id=7 AND status=1 ) ORDER BY orderby ASC  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.019755s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.019841s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.076800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.076860s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.023629s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.023672s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.029853s ]
+INFO: [ app_end ] --END-- [ RunTime:0.029900s ]
+

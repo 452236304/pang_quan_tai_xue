@@ -10,7 +10,7 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
                             <button class="btn btn-primary" type="button" onclick="location.href='{:U('Banner/modifyad','p='.$map['p'].'&type='.$map['type'].'&notice='.$notice)}'">＋增加</button>
-                            <button type="submit" class="btn btn-primary" />重新排序</button>
+<!--                            <button type="submit" class="btn btn-primary" />重新排序</button>-->
                         </div>
                     </div>
                 </div>
@@ -23,13 +23,14 @@
                                     <tr>
                                         <th width="100" class="TC">编号</th>
                                         <if condition="$notice eq 0">
-                                            <th class="TC" >预览</th>
+                                            <th class="TC" width="50">预览</th>
                                         </if>
-                                        <if condition="$notice eq 1">
-                                            <th class="TC" width="300">公告</th>
-                                        </if>
-										<th class="TC">跳转类型</th>
-										<th class="TC">目标ID / 跳转链接</th>
+<!--                                        <if condition="$notice eq 1">-->
+<!--                                            <th class="TC" width="300">公告</th>-->
+<!--                                        </if>-->
+<!--										<th class="TC">跳转类型</th>-->
+<!--										<th class="TC">目标ID / 跳转链接</th>-->
+                                        <th width="100" class="TC">分页</th>
                                         <th width="100" class="TC">排序</th>
                                         <th width="100" class="TC">审核</th>
                                         <th width="100" class="TC">发布日期</th>
@@ -41,16 +42,21 @@
                                         <tr>
                                             <td align="center">{$n}<input type="hidden" name="id[]" value="{$vo.id}" /></td>
                                             <if condition="$notice eq 0">
-                                                <td align="center"><a href="{$vo.image}" class="fancybox"><img src="{$vo.image}" width="100" /></a></td>
+                                                <td align="center"><a href="{$vo.image}" class="fancybox">
+                                                    <img src="{$vo.image}" style="width: 50px;" /></a></td>
                                             </if>
-                                            <if condition="$notice eq 1">
-                                                <td align="center">{$vo.notice}</td>
-                                            </if>
-											<td align="center">{$vo.param.param_type}</td>
-											<td align="center">{$vo.param.param_id}</td>
+<!--                                            <if condition="$notice eq 1">-->
+<!--                                                <td align="center">{$vo.notice}</td>-->
+<!--                                            </if>-->
+<!--											<td align="center">{$vo.param.param_type}</td>-->
+<!--											<td align="center">{$vo.param.param_id}</td>-->
                                             <td align="center">
-                                                <input type="text" style="text-align:center; width:50px;" class="form-control"
-                                                    name="ordernum[]" value="{$vo.ordernum}" />
+                                                {$vo.cate}
+                                            </td>
+                                            <td align="center">
+                                                {$vo.ordernum}
+<!--                                                <input type="text" style="text-align:center; width:50px;" class="form-control"-->
+<!--                                                    name="ordernum[]" value="{$vo.ordernum}" />-->
                                             </td>
                                             <td align="center">
                                                 <if condition="$vo.status eq 1">
