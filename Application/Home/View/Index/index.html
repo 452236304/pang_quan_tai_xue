@@ -31,11 +31,10 @@
     <div class="layout orderBg">
         <div class="order" id="sel">
             <p class="orderTit">预估价格</p>
-            <div class="select_down" id="sel">
+            <div class="select_down">
                 <dl>
                     <dt>
                         <h3>请选择科目类型</h3>
-<!--                        <a href="javascript:;"></a>-->
                         <ul>
                             <foreach name="title.title2" item="vo" >
                                 <li data-id="{$key}">{$vo}</li>
@@ -45,7 +44,6 @@
                     </dt>
                     <dt>
                         <h3>请选择选择学历背景</h3>
-<!--                        <a href="javascript:;"></a>-->
                         <ul>
                             <foreach name="title.title3" item="vo" >
                                 <li data-id="{$key}">{$vo}</li>
@@ -278,7 +276,7 @@
         </div>
     </div>
     <!-- 右边导航栏 -->
-    <div class="sideBox">
+    <div class="sideBox" style="z-index: 999;left: 40px;right: 0">
         <img src="__PUBLIC__/Home/img/img53.png" alt="" class="side_logo">
         <ul class="sidewx">
             <li><img src="__PUBLIC__/Home/img/img_15.png" alt="">
@@ -342,6 +340,63 @@
 <script src="__PUBLIC__/Home/js/laydate/laydate.js"></script>
 <script src="__PUBLIC__/Home/js/main.js"></script>
 <script>
+    $(document).ready(function () {
+        var sel = "{$Think.get.sel}";
+        if(!sel)
+        {
+            sel = 0;
+        }
+        $('.nav').find('li:eq('+sel+')').click();
+    })
+    $('.nav li').click(function () {
+        $(this).addClass('navAct').siblings('li').removeClass('navAct');
+
+        var index = $(this).index();
+        var sel = '';
+        if(index == 0)
+        {
+            sel = $('body');
+            // sel = $('.WhyBox');
+        }
+        else if(index == 1)
+        {
+            sel = $('.aboutBox');
+        }
+        else if(index ==2)
+        {
+            sel = $('.flowBox');
+        }
+        else if(index ==3)
+        {
+            sel = $('.priceBox');
+        }
+        else if(index ==4)
+        {
+            sel = $('.caseBox');
+        }
+        else if(index ==5)
+        {
+            sel = $('.feed');
+        }
+        else if(index ==6)
+        {
+            sel = $('.feed .foot');
+        }
+        else
+        {
+            sel = $('body');
+        }
+        scrollPosition(sel,-100);
+    })
+
+    function scrollPosition(id,p_top=0) {
+        var offset= $(id).offset();
+
+        $('body,html').animate({
+            scrollTop:offset.top+p_top
+        })
+    };
+
     $('#gogogo').click(function () {
         var title2 = $("input[name='title2']").val();
         var title3 = $("input[name='title3']").val();
