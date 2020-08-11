@@ -11,7 +11,7 @@
 <div class="Boxbg Box1">
     <div class="NavBox layout">
         <div class="logo">
-            <a href="#"><img src="__PUBLIC__/Home/img/img_6.png" alt=""></a>
+            <a href="{:U('Home/index/index')}"><img src="__PUBLIC__/Home/img/img_6.png" alt=""></a>
         </div>
         <ul class="nav clearfix nav_order">
             <li class="navAct"><a href="{:U('Home/index/index')}?sel=0">万能学姐</a></li>
@@ -392,6 +392,34 @@
                 break;
             }
 
+            var msg = '';
+            if($data[i].name == "user_phone")
+            {
+                if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test($data[i].value))){
+                    msg = "手机号码有误，请重填";
+                }
+            }
+            else if($data[i].name == "user_mail")
+            {
+                if(!(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test($data[i].value))){
+                    msg = "邮箱错误，请重填";
+                }
+            }
+            if(msg != '')
+            {
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+                    layer.closeBtn = 0;
+                    layer.open({
+                        title: '提示',
+                        closeBtn: 0,
+                        content: msg,
+                    });
+                });
+                return;
+                break;
+            }
+
             var text = '';
             if($data[i].name == 'title1' || $data[i].name == 'title2' || $data[i].name == 'title3' || $data[i].name == 'title4' || $data[i].name == 'title5')
             {
@@ -452,8 +480,12 @@
         window.location.href = "{:U('Home/Form/index')}";
     });
 
-    $("#submit input[name='word_num']").bind("input propertychange",function () {
-        get_price($(this).val());
+    $("#submit .option li").bind("click",function () {
+        check_data();
+    });
+
+    $("#submit input").bind("input propertychange",function () {
+        check_data();
     });
 
     $("#sub").click(function () {
@@ -475,8 +507,8 @@
         {
             var now_val = val - 100;
         }
-        get_price(now_val);
         inp.val(now_val);
+        check_data();
         return ;
     });
 
@@ -492,10 +524,36 @@
             val = parseInt(val);
         }
         var now_val = val + 100
-        get_price(now_val);
         inp.val(now_val);
+        check_data();
         return ;
     });
+
+    function check_data()
+    {
+        var data = $("#submit").serializeArray();
+        var change_price = true;
+        for(i=0;i<data.length;i++)
+        {
+            if(data[i].name == "order_need")
+            {
+                continue;
+            }
+            if(data[i].value == '')
+            {
+                change_price = false;
+                break;
+            }
+        }
+        if(change_price)
+        {
+            get_price($("#submit input[name='word_num']").val());
+        }
+        else
+        {
+            get_price(0);
+        }
+    }
 
     function get_price($word_num)
     {

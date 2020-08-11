@@ -296,22 +296,24 @@ input::-ms-input-placeholder {
     top: 0;
     width: 100%;
     height: 800px;
+	object-fit: cover;
 }
 
 .orderBg {
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 175px;
 }
 
 .order {
-    width: 410px;
-    height: 480px;
-    background: rgba(255, 255, 255, 1);
-    position: absolute;
-    right: 10px;
-    border-radius: 10px;
-    top: 175px;
-    padding: 0 30px;
-    box-sizing: border-box;
+	width: 410px;
+	height: 480px;
+	background: rgba(255, 255, 255, 1);
+	border-radius: 10px;
+	padding: 0 30px;
+	box-sizing: border-box;
 }
 
 .orderTit {
@@ -1509,7 +1511,7 @@ input::-ms-input-placeholder {
     border-radius: 10px;
     position: fixed;
     top: 250px;
-    right: 40px;
+    left: 40px;
     background: #FD9025;
     text-align: center;
 
@@ -1768,4 +1770,32 @@ input::-ms-input-placeholder {
 }
 .dropText{
     margin-left:10px;
+}
+/* 左边 */
+.leftTxt{
+    position: relative;
+    z-index: 11;
+    width: 554px;
+    margin-left: 20px;
+}
+.leftTxt>h6{
+    font-size:53px;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+}
+.leftTxt>p{
+   margin-top: 38px;
+    font-size:24px;
+    font-weight:bold;
+    padding-bottom: 33px;
+    color:rgba(255,255,255,1);
+}
+.orderLefts p{
+    font-size:22px;
+    line-height:30px;
+    color:rgba(255,255,255,1);
+    margin-top: 20px;
+}
+.on{
+    background: rgba(16, 29, 46, 0.85)
 }

@@ -29,7 +29,22 @@
 <div class="orderBox">
     <img src="__PUBLIC__/Home/img/img_36.png" alt="" class="order_bg">
     <div class="layout orderBg">
+        <div class="leftTxt">
+            <h6>万能学姐 全球最强代写 </h6>
+            <p>24小时在线，免费Turnitin查重，无限修改售后</p>
+            <div class="orderLefts">
+                <p>Business   HR   Sociology   Economics  <br>
+                    History   Management   Law/B Law<br>
+                    Accounting   Marketing   Ethics   Statistic  <br>
+                    Biology   International Relations</p>
+                <p>C/C++   Java   Python   Matlab   R<br>
+                    PHP   Javascript   Android   Linux<br>
+                    机器学习   深度学习   数据结构<br>
+                    金融编程   网络编程   数据库</p>
+            </div>
+        </div>
         <div class="order" id="sel">
+            <form action="">
             <p class="orderTit">预估价格</p>
             <div class="select_down">
                 <dl>
@@ -64,6 +79,7 @@
                     </dt>
                 </dl>
             </div>
+            </form>
             <div class="price">
                 <p class="price_tit">原价：</p>
                 <p class="price_con" id="price_num"><span>￥</span>0.00 </p>
@@ -237,13 +253,13 @@
         <foreach name="content" item="vo" >
             <ul class="casrList clearfix" style="display: {$key==0?block:none};">
                 <foreach name="vo" item="v" >
-                <li>
-                    <img src="{$v.img_url}" alt="">
-                    <div class="cTit">
-                        <h6>{$v.title}</h6>
-                        <p>{$v.content}</p>
-                    </div>
-                </li>
+                    <li>
+                        <img src="{$v.img_url}" alt="">
+                        <div class="cTit">
+                            <h6>{$v.title}</h6>
+                            <p>{$v.content}</p>
+                        </div>
+                    </li>
                 </foreach>
             </ul>
         </foreach>
@@ -260,11 +276,11 @@
             <div class="swiper-container feedBanner">
                 <div class="swiper-wrapper">
                     <foreach name="banner" item="vo" >
-                    <div class="swiper-slide feedBbox">
-                        <foreach name="vo" item="v" >
-                            <img src="{$v.image}" alt="">
-                        </foreach>
-                    </div>
+                        <div class="swiper-slide feedBbox">
+                            <foreach name="vo" item="v" >
+                                <img src="{$v.image}" alt="">
+                            </foreach>
+                        </div>
                     </foreach>
                 </div>
             </div>
@@ -407,8 +423,16 @@
         window.location.href = "{:U('/Home/Form/index')}?title2="+title2+'&title3='+title3+'&word_num='+word_num+'&price_num='+price_num+'&end_time='+end_time;
     })
 
-    $("input[name='word_num']").bind("input propertychange",function () {
-        get_price($(this).val());
+    // $("input[name='word_num']").bind("input propertychange",function () {
+    //     get_price($(this).val());
+    // });
+
+    $("#sel ul li").bind("click",function () {
+        check_data();
+    });
+
+    $("#sel input").bind("input propertychange",function () {
+        check_data();
     });
 
     $("#sub").click(function () {
@@ -430,8 +454,8 @@
         {
             var now_val = val - 100;
         }
-        get_price(now_val);
         inp.val(now_val);
+        check_data();
         return ;
     });
 
@@ -447,10 +471,33 @@
             val = parseInt(val);
         }
         var now_val = val + 100
-        get_price(now_val);
         inp.val(now_val);
+        check_data();
         return ;
     });
+
+    function check_data()
+    {
+        var data = $("#sel form").serializeArray();
+        console.log(data);
+        var change_price = true;
+        for(i=0;i<data.length;i++)
+        {
+            if(data[i].value == '')
+            {
+                change_price = false;
+                break;
+            }
+        }
+        if(change_price)
+        {
+            get_price($("input[name='word_num']").val());
+        }
+        else
+        {
+            get_price(0);
+        }
+    }
 
     function get_price($word_num)
     {

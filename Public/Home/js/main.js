@@ -72,3 +72,12 @@ $(function () {
         }, 300);
     });
 })
+$(window).scroll(function() {
+    var top = $(window).scrollTop();
+    // console.log(top)
+    if(top>=10){
+        $(".Box").addClass("on");
+        }else{
+        $(".Box").removeClass("on");
+    }
+});
