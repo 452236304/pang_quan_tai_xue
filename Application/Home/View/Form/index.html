@@ -117,7 +117,7 @@
                         <span> * </span> </p>
                     <div class="zs_num">
                         <button id="sub" type="button">-</button>
-                        <input placeholder="500" name="word_num" type="number" value="{$Think.get.word_num}"></input>
+                        <input placeholder="0" name="word_num" type="number" value="{$Think.get.word_num}"></input>
                         <button id="add" type="button">+</button>
                     </div>
                 </li>
@@ -155,8 +155,9 @@
                     <p class="Ortype">
                         上传文件
                     </p>
-                    <div id="upload-container">
+                    <div id="upload-container" style="position: relative;">
                         <img src="__PUBLIC__/Home/img/img_20.png" class="iconImg" /> <span>文件放在此处或浏览计算机</span>
+                        <span style="position: absolute;bottom: -40%;width: 500px;color: #FF0000;">支持格式：jpg、jpeg、png、git、doc、docx、xls、xlsx、pdf、txt</span>
                     </div>
                     <button id="picker" style="display: none;">点击上传文件</button>
                 </li>
@@ -635,7 +636,7 @@
     // });
 
     $('.colseBox').click(function () {
-        window.location.href = "{:U('Home/Form/index')}";
+        window.location.href = "{:U('Home/index/index')}";
     });
 
     $("#submit .option li").bind("click",function () {

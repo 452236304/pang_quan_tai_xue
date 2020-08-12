@@ -29,8 +29,8 @@ class FormController extends BaseController
     {
         $this->filePath = './upload/userfiles/';
         $this->fileSize = 10 * 1048576;
-        $this->fileType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif','text/plain','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword'];
-        $this->fileExt = ['jpg', 'jpeg', 'png', 'gif','xlsx','xls','docx','doc','txt'];
+        $this->fileType = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf', 'image/gif','text/plain','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword'];
+        $this->fileExt = ['jpg', 'jpeg', 'png', 'gif','xlsx','xls','docx','doc','txt','pdf'];
         $this->flag = false;
 
         $this_file = $_FILES['upload_file'];
