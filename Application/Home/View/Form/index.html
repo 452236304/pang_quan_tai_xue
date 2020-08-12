@@ -157,7 +157,7 @@
                     </p>
                     <div id="upload-container" style="position: relative;">
                         <img src="__PUBLIC__/Home/img/img_20.png" class="iconImg" /> <span>文件放在此处或浏览计算机</span>
-                        <span style="position: absolute;bottom: -40%;width: 500px;color: #FF0000;">支持格式：jpg、jpeg、png、git、doc、docx、xls、xlsx、pdf、txt</span>
+                        <span style="position: absolute;bottom: -40%;width: 500px;color: #FF0000;">支持格式：jpg、jpeg、png、gif、doc、docx、xls、xlsx、pdf、txt</span>
                     </div>
                     <button id="picker" style="display: none;">点击上传文件</button>
                 </li>
@@ -788,7 +788,7 @@
                 layer.open({
                     title: '提示',
                     closeBtn: 0,
-                    content: '上传失败',
+                    content: response.msg,
                 });
             });
         }
