@@ -44,6 +44,7 @@ class FormSubmitController extends BaseController {
         if($id > 0)
         {
             $info = $model->find($id);
+            $info['upload_file'] = explode(',', $info['upload_file']);
         }
 
         if($doinfo == "modifyad")
@@ -65,6 +66,30 @@ class FormSubmitController extends BaseController {
         $this->assign('info', $info);
         $this->assign("map",$this->getMap());
         $this->display();
+    }
+
+    public function doDeal()
+    {
+        $id = I("get.id", 0);
+        $model = $this->model;
+        if($id <= 0)
+        {
+            $this->error('id异常');
+        }
+
+        $info = $model->find($id);
+        if(empty($info))
+        {
+            $this->error('订单不存在');
+        }
+
+        $d = [];
+        $d['status'] = 1;
+        $d['status_time'] = time();
+        $model->where("id=".$id)->save($d);
+
+        $url = U('FormSubmit/listad')."?".http_build_query($this->getMap());
+        header('Location:'.$url);
     }
 
     public function getMap(){

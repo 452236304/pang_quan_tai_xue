@@ -25,36 +25,138 @@ class FormController extends BaseController
         $this->display();
     }
 
+    function upload()
+    {
+        $this->filePath = './upload/userfiles/';
+        $this->fileSize = 10 * 1048576;
+        $this->fileType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword'];
+        $this->fileExt = ['jpg', 'jpeg', 'png', 'gif','xlsx','xls','docx','doc'];
+        $this->flag = false;
+
+        $this_file = $_FILES['upload_file'];
+        if(empty($this_file) || !isset($this_file))
+        {
+            $this->err['msg'] = '上传为空';
+            $this->ajaxReturn($this->err);
+        }
+
+        $this->fileInfo = $this_file;
+        $res = $this->upload_file();
+        if($res['error'] != 1)
+        {
+            $this->err['msg'] = '上传失败';
+            $this->ajaxReturn($this->err);
+        }
+        $this->err['code'] = 1;
+        $this->err['msg'] = '上传成功';
+        $this->err['data'] = ['all_path'=>$this->DoUrlHandle($res['data']),'path'=>$res['data']];
+        $this->ajaxReturn($this->err);
+    }
+
     public function submit()
     {
         $data = I('post.');
         if(empty($data))
         {
-            $this->err['msg'] = '请不要留空';
+            $this->err['msg'] = '数据异常';
             $this->ajaxReturn($this->err);
         }
+
+        $msg = '';
+        $upload_file = [];
         foreach ($data as $k => $v )
         {
-            if($k == 'order_need')
+            if($k == "title1")
             {
-                continue;
+                if($v == '')
+                {
+                    $msg = '请选择订单类型';
+                }
             }
-            if(empty($v))
+            else if($k == "title2")
             {
-                $this->err['msg'] = '请不要留空';
+                if($v == '')
+                {
+                    $msg = '请选择科目类型';
+                }
+            }
+            else if($k == "title3")
+            {
+                if($v == '')
+                {
+                    $msg = '请选择学历背景';
+                }
+            }
+            else if($k == "title4")
+            {
+                if($v == '')
+                {
+                    $msg = '请选择引用数';
+                }
+            }
+            else if($k == "title5")
+            {
+                if($v == '')
+                {
+                    $msg = '请选择写作格式';
+                }
+            }
+            else if($k == "word_num")
+            {
+                if($v == '' || $v == 0)
+                {
+                    $msg = '请填写字数数量要求';
+                }
+            }
+            else if($k == "end_time")
+            {
+                if($v == '')
+                {
+                    $msg = '请选择截止日期';
+                }
+            }
+            else if($k == "font_space")
+            {
+                if($v == '')
+                {
+                    $msg = '请选择字体行距';
+                }
+            }
+            else if($k == "user_name")
+            {
+                if($v == '')
+                {
+                    $msg = '请输入您的名称';
+                }
+            }
+            else if($k == "user_phone")
+            {
+                if($v == '')
+                {
+                    $msg = '请填写联系电话';
+                }
+                else if(!preg_match("/^1[34578]\d{9}$/", $data['user_phone']))
+                {
+                    $msg = "联系电话有误，请重填";
+                }
+            }
+            else if($k == "user_mail")
+            {
+                if($v == '')
+                {
+                    $msg = '请填写接收邮箱';
+                }
+                else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/", $data['user_mail']))
+                {
+                    $msg = "邮箱错误，请重填";
+                }
+            }
+            if(!empty($msg))
+            {
+                $this->err['msg'] = $msg;
                 $this->ajaxReturn($this->err);
                 break;
             }
-        }
-        if(!preg_match("/^1[34578]\d{9}$/", $data['user_phone']))
-        {
-            $this->err['msg'] = '请正常填写手机号';
-            $this->ajaxReturn($this->err);
-        }
-        if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/", $data['user_mail']))
-        {
-            $this->err['msg'] = '请正常填写邮箱';
-            $this->ajaxReturn($this->err);
         }
 
         $title = $this->title;
@@ -66,28 +168,8 @@ class FormController extends BaseController
         $data['word_num'] = intval($data['word_num']);
         $data['forcase_price'] = bcmul($data['word_num'], 0.8, 2);
         $data['end_time'] = strtotime($data['end_time']);
+        $data['upload_file'] = implode(',', $data['upload_file']);
         $data['add_time'] = time();
-
-        if(!empty($_FILES['upload_file']))
-        {
-            $this->fileInfo = $_FILES['upload_file'];
-            $this->filePath = './upload/userfiles/';
-            $this->fileSize = 10 * 1048576;
-            $this->fileType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword'];
-            $this->fileExt = ['jpg', 'jpeg', 'png', 'gif','xlsx','xls','docx','doc'];
-            $this->flag = false;
-            $res = $this->upload_file();
-            if($res['error'] != 1)
-            {
-                $this->err['msg'] = $res['msg'];
-                $this->ajaxReturn($this->err);
-            }
-            $data['upload_file'] = $res['data'];
-        }
-        else
-        {
-            $data['upload_file'] = '';
-        }
 
         $res = D('form_submit')->add($data);
         if(!$res)

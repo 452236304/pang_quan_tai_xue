@@ -41,8 +41,8 @@
                             <th width="100" class="TC">接收邮箱</th>
                             <th width="100" class="TC">预估价格</th>
                             <th width="100" class="TC">提交时间</th>
-                            <th width="100" class="TC">审核</th>
-                            <th width="100" class="TC">审核时间</th>
+                            <th width="100" class="TC">订单状态</th>
+                            <th width="100" class="TC">处理时间</th>
                             <th width="200" class="TC">操作</th>
                         </tr>
                         </thead>
@@ -64,16 +64,18 @@
                                 <td align="center">{$vo.add_time|date|date="Y-m-d H:i:s",###}</td>
                                 <td align="center">
                                     <switch name="vo.status">
-                                        <case value="0">待审核</case>
-                                        <case value="1">已完成</case>
-                                        <case value="2">订单作废</case>
+                                        <case value="0">待处理</case>
+                                        <case value="1">已处理</case>
                                     </switch>
                                 </td>
                                 <td align="center">{$vo.status_time|date|date="Y-m-d H:i:s",###}</td>
 
                                 <td class="text-navy" align="center">
                                     <p>
-                                        <a href="{:U('FormSubmit/modifyad','&p='.$map['p'])}?id={$vo['id']}">审核</a>
+                                        <if condition="$vo.status == 0">
+                                            <a href="{:U('FormSubmit/doDeal','&p='.$map['p'])}?id={$vo['id']}">待处理</a>
+                                        </if>
+                                        <a href="{:U('FormSubmit/modifyad','&p='.$map['p'])}?id={$vo['id']}">查看修改</a>
                                     </p>
                                 </td>
                             </tr>

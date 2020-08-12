@@ -15,12 +15,21 @@ class IndexController extends BaseController
         {
             $banner[$v['cate']][] = $v;
         }
+
         $cate = D('case_cate')->field('id,title')->where('status=1')->order('orderby ASC')->select();
         $model = D('case_content');
         $content = [];
         foreach ($cate as $k => $v)
         {
-            $content[] = $model->field("id,title,content,img_url")->where("cate_id={$v['id']} AND status=1")->limit(4)->order('orderby ASC')->select();
+            $count = $model->where("cate_id={$v['id']} AND status=1")->count();
+            if($count >= 3)
+            {
+                $content[] = $model->field("id,title,content,img_url")->where("cate_id={$v['id']} AND status=1")->limit(3)->order('orderby ASC')->select();
+            }
+            else
+            {
+                unset($cate[$k]);
+            }
         }
 
         $this->assign('cate', $cate);

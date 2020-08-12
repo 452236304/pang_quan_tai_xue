@@ -1,11 +1,11 @@
 <include file="Public/Home/static/header.html" />
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
-
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/baguetteBox.css" />
 <!-- 顶部导航栏 -->
 <div class="Boxbg Box">
     <div class="NavBox layout">
         <div class="logo">
-            <a href="#"><img src="__PUBLIC__/Home/img/img_38.png" alt=""></a>
+            <a href="{:U('Home/index/index')}"><img src="__PUBLIC__/Home/img/img_38.png" alt=""></a>
         </div>
         <ul class="nav clearfix">
             <li class="navAct"><a href="#">万能学姐</a></li>
@@ -96,7 +96,7 @@
             <p>Why did you choose the omnipotent sister?</p>
         </div>
         <ul class="whyFlow">
-            <li>
+            <li class="whyact">
                 <div class="why_icon"></div>
                 <h6>严谨的做事流程</h6>
                 <p>最迟30分钟内确认并决定是否接单；<br>接单后及时沟通任何一处疑问，<br>细节决定成败。</p>
@@ -170,7 +170,7 @@
         <img src="__PUBLIC__/Home/img/img_8.png" alt="">
     </div>
     <ul class="priceRight clearfix">
-        <li>
+        <li class="rightact">
             <div class="priceTop">
                 <div class="priceTop_icon"></div>
                 <div class="Toptxt">
@@ -254,7 +254,8 @@
             <ul class="casrList clearfix" style="display: {$key==0?block:none};">
                 <foreach name="vo" item="v" >
                     <li>
-                        <img src="{$v.img_url}" alt="">
+                        <a href="{$v.img_url}">
+                        <img src="{$v.img_url}" alt=""></a>
                         <div class="cTit">
                             <h6>{$v.title}</h6>
                             <p>{$v.content}</p>
@@ -292,7 +293,7 @@
         </div>
     </div>
     <!-- 右边导航栏 -->
-    <div class="sideBox" style="z-index: 999;left: 40px;right: 0">
+    <div class="sideBox" style="z-index: 999;top: 50%;transform: translateY(-50%);">
         <img src="__PUBLIC__/Home/img/img53.png" alt="" class="side_logo">
         <ul class="sidewx">
             <li><img src="__PUBLIC__/Home/img/img_15.png" alt="">
@@ -353,26 +354,35 @@
     </div>
 </div>
 <include file="Public/Home/static/footer.html" />
-<script src="__PUBLIC__/Home/js/laydate/laydate.js"></script>
 <script src="__PUBLIC__/Home/js/main.js"></script>
+<script src="__PUBLIC__/Home/js/laydate/laydate.js"></script>
+<script src="__PUBLIC__/Home/js/baguetteBox.js"></script>
 <script>
+    $(document).ready(function () {
+        $('.whyFlow li').hover(function () {
+            $(this).addClass('whyact').siblings().removeClass('whyact');
+        })
+    })
+    $(document).ready(function () {
+        $('.priceRight li').hover(function () {
+            $(this).addClass('rightact').siblings().removeClass('rightact');
+        })
+    })
     $(document).ready(function () {
         var sel = "{$Think.get.sel}";
-        if(!sel)
+        if(sel !== '')
         {
-            sel = 0;
+            $('.nav').find('li:eq('+sel+')').click();
         }
-        $('.nav').find('li:eq('+sel+')').click();
     })
-    $('.nav li').click(function () {
-        $(this).addClass('navAct').siblings('li').removeClass('navAct');
-
+    $('.nav li,.fot_nav li').click(function () {
         var index = $(this).index();
+        $('.nav li:eq('+index+')').addClass('navAct').siblings('li').removeClass('navAct');
+        $('.fot_nav li:eq('+index+')').addClass('navAct').siblings('li').removeClass('navAct');
         var sel = '';
-        if(index == 0)
+        if(index === 0)
         {
             sel = $('body');
-            // sel = $('.WhyBox');
         }
         else if(index == 1)
         {
@@ -400,7 +410,7 @@
         }
         else
         {
-            sel = $('body');
+            // sel = $('body');
         }
         scrollPosition(sel,-100);
     })
@@ -423,15 +433,17 @@
         window.location.href = "{:U('/Home/Form/index')}?title2="+title2+'&title3='+title3+'&word_num='+word_num+'&price_num='+price_num+'&end_time='+end_time;
     })
 
-    // $("input[name='word_num']").bind("input propertychange",function () {
-    //     get_price($(this).val());
-    // });
-
     $("#sel ul li").bind("click",function () {
+        var id = $(this).attr('data-id');
+        $(this).parents('ul').siblings('input').val(id);
         check_data();
     });
 
     $("#sel input").bind("input propertychange",function () {
+        check_data();
+    });
+
+    $("#layui-laydate1 .laydate-btns-confirm").bind("click",function () {
         check_data();
     });
 
@@ -479,7 +491,6 @@
     function check_data()
     {
         var data = $("#sel form").serializeArray();
-        console.log(data);
         var change_price = true;
         for(i=0;i<data.length;i++)
         {
@@ -509,7 +520,11 @@
     laydate.render({
         elem: '#endTime',
         type: 'datetime',
-        theme: '#FD9025'
+        theme: '#FD9025',
+        done: function(value, date, endDate){
+            $('#endTime').val(value);
+            check_data();
+        }
     });
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true, //可选选项，自动滑动\
@@ -521,4 +536,5 @@
             prevEl: '.feedNext .swiper-next',
         },
     })
+    baguetteBox.run('.casrList');
 </script>

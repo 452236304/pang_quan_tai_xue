@@ -40,9 +40,6 @@ window.onload = function () {
                     aH3[this.parentNode.index].innerHTML = this.innerHTML;
                     ev.cancelBubble = true;
                     this.parentNode.style.display = 'none';
-
-                    var id = $(this).attr('data-id');
-                    $(this).parents('ul').siblings('input').val(id);
                 };
             }
 
@@ -77,7 +74,7 @@ $(window).scroll(function() {
     // console.log(top)
     if(top>=10){
         $(".Box").addClass("on");
-        }else{
+    }else{
         $(".Box").removeClass("on");
     }
 });

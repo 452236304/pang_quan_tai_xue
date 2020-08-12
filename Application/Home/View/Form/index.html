@@ -1,8 +1,8 @@
 <include file="Public/Home/static/header.html" />
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/main.css" />
-
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css">
 <style>
-    .zixun:hover{
+    .zixun,.last_step:hover{
         background: rgba(253, 144, 37, 1) !important;
     }
 </style>
@@ -14,13 +14,13 @@
             <a href="{:U('Home/index/index')}"><img src="__PUBLIC__/Home/img/img_6.png" alt=""></a>
         </div>
         <ul class="nav clearfix nav_order">
-            <li class="navAct"><a href="{:U('Home/index/index')}?sel=0">万能学姐</a></li>
-            <li><a href="{:U('Home/index/index')}?sel=1">关于我们</a></li>
-            <li><a href="{:U('Home/index/index')}?sel=2">服务内容</a></li>
-            <li><a href="{:U('Home/index/index')}?sel=3">写作套餐</a></li>
-            <li><a href="{:U('Home/index/index')}?sel=4">成功案例</a></li>
-            <li><a href="{:U('Home/index/index')}?sel=5">好评反馈</a></li>
-            <li><a href="{:U('Home/index/index')}?sel=6">联系我们</a></li>
+            <li class="navAct"><a href="#">万能学姐</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">服务内容</a></li>
+            <li><a href="#">写作套餐</a></li>
+            <li><a href="#">成功案例</a></li>
+            <li><a href="#">好评反馈</a></li>
+            <li><a href="#">联系我们</a></li>
         </ul>
         <div class="navRight">
             <img src="__PUBLIC__/Home/img/img_19.png" alt="">
@@ -141,18 +141,28 @@
                     </div>
                 </li>
                 <li>
-                    <p class="Ortype">上传文件</p>
-                    <div class="uploadBox" id="filePicker">
-                        <img src="__PUBLIC__/Home/img/img_20.png" class="iconImg">
-                        <div class="dropText">将文件放在此处或浏览计算机</div>
-                        <a href="javascript:;" class="file gradient">
-                            <div class="flieBox">
-                                <input type="file" name="upload_file" id="file" style="width: inherit;height: inherit;">
-                            </div>
-                        </a>
-                        <div class="showFileName1"></div>
+<!--                    <p class="Ortype">上传文件</p>-->
+<!--                    <div class="uploadBox" id="filePicker">-->
+<!--                        <img src="__PUBLIC__/Home/img/img_20.png" class="iconImg">-->
+<!--                        <div class="dropText">将文件放在此处或浏览计算机</div>-->
+<!--                        <a href="javascript:;" class="file gradient">-->
+<!--                            <div class="flieBox">-->
+<!--                                <input type="file" multiple name="upload_file" id="file" style="width: inherit;height: inherit;">-->
+<!--                            </div>-->
+<!--                        </a>-->
+<!--                        <div class="showFileName1"></div>-->
+<!--                    </div>-->
+                    <p class="Ortype">
+                        上传文件
+                    </p>
+                    <div id="upload-container">
+                        <img src="__PUBLIC__/Home/img/img_20.png" class="iconImg" /> <span>文件放在此处或浏览计算机</span>
                     </div>
+                    <button id="picker" style="display: none;">点击上传文件</button>
                 </li>
+                <div id="upload-list">
+
+                </div>
             </ul>
             <ul class="OrLeft">
                 <li>
@@ -182,7 +192,7 @@
                         <span>实际以联系客服为准</span>
                     </div>
                     <div class="right_p2">
-                        <span>￥</span>{$Think.get.price_num}
+                        <span>￥</span>{$Think.get.price_num|default='0.00'}
                     </div>
                 </li>
             </ul>
@@ -236,7 +246,9 @@
                 <p>研究生（master）</p>
             </li>
             <li><span>上传文件</span>
-                <p class="_upload_file">暂无文件</p>
+                <div class="_upload_file" style="width: 200px;">
+
+                </div>
             </li>
         </ul>
     </div>
@@ -298,6 +310,7 @@
 
 <include file="Public/Home/static/footer.html" />
 <script src="__PUBLIC__/Home/js/laydate/laydate.js"></script>
+<script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.js"></script>
 <script src="__PUBLIC__/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script>
     $(document).ready(function(){
@@ -314,30 +327,71 @@
         }
     });
 
+    $('.nav li,.fot_nav li').click(function () {
+        var that = $(this);
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.closeBtn = 0;
+            layer.open({
+                content: '是否放弃已填写内容的询价？',
+                closeBtn: 0,
+                btn: ['是的', '取消']
+                ,yes: function(index, layero){
+                    var index = $(that).index();
+                    window.location.href = "{:U('Home/index/index')}?sel="+index;
+                }
+                ,btn2: function(index, layero){
+                    //按钮【按钮二】的回调
+
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+            });
+        });
+        return true;
+        var index = $(this).index();
+        $('.nav li:eq('+index+')').addClass('navAct').siblings('li').removeClass('navAct');
+        $('.fot_nav li:eq('+index+')').addClass('navAct').siblings('li').removeClass('navAct');
+        var sel = '';
+        if(index == 0)
+        {
+            sel = $('body');
+        }
+        else if(index == 1)
+        {
+            sel = $('.aboutBox');
+        }
+        else if(index ==2)
+        {
+            sel = $('.flowBox');
+        }
+        else if(index ==3)
+        {
+            sel = $('.priceBox');
+        }
+        else if(index ==4)
+        {
+            sel = $('.caseBox');
+        }
+        else if(index ==5)
+        {
+            sel = $('.feed');
+        }
+        else if(index ==6)
+        {
+            sel = $('.feed .foot');
+        }
+        else
+        {
+            sel = $('body');
+        }
+        scrollPosition(sel,-100);
+    })
+
     $('.zixun2').click(function () {
         var formData = new FormData();
-        formData.append("upload_file",$("#file")[0].files[0]);
         $data = $("#submit").serializeArray();
         for(i=0;i<$data.length;i++)
         {
-            if($data[i].name == "order_need")
-            {
-
-            }
-            else if($data[i].value == '')
-            {
-                layui.use('layer', function(){
-                    var layer = layui.layer;
-                    layer.closeBtn = 0;
-                    layer.open({
-                        title: '提示',
-                        closeBtn: 0,
-                        content: '请不要留空',
-                    });
-                });
-                return;
-                break;
-            }
             formData.append($data[i].name,$data[i].value);
         }
 
@@ -349,6 +403,7 @@
             url:"{:U('Home/Form/submit')}",
             dataType:"json",
             success:function(data){
+                console.log(data)
                 if(data.code == 1)
                 {
                     $('.win').css('display','grid');
@@ -370,41 +425,94 @@
     });
 
     $('.zixun').click(function () {
-        $data = $("#submit").serializeArray();
+        var $data = $("#submit").serializeArray();
+        var msg = '';
         for(i=0;i<$data.length;i++)
         {
-            if($data[i].name == "order_need")
+            if($data[i].name == "title1")
             {
-
+                if($data[i].value == '')
+                {
+                    msg = '请选择订单类型';
+                }
             }
-            else if($data[i].value == '')
+            else if($data[i].name == "title2")
             {
-                layui.use('layer', function(){
-                    var layer = layui.layer;
-                    layer.closeBtn = 0;
-                    layer.open({
-                        title: '提示',
-                        closeBtn: 0,
-                        content: '请不要留空',
-                    });
-                });
-                return;
-                break;
+                if($data[i].value == '')
+                {
+                    msg = '请选择科目类型';
+                }
             }
-
-            var msg = '';
-            if($data[i].name == "user_phone")
+            else if($data[i].name == "title3")
             {
-                if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test($data[i].value))){
-                    msg = "手机号码有误，请重填";
+                if($data[i].value == '')
+                {
+                    msg = '请选择学历背景';
+                }
+            }
+            else if($data[i].name == "title4")
+            {
+                if($data[i].value == '')
+                {
+                    msg = '请选择引用数';
+                }
+            }
+            else if($data[i].name == "title5")
+            {
+                if($data[i].value == '')
+                {
+                    msg = '请选择写作格式';
+                }
+            }
+            else if($data[i].name == "word_num")
+            {
+                if($data[i].value == '' || $data[i].value == 0)
+                {
+                    msg = '请填写字数数量要求';
+                }
+            }
+            else if($data[i].name == "end_time")
+            {
+                if($data[i].value == '')
+                {
+                    msg = '请选择截止日期';
+                }
+            }
+            else if($data[i].name == "font_space")
+            {
+                if($data[i].value == '')
+                {
+                    msg = '请选择字体行距';
+                }
+            }
+            else if($data[i].name == "user_name")
+            {
+                if($data[i].value == '')
+                {
+                    msg = '请输入您的名称';
+                }
+            }
+            else if($data[i].name == "user_phone")
+            {
+                if($data[i].value == '')
+                {
+                    msg = '请填写联系电话';
+                }
+                else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test($data[i].value))){
+                    msg = "联系电话有误，请重填";
                 }
             }
             else if($data[i].name == "user_mail")
             {
-                if(!(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test($data[i].value))){
+                if($data[i].value == '')
+                {
+                    msg = '请填写接收邮箱';
+                }
+                else if(!(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test($data[i].value))){
                     msg = "邮箱错误，请重填";
                 }
             }
+
             if(msg != '')
             {
                 layui.use('layer', function(){
@@ -417,14 +525,13 @@
                     });
                 });
                 return;
-                break;
             }
 
+            console.log($data[i].name);
             var text = '';
             if($data[i].name == 'title1' || $data[i].name == 'title2' || $data[i].name == 'title3' || $data[i].name == 'title4' || $data[i].name == 'title5')
             {
                 text = $("input[name='"+$data[i].name+"']").siblings('ul').find("li[data-id="+$data[i].value+"]").text();
-
             }
             else if($data[i].name == 'font_space')
             {
@@ -441,6 +548,10 @@
                     text = '1.5 spaced';
                 }
             }
+            else if($data[i].name == 'upload_file[]')
+            {
+                continue;
+            }
             else
             {
                 text = $data[i].value;
@@ -448,12 +559,22 @@
             $('._'+$data[i].name).text(text?text:'无');
         }
 
-        var _upload_file = $(".showFileName1").html();
-        if(_upload_file == '' || _upload_file == '您未上传文件，或者您上传文件类型有误！')
+        var html = ''
+        if($("#upload-list .upload-item").length > 0)
         {
-            _upload_file = '暂无文件';
+            $("#upload-list .upload-item").each(function()
+            {
+                var img = $(this).find('img').attr('src');
+                var text = $(this).find('p').text();
+                html += '<div class="upload-item" style="margin: 0;"><img src="'+img+'" class="img_ing"><p style="width: 100px;">'+text+'</p></div>';
+            })
+            $('._upload_file').html(html);
         }
-        $('._upload_file').text(_upload_file);
+        else
+        {
+            $('._upload_file').text('无');
+        }
+
         $('._forcase_price').html($('.right_p2').html());
         $('.box1').hide();
         $('.box2').show();
@@ -464,23 +585,62 @@
         $('.box2').hide();
     })
 
-    $(".file").on("change", "input[type='file']", function (){
-        var filePath = $(this).val();
-        if (filePath.indexOf("jpg") != -1 || filePath.indexOf("jpeg") != -1 || filePath.indexOf("png") != -1 || filePath.indexOf("gif") != -1 || filePath.indexOf("xlsx") != -1 || filePath.indexOf("xls") != -1 || filePath.indexOf("docx") != -1 || filePath.indexOf("doc") != -1) {
-            var arr = filePath.split('\\');
-            var fileName = arr[arr.length - 1];
-            $(".showFileName1").html(fileName).css('color','#000');
-        }else{
-            $(".showFileName1").html("您未上传文件，或者您上传文件类型有误！").show().css('color','red');
-            return false
-        }
-    });
+    // $(".file").on("change", "input[type='file']", function (){
+    //     var files = $("#file")[0].files;
+    //     console.log(files);
+    //     var html = '<div class="upload-item"><span>文件名：'+file.name+'</span><span data-file_id="'+file.id+'" class="btn-delete">删除</span></div>';
+    //     $('#upload-list').append(html);
+    //     if(files.length > 3)
+    //     {
+    //         layui.use('layer', function(){
+    //             var layer = layui.layer;
+    //             layer.closeBtn = 0;
+    //             layer.open({
+    //                 title: '提示',
+    //                 closeBtn: 0,
+    //                 content: '最多上传3个文件',
+    //             });
+    //         });
+    //     }
+    //     for (var i = 0; i < files.length; i++)
+    //     {
+    //         if(files[i].size > (10 * 1048576))
+    //         {
+    //             layui.use('layer', function(){
+    //                 var layer = layui.layer;
+    //                 layer.closeBtn = 0;
+    //                 layer.open({
+    //                     title: '提示',
+    //                     closeBtn: 0,
+    //                     content: '每个文件大小不得超过10M，您的第'+(i+1)+'个文件已超过10M，将导致上传失败',
+    //                 });
+    //             });
+    //             return;
+    //             break;
+    //         }
+    //     }
+    //
+    //     // var filePath = $(this).val();
+    //     //
+    //     // if (filePath.indexOf("jpg") != -1 || filePath.indexOf("jpeg") != -1 || filePath.indexOf("png") != -1 || filePath.indexOf("gif") != -1 || filePath.indexOf("xlsx") != -1 || filePath.indexOf("xls") != -1 || filePath.indexOf("docx") != -1 || filePath.indexOf("doc") != -1) {
+    //     //     var arr = filePath.split('\\');
+    //     //     var fileName = arr[arr.length - 1];
+    //     //
+    //     //
+    //     //     $('.showFileName1').append($(".showFileName1").html(fileName).css('color','#000'));
+    //     // }else{
+    //     //     $(".showFileName1").html("您未上传文件，或者您上传文件类型有误！").show().css('color','red');
+    //     //     return false
+    //     // }
+    // });
 
     $('.colseBox').click(function () {
         window.location.href = "{:U('Home/Form/index')}";
     });
 
     $("#submit .option li").bind("click",function () {
+        var id = $(this).attr('data-id');
+        $(this).parents('ul').siblings('input').val(id);
         check_data();
     });
 
@@ -563,7 +723,95 @@
     laydate.render({
         elem: '#endTime',
         type: 'datetime',
-        theme: '#FD9025'
+        theme: '#FD9025',
+        done: function(value, date, endDate){
+            $('#endTime').val(value);
+            check_data();
+        }
+    });
+    $('#upload-container').click(function(event) {
+        $("#picker").find('input').click();
+    });
+
+
+    var uploader = WebUploader.create({
+        auto: true,// 选完文件后，是否自动上传。
+        swf: 'https://cdn.bootcss.com/webuploader/0.1.1/Uploader.swf',// swf文件路径
+        server: '{:U("Home/Form/upload")}',// 文件接收服务端。
+        dnd: '#upload-container',
+        pick: '#picker',// 内部根据当前运行是创建，可能是input元素，也可能是flash. 这里是div的id
+        multiple: true, // 选择多个
+        chunked: true,// 开起分片上传。
+        threads: 3, // 上传并发数。允许同时最大上传进程数。
+        method: 'POST', // 文件上传方式，POST或者GET。
+        fileSizeLimit: 1024*1024*100*3, //验证文件总大小是否超出限制, 超出则不允许加入队列。
+        fileSingleSizeLimit: 1024*1024*10, //验证单个文件大小是否超出限制, 超出则不允许加入队列。
+        fileVal:'upload_file', // [默认值：'file'] 设置文件上传域的name。
+    });
+
+    uploader.on('fileQueued', function(file) {
+        console.log(file)
+        // 选中文件时要做的事情，比如在页面中显示选中的文件并添加到文件列表，获取文件的大小，文件类型等
+        console.log(file.ext) // 获取文件的后缀
+        console.log(file.size) // 获取文件的大小
+        console.log(file.name);
+
+    });
+
+    uploader.on('uploadProgress', function(file, percentage) {
+        console.log(percentage * 100 + '%');
+        var width = $('.upload-item').width();
+        $('.'+file.id).width(width*percentage);
+    });
+
+    uploader.on('uploadSuccess', function(file, response) {
+        if(response.code == 1)
+        {
+            console.log($.inArray(file.ext, ['jpg','jpeg','git','png']),file.ext);
+            if($.inArray(file.ext, ['jpg','jpeg','git','png']) != -1)
+            {
+                var html = '<div class="upload-item"><input name="upload_file[]" type="hidden" value="'+response.data.path+'" /><img src="'+response.data.all_path+'" class="img_ing"><p>'+file.name+'</p><span data-file_id="'+file.id+'" class="btn-delete"><img src="__PUBLIC__/Home/img/img_16.png"></span></div>';
+            }
+            else
+            {
+                var html = '<div class="upload-item"><input name="upload_file[]" type="hidden" value="'+response.data.path+'" /><img src="__PUBLIC__/Home/img/img_13.png" class="img_ing"><p>'+file.name+'</p><span data-file_id="'+file.id+'" class="btn-delete"><img src="__PUBLIC__/Home/img/img_16.png"></span></div>';
+            }
+            $('#upload-list').append(html);
+        }
+        else
+        {
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                layer.closeBtn = 0;
+                layer.open({
+                    title: '提示',
+                    closeBtn: 0,
+                    content: '上传失败',
+                });
+            });
+        }
+    //    /upload/edit/image/20200227/1582769853125877.png
+    });
+
+    uploader.on('uploadError', function(file) {
+        console.log(file);
+        console.log(file.id+'upload error')
+    });
+
+    $('#upload-list').on('click', '.upload-item .btn-delete', function() {
+        // 从文件队列中删除某个文件id
+        file_id = $(this).data('file_id');
+        // uploader.removeFile(file_id); // 标记文件状态为已取消
+        uploader.removeFile(file_id, true); // 从queue中删除
+        console.log(uploader.getFiles());
+    });
+
+    $('#upload-list').on('click', '.btn-retry', function() {
+        uploader.retry($(this).data('file_id'));
+    });
+
+    uploader.on('uploadComplete', function(file) {
+        console.log(uploader.getFiles());
     });
 
 </script>
