@@ -747,6 +747,7 @@
         fileSizeLimit: 1024*1024*100*3, //验证文件总大小是否超出限制, 超出则不允许加入队列。
         fileSingleSizeLimit: 1024*1024*10, //验证单个文件大小是否超出限制, 超出则不允许加入队列。
         fileVal:'upload_file', // [默认值：'file'] 设置文件上传域的name。
+        // accept: { title: 'Files', extensions: 'jpg,jpeg,png,gif,pdf,doc,docx', mimeTypes: 'image/*,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document' +',application/pdf' },
     });
 
     uploader.on('fileQueued', function(file) {
@@ -803,6 +804,8 @@
         file_id = $(this).data('file_id');
         // uploader.removeFile(file_id); // 标记文件状态为已取消
         uploader.removeFile(file_id, true); // 从queue中删除
+
+        $('#upload-list').find('.btn-delete[data-file_id="'+file_id+'"]').parents('.upload-item').remove();
         console.log(uploader.getFiles());
     });
 

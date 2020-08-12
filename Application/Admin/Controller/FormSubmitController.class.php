@@ -45,6 +45,16 @@ class FormSubmitController extends BaseController {
         {
             $info = $model->find($id);
             $info['upload_file'] = explode(',', $info['upload_file']);
+            $info['file'] = [];
+            foreach ($info['upload_file'] as $k => $v)
+            {
+                $upload_file = [];
+                $upload_file['ext'] = pathinfo($v)['extension'];
+                $upload_file['path'] = $v;
+                $upload_file['all_path'] = $this->DoUrlHandle($v);
+                array_push($info['file'], $upload_file);
+            }
+//            var_dump($info);die;
         }
 
         if($doinfo == "modifyad")
@@ -66,6 +76,19 @@ class FormSubmitController extends BaseController {
         $this->assign('info', $info);
         $this->assign("map",$this->getMap());
         $this->display();
+    }
+
+    //补全访问链接地址
+    protected function DoUrlHandle($thumb){
+        if(!empty($thumb) && (strpos(strtolower($thumb), 'http://') === false && strpos(strtolower($thumb), 'https://') === false)){
+            $http_type = "http://";
+            if((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')){
+                $http_type = "https://";
+            }
+            return $http_type.$_SERVER['HTTP_HOST'].$thumb;
+        }else{
+            return $thumb;
+        }
     }
 
     public function doDeal()
